@@ -46,25 +46,20 @@
     right: 0;
     bottom: 0;
     box-shadow: 0 -0.02667rem 0.05333rem rgba(0,0,0,.1);
-  }
-  .footer div{
-      width: 25%;
-      float: left;
-      font-size: 16px;
-      height: 100%;
-      padding: 0.05rem 0;
+      font-size: 0.24rem;
   }
   .active{
       color: rgb(49, 144, 232);
   }
   .footer .iconfont{
-      font-size: 0.4rem;
+      font-size: 0.46rem;
   }
   .link{
     text-decoration: none;
     display: inline-block;
     width: 25%;
     color: #666;
-    font-size:0.2rem;
+    font-size: 0.2rem;
+      padding: 0.1rem 0;
   }
 </style>
