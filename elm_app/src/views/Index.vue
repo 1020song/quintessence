@@ -79,6 +79,9 @@ export default {
 }
 </script>
 <style scoped>
+*{
+  box-sizing: border-box;
+}
 .home {
   width: 6.4rem;
   height: auto;

@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <elmHead left='1' center='2' right='3'></elmHead>
+    <elmHead left='&lt;' center='2' right='3'></elmHead>
     <elmfoot></elmfoot>
   </div>
 </template>

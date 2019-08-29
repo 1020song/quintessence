@@ -43,13 +43,16 @@ export default {
   }
   .s1{
     width: 1rem;
+    float: left;
   }
   .s2{
     width: 3.5rem;
     text-align: center;
+    float: left;
   }
   .s3{
     width: 1.5rem;
     text-align: right;
+    float: right;
   }
 </style>
