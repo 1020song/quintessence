@@ -1,6 +1,10 @@
 <template>
   <div class="about">
-    <elmHead left='&lt;' center='2' right='3'></elmHead>
+    <elmHead>
+      <template v-slot:left>&lt;</template>
+      <template v-slot:center></template>
+      <template v-slot:right>登录/注册</template>
+    </elmHead>
     <elmfoot></elmfoot>
   </div>
 </template>
