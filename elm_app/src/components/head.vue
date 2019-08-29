@@ -40,6 +40,7 @@ export default {
   .head span{
     font-size: 0.24rem;
     display: inline-block;
+    float: left;
   }
   .s1{
     width: 1rem;
