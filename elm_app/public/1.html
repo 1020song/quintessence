@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+.blue{color: blue;}
+.red{color: red;}
+</style>
+</head>
+<body>
+	<p class="blue red">内容</p>
+	
+</body>
+
+
+<script>
+	(function(){
+		return [
+			(()=>this.x).bind({x:'inner'})(),
+			(()=>this.x)()
+	  ]
+	}).call({x:'outer'}); 
+</script>
+
+
+<script>
+	
+
+	var arr = [1,1,1,1,2,2,3,4,5,6,6,7];
+	var obj = {};
+	for(var i = 0;i < arr.length;i++){
+		var key = arr[i];
+		console.log(key);
+		if(obj[key]){
+			obj[key]++;
+			console.log(obj);
+		}else{
+			obj[key] = 1;
+		}
+	}
+
+	var num = 0;
+
+	for(var key in obj){
+		if(num < obj[key]){
+			num = obj[key]
+			console.log(num)
+		}
+	}
+</script>
+</html>
