@@ -46,9 +46,8 @@
     right: 0;
     bottom: 0;
     box-shadow: 0 -0.02667rem 0.05333rem rgba(0,0,0,.1);
-    font-size: 0.2rem;
+      font-size: 0.24rem;
   }
-
   .active{
       color: rgb(49, 144, 232);
   }
@@ -61,5 +60,7 @@
     width: 25%;
     color: #666;
     font-size:0.16rem;
+    font-size: 0.2rem;
+      padding: 0.1rem 0;
   }
 </style>
