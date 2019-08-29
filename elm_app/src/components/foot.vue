@@ -13,7 +13,7 @@
             <i class="iconfont" :class="{active:num==2}">&#xe601;</i>
             <p>订单</p>
         </router-link>
-        <router-link to="/about/mine" @click.native="num=3" class="link">
+        <router-link to="/about/user" @click.native="num=3" class="link">
             <i class="iconfont" :class="{active:num==3}">&#xe602;</i>
             <p>我的</p>
         </router-link>
