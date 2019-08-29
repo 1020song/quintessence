@@ -1,17 +1,18 @@
 <template>
     <div class="head">
-      <span class="s1">1</span>
-      <span class="s2">2</span>
-      <span class="s3">3</span>
+      <span class="s1">{{left}}</span>
+      <span class="s2">{{center}}</span>
+      <span class="s3">{{right}}</span>
     </div>
 </template>
 
 <script>
 export default {
-  // name: 'HelloWorld',
-  // props: {
-  //   msg: String
-  // }
+  props: {
+    left: String,
+    center: String,
+    right: String,
+  }
 }
 </script>
 
@@ -32,8 +33,12 @@ export default {
     line-height: 1rem;
     padding: 0 0.2rem;
     box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
   .head span{
+    font-size: 0.24rem;
     display: inline-block;
   }
   .s1{

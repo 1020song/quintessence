@@ -1,9 +1,6 @@
 <template>
   <div class="home">
-    <div class="header">
-        <span>ele.me</span>
-        <span>登录/注册</span>
-    </div>
+    <elmHead left='ele' right='登录/注册'></elmHead>
     <div class="con">
       <div class="no1">
         <div>
@@ -38,7 +35,11 @@
 </template>
 
 <script>
+import elmHead from '../components/head'
 export default {
+  components:{
+    elmHead:elmHead,
+  },
   data(){
     return{
       hot_city:'',
@@ -83,27 +84,8 @@ export default {
   height: auto;
   background: #ccc;
 }
-.header {
-  background: #3190e8;
-  background-color: #3190e8;
-  position: fixed;
-  z-index: 100;
-  left: 0;
-  top: 0;
-  width: 100%;
-  padding: 0 0.16rem;
-  line-height: 0.8rem;
-}
-.header span{
-    font-size:0.26rem;
-    color: #fff;
-    float: left;
-  }
-  .header span:nth-of-type(2){
-    float: right
-  }
-  .con{
-    padding-top: 0.8rem;
+.con{
+    padding-top: 1rem;
     border-top: 1px solid #e4e4e4;
     background-color: #fff;
     background: #eee;
