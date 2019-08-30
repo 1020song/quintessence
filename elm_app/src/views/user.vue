@@ -1,5 +1,5 @@
 <template>
-  <div class="user">
+  <div>
     <div class="contain">
       <!-- 个人资料/信息 -->
       <div class="ziliao">
@@ -30,7 +30,7 @@
           <router-link to="vip"><li><i class="iconfont icon-fuwu"></i>饿了么会员卡<span class="f-r">></span></li></router-link>
           </div>
           <div class="item">
-            <router-link to="service"><li><i class="iconfont icon-vip"></i>服务中心<span class="f-r">></span></li></router-link>
+            <router-link to="/service"><li><i class="iconfont icon-vip"></i>服务中心<span class="f-r">></span></li></router-link>
           <router-link to="app"><li><i class="iconfont icon-changyonglogo40"></i>下载饿了么APP<span class="f-r">></span></li></router-link>
           </div>
         </div>

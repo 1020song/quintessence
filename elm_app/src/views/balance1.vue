@@ -1,9 +1,15 @@
 <template>
 	<div>
+		<elmHead>
+		<template v-slot:left><router-link to="/about/user">&lt;</router-link></template>
+		<template v-slot:center>我的余额</template>
+		<template v-slot:right></template>
+		</elmHead>
 		<!-- 余额详情 -->
 		<div class="nav">
 			<div class="price">
 				<span style="font-size:.2rem">当前余额</span>
+				
 				<router-link to="/balance/explain" style="float:right;color:blue"><i ></i> 余额说明</router-link>
 				<p>
 					<span style="font-size:.6rem;line-height:1.2rem">0.00</span>
@@ -25,8 +31,11 @@
 </template>
 <script>
 import balance from '../css/balance.css'
+import elmHead from '../components/head'
 export default {
-	
-	
+	components:{
+    elmHead:elmHead,
+    name:'contain'
+  },
 }
 </script>

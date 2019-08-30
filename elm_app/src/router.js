@@ -14,7 +14,9 @@ import Users from './views/user.vue'
 import Balance from './views/balance.vue'
 import Balance1 from './views/balance1.vue'
 import Explain from './views/explain.vue'
-// import Service from './views/service.vue'
+import Service from './views/service_cont.vue'
+import serviceD from './views/service_details.vue'
+import service1 from './views/service1.vue'
 // import Integral from './views/user.vue'
 // import Vip from './views/user.vue'
 // import App from './views/user.vue'
@@ -30,9 +32,9 @@ export default new Router({
       component: login
     },
     {
-      path:'/change',
-      name:'change',
-      component:change,
+      path: '/change',
+      name: 'change',
+      component: change,
     },
     {
       path: '/',
@@ -90,6 +92,22 @@ export default new Router({
           path: 'explain',
           name: 'explain',
           component: Explain
+        }
+      ]
+    }, {
+      path: '/service',
+      name: 'service',
+      component: Service,
+      children: [
+        {
+          path: '/',
+          name: 'service',
+          component: service1
+        },
+        {
+          path: 'Details',
+          name: 'details',
+          component: serviceD
         }
       ]
     }
