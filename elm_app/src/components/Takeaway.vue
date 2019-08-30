@@ -1,12 +1,16 @@
 <template>
     <div>
-            <h1>111</h1>
+        <elmBanner></elmBanner>
     </div>
 </template>
 
 <script>
+import elmBanner from './Banner'
     export default {
-        name: "Takeaway"
+        name: "Takeaway",
+        components:{
+            elmBanner
+        }
     }
 </script>
 
