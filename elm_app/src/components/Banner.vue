@@ -57,11 +57,11 @@ export default {
     .swiper-container {
         padding-top: 1rem !important;
         width: 100% !important;
-        height: 2.6rem;
+        height: 4.6rem;
     }
     .swiper-slide {
         width: 6.4rem !important;
-        height: 2.6rem;
+        height: 100%;
         /* text-align: center; */
         font-size: 0.18rem;
         background: #fff; 

@@ -18,10 +18,21 @@
           </div>
       </div>
       <div class="list">
-        <!-- <p>搜索历史</p> -->
+<!--        搜索历史-->
+         <div v-if="!list">
+           <div class="search_hsr">搜索历史</div>
+           <div v-for="item in arr" class="list_ars">
+             <div>{{item.split(',')[0]}}</div>
+             <div style="color: #999;font-size: .24rem">{{item.split(',')[1]}}</div>
+           </div>
+         </div>
         <ul>
           <li v-for="(i,$index) in list" :key="$index">
+<<<<<<< HEAD
             <router-link to='/about/Takeaway/'>{{i.name}}<br><span>{{i.address}}</span></router-link>
+=======
+            <router-link @click.native="search_list(i.name,i.address,$index)" to='/page1'>{{i.name}}<br><span>{{i.address}}</span></router-link>
+>>>>>>> 06b22e0b41a5c28dce31f12303e374cb7cd83207
           </li>
         </ul>
       </div>
@@ -38,19 +49,41 @@ export default {
     return{
       city:'',
       txt:'',
-      list:''
+      list:'',
+      search_history:[],
+      arr:'',
     }
   },
   created(){
     fetch('http://elm.cangdu.org/v1/cities/'+this.$route.params.id).then(response=>response.json()).then(res=>{
         this.city=res.name
       })
+    //搜索历史显示
+    if(localStorage.keyword){
+      this.arr = localStorage.keyword.split('&')
+      this.arr.pop()
+    }else{
+      this.arr = []
+    }
+    console.log(this.arr)
   },
   methods:{
-    tijiao(){
-      fetch("http://elm.cangdu.org/v1/pois?type=search&city_id="+this.$route.params.id+"&keyword="+this.txt).then(response=>response.json()).then(res=>{
-        this.list=res
-      })
+    // 搜索
+    search_list (name, address,index){
+      this.search_history.push([name, address,'&'])
+      localStorage.keyword += this.search_history
+    },
+    // 跳转城市搜索
+    tijiao () {
+      if (this.txt) {
+        fetch( "http://elm.cangdu.org/v1/pois?type=search&city_id="+this.$route.params.id+"&keyword="+this.txt )
+          .then( response => response.json())
+          .then( res => {
+            this.list = res
+          })
+      } else {
+        alert('请输入字段')
+      }
     }
   }
 }
@@ -116,11 +149,21 @@ a{
    float: left;
    outline: none;
   }
-  .list p{
-    font-size: 0.18rem;
+  .search_hsr{
+    font-size: 0.2rem;
+    border-bottom: 1px solid #e4e4e4;
+    padding-left: .5rem;
+    background-color: #f5f5f5;
+  }
+  .list .list_ars div{
+    font-size: 0.3rem;
     line-height: 0.4rem;
-    text-indent: 0.16rem;
+    padding-left: .5rem;
+    padding-top: .1rem;
+  }
+  .list_ars{
     border-bottom: #eee solid 2px;
+    padding: .2rem 0;
   }
   .list ul li{
     /* height: 0.8rem; */

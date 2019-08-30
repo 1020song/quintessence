@@ -1,14 +1,15 @@
 <template>
-    <div>
+    <div class="user">
+        <users></users>
     </div>
 </template>
 
 <script>
-    export default {
-        name: "user"
+import users from '../views/user.vue'
+ export default {
+    name:'user',
+    components:{
+        users   
     }
+}
 </script>
-
-<style scoped>
-
-</style>
