@@ -21,7 +21,7 @@
         <!-- <p>搜索历史</p> -->
         <ul>
           <li v-for="(i,$index) in list" :key="$index">
-            <router-link to='/page1'>{{i.name}}<br><span>{{i.address}}</span></router-link>
+            <router-link to='/about/Takeaway/'>{{i.name}}<br><span>{{i.address}}</span></router-link>
           </li>
         </ul>
       </div>
