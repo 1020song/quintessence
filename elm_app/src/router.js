@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import login from './views/login.vue'
+import change from './views/changepassword.vue'
 import Index from './views/Index.vue'
 import About from './views/About.vue'
 import City from './views/City.vue'
@@ -22,6 +24,16 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
+    {
+      path: '/login',
+      name: 'login',
+      component: login
+    },
+    {
+      path:'/change',
+      name:'change',
+      component:change,
+    },
     {
       path: '/',
       name: 'index',
