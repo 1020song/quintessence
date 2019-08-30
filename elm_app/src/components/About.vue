@@ -1,27 +1,37 @@
 <template>
   <div class="about">
     <div class="footer">
-      <div>
-        <i class="iconfont">&#xe603;</i>
-        <router-link class="link" to="/about/Takeaway">外卖</router-link>
-      </div>
-     <div>
-         <i class="iconfont font_2">&#xe600;</i>
-       <router-link class="link" to="/about/seach">搜索</router-link>
-     </div>
-      <div>
-          <i class="iconfont">&#xe601;</i>
-        <router-link class="link" to="/about/Order">订单</router-link>
-      </div>
-    <div>
-        <i class="iconfont font_4">&#xe602;</i>
-      <router-link class="link" to="/about/mine">我的</router-link>
-    </div>
+        <router-link to="/about/Takeaway" @click.native="num=0" class="link">
+            <i class="iconfont" :class="{active:num==0}">&#xe603;</i>
+            <p>外卖</p>
+        </router-link>
+        <router-link @click.native="num=1" to="/about/seach" class="link">
+            <i class="iconfont" :class="{active:num==1}">&#xe600;</i>
+            <p>搜索</p>
+        </router-link>
+        <router-link to="/about/Order" @click.native="num=2" class="link">
+            <i class="iconfont" :class="{active:num==2}">&#xe601;</i>
+            <p>订单</p>
+        </router-link>
+        <router-link to="/about/mine" @click.native="num=3" class="link">
+            <i class="iconfont" :class="{active:num==3}">&#xe602;</i>
+            <p>我的</p>
+        </router-link>
     </div>
     <router-view></router-view>
   </div>
 
 </template>
+<script>
+    export default {
+        name: 'home',
+        data(){
+            return{
+                num:-1
+            }
+        },
+    }
+</script>
 <style>
   *{
     margin: 0;
@@ -36,28 +46,21 @@
     right: 0;
     bottom: 0;
     box-shadow: 0 -0.02667rem 0.05333rem rgba(0,0,0,.1);
+      font-size: 0.24rem;
   }
-  .footer div{
-      width: 25%;
-      float: left;
-      font-size: 16px;
-      height: 100%;
-      padding: 2px 0;
-  }
-  .iconfont{
-      font-size: 20px;
-  }
-  .font_2{
+  .active{
       color: rgb(49, 144, 232);
   }
-  .footer .font_4{
-      font-size: 22px;
+  .footer .iconfont{
+      font-size: 0.46rem;
   }
   .link{
     text-decoration: none;
     display: inline-block;
-    width: 100%;
+    width: 25%;
     color: #666;
-      font-size: 12px;
+    font-size:0.16rem;
+    font-size: 0.2rem;
+      padding: 0.1rem 0;
   }
 </style>

@@ -5,7 +5,7 @@
 
 <script>
     export default {
-        name: "mine"
+        name: "user"
     }
 </script>
 

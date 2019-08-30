@@ -6,7 +6,7 @@ import City from './views/City.vue'
 import Takeaway from './components/Takeaway'
 import seach from './components/seach'
 import Order from './components/Order'
-import mine from './components/mine'
+import user from './components/user'
 Vue.use(Router)
 
 export default new Router({
@@ -17,13 +17,11 @@ export default new Router({
       path: '/',
       name: 'index',
       component: Index
-      // props: route => ({ name: route.query.data })
     },
     {
       path: '/city/:id',
       name: 'city',
       component: City
-      // props: route => ({ name: route.query.data })
     },
     {
       path: '/about',
@@ -46,9 +44,9 @@ export default new Router({
           component: Order
         },
         {
-          path: 'mine',
-          name: 'mine',
-          component: mine
+          path: 'user',
+          name: 'user',
+          component: user
         }
       ]
     }
