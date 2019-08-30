@@ -1,0 +1,9 @@
+.item{
+	display: flex
+
+}
+.item dl img{
+	width: .6rem;
+	height: .6rem;
+	
+}
