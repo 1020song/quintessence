@@ -4,9 +4,18 @@ import Index from './views/Index.vue'
 import About from './views/About.vue'
 import City from './views/City.vue'
 import Takeaway from './components/Takeaway'
-import seach from './components/seach'
+import search from './components/search'
 import Order from './components/Order'
 import user from './components/user'
+
+import Users from './views/user.vue'
+import Balance from './views/balance.vue'
+import Balance1 from './views/balance1.vue'
+import Explain from './views/explain.vue'
+// import Service from './views/service.vue'
+// import Integral from './views/user.vue'
+// import Vip from './views/user.vue'
+// import App from './views/user.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -34,9 +43,9 @@ export default new Router({
           component: Takeaway
         },
         {
-          path: 'seach',
-          name: 'seach',
-          component: seach
+          path: 'search',
+          name: 'search',
+          component: search
         },
         {
           path: 'Order',
@@ -47,6 +56,28 @@ export default new Router({
           path: 'user',
           name: 'user',
           component: user
+        }
+      ]
+    },
+    {
+      path: '/users',
+      name: 'users',
+      component: Users
+    },
+    {
+      path: '/balance',
+      name: 'balance',
+      component: Balance,
+      children: [
+        {
+          path: '/',
+          name: 'explain',
+          component: Balance1
+        },
+        {
+          path: 'explain',
+          name: 'explain',
+          component: Explain
         }
       ]
     }

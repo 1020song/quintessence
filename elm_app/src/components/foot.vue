@@ -5,7 +5,7 @@
             <i class="iconfont" :class="{active:num==0}">&#xe603;</i>
             <p>外卖</p>
         </router-link>
-        <router-link @click.native="num=1" to="/about/seach" class="link">
+        <router-link @click.native="num=1" to="/about/search" class="link">
             <i class="iconfont" :class="{active:num==1}">&#xe600;</i>
             <p>搜索</p>
         </router-link>
