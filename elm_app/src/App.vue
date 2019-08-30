@@ -14,4 +14,7 @@
   margin: 0;
   padding: 0;
 }
+#app{
+  padding:0 !important;
+}
 </style>

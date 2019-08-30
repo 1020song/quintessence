@@ -1,6 +1,19 @@
 <template>
   <div>
     <div class="contain">
+      <div class="lz_info" @click="info">
+        <router-link to="/about/user/info" class="lz_info_a">
+        <img :src="info_img" alt="">
+        <div class="lz_info_user">
+          <p>{{info_user}}</p>
+          <p>
+            <span class="iconfont" style="margin-right:0.1rem">&#xe68a;</span>
+            <span>暂无绑定手机号</span>
+            </p>
+        </div>
+        <span style="float:right;margin-top:0.2rem;color:#fff;">&gt;</span>
+        </router-link>
+      </div>
       <!-- 个人资料/信息 -->
       <div class="ziliao">
             <dl>
@@ -41,6 +54,24 @@
 import user from '../css/user.css'
 
 export default {
-  
+  data() {
+    return {
+      info_img:'',
+      info_user:''
+    }
+  },
+  created() {
+    this.info()
+  },
+  methods: {
+    info(){
+      this.$axios.get('https://elm.cangdu.org/v1/user')
+      .then(data=>{
+        this.info_img = '//elm.cangdu.org/img/'+data.data.avatar
+        this.info_user = data.data.username
+        console.log(data);
+      })
+    }
+  },
 }
 </script>

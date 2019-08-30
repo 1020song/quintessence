@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './assets/iconfont/iconfont.css'
+import './assets/lz.iconfont/iconfont.css'
 import axios from 'axios'
 Vue.use(axios)
 import '../node_modules/swiper/dist/css/swiper.min.css'

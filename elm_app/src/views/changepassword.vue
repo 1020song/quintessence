@@ -1,11 +1,16 @@
 <template>
   <div>
-    <div class="header">
+    <!-- <div class="header">
       <div class="r">
         <router-link to class="color"><</router-link>
       </div>
       <div class="pass">重置密码</div>
-    </div>
+    </div> -->
+    <elmHead>
+      <template v-slot:left> <router-link to="/login" class="login"> &lt;</router-link></template>
+      <template v-slot:center>重置密码</template>
+      <template v-slot:right></template>
+    </elmHead>
     <div class="container">
       <div>
         <input type="text" v-model="user" placeholder="账号">
@@ -22,15 +27,19 @@
       <div>
         <input type="text" placeholder="验证码" v-model="Verify">
         <img :src="yanUrl" class="img">
-        <span @click="random" style="cursor:pointer;margin-left:0.1rem">换一个</span>
+        <span @click="random" style="cursor:pointer;margin-left:0.01rem;font-size:0.22rem;">换一个</span>
       </div>
       <button @click="confirm">确认修改</button>
     </div>
   </div>
 </template>
 <script>
+import elmHead from '../components/head'
 export default {
   name: "change",
+  components:{
+    elmHead
+  },
   data() {
       return {
           user:'',/*用户账号*/
@@ -71,6 +80,7 @@ export default {
             alert(data.data.success)
         }else{
             alert(data.data.message)
+            this.random()
         }
         
       })
@@ -97,22 +107,6 @@ input{
   display: inline-block;
   vertical-align: middle;
 }
-.header{
-  width: 100%;
-  height: 0.8rem;
-  line-height: 0.8rem;
-  background-color: #3190e8;
-}
-.r{
-  float: left;
-  font-size: 0.5rem;
-  margin-left: 0.2rem;
-  height: 100%;
-}
-.color{
-  height: 100%;
-  color: #fff;
-}
 .pass{
   width: 50%;  
   margin: 0 auto;
@@ -123,7 +117,8 @@ input{
 }
 .container{
   height: auto;
-  margin-top: 0.5rem;
+  margin-top: 1.2rem;
+  background-color: #fff;
 }
 .container div{
   width: 100%;
@@ -136,7 +131,7 @@ input{
   display: inline-block;
   vertical-align: middle;
   margin-top: -0.02rem;
-  margin-left: 0.5rem
+  margin-left: 0.4rem
 }
 .container button{
   outline: none;
@@ -148,5 +143,10 @@ input{
   color: #fff;
   border-radius:0.05rem; 
   font-size: 0.3rem;
+  margin-top: 0.3rem;
+}
+.login{
+  color: #fff;
+  text-decoration: none;
 }
 </style>
