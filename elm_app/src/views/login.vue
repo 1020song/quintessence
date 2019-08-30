@@ -1,11 +1,16 @@
 <template>
-  <div>
-    <div class="header">
+  <div class="login">
+    <!-- <div class="header">
       <div class="r">
         <router-link to class="color"><</router-link>
       </div>
       <div class="pass">密码登录</div>
-    </div>
+    </div> -->
+    <elmHead>
+      <template v-slot:left><router-link to="/" class="lt">&lt;</router-link></template>
+      <template v-slot:center>密码登录</template>
+      <template v-slot:right></template>
+    </elmHead>
     <div class="container">
       <div>
         <input type="text" v-model="user" placeholder="账号">
@@ -27,8 +32,12 @@
 </template>
 
 <script>
+import elmHead from '../components/head'
 export default {
   name: "login",
+  components:{
+    elmHead
+  },
   data() {
     return {
       user: "",
@@ -61,8 +70,12 @@ export default {
             alert('请输入验证码')
           }else if(this.user = data.data.username){
             alert('登录成功')
+            location.href='/'
+            localStorage.user = this.user
           }else{
             alert(data.data.message)
+            this.random()
+            this.password=''
           }
           console.log(data);
         });
@@ -89,22 +102,6 @@ input{
   display: inline-block;
   vertical-align: middle;
 }
-.header{
-  width: 100%;
-  height: 0.8rem;
-  line-height: 0.8rem;
-  background-color: #3190e8;
-}
-.r{
-  float: left;
-  font-size: 0.5rem;
-  margin-left: 0.2rem;
-  height: 100%;
-}
-.color{
-  height: 100%;
-  color: #fff;
-}
 .pass{
   width: 50%;  
   margin: 0 auto;
@@ -115,7 +112,7 @@ input{
 }
 .container{
   height: auto;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
 }
 .container div{
   width: 100%;
@@ -152,5 +149,9 @@ input{
   font-size: 0.3rem;
   color: #3b95e9;
   margin-top: 0.1rem;
+}
+.lt{
+  color: #fff;
+  text-decoration: none;
 }
 </style>

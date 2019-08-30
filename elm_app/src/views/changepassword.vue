@@ -1,11 +1,16 @@
 <template>
   <div>
-    <div class="header">
+    <!-- <div class="header">
       <div class="r">
         <router-link to class="color"><</router-link>
       </div>
       <div class="pass">重置密码</div>
-    </div>
+    </div> -->
+    <elmHead>
+      <template v-slot:left>&lt;</template>
+      <template v-slot:center>重置密码</template>
+      <template v-slot:right></template>
+    </elmHead>
     <div class="container">
       <div>
         <input type="text" v-model="user" placeholder="账号">
@@ -29,8 +34,12 @@
   </div>
 </template>
 <script>
+import elmHead from '../components/head'
 export default {
   name: "change",
+  components:{
+    elmHead
+  },
   data() {
       return {
           user:'',/*用户账号*/
@@ -71,6 +80,7 @@ export default {
             alert(data.data.success)
         }else{
             alert(data.data.message)
+            this.random()
         }
         
       })
@@ -97,22 +107,6 @@ input{
   display: inline-block;
   vertical-align: middle;
 }
-.header{
-  width: 100%;
-  height: 0.8rem;
-  line-height: 0.8rem;
-  background-color: #3190e8;
-}
-.r{
-  float: left;
-  font-size: 0.5rem;
-  margin-left: 0.2rem;
-  height: 100%;
-}
-.color{
-  height: 100%;
-  color: #fff;
-}
 .pass{
   width: 50%;  
   margin: 0 auto;
@@ -123,7 +117,7 @@ input{
 }
 .container{
   height: auto;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
 }
 .container div{
   width: 100%;
