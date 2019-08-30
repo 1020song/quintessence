@@ -21,7 +21,7 @@
       <div>
         <input type="text" placeholder="验证码" v-model="Verify">
         <img :src="yanUrl" class="img">
-        <span @click="random" style="cursor:pointer;margin-left:0.1rem">换一个</span>
+        <span @click="random" style="cursor:pointer;margin-left:0.06rem;font-size:0.15rem">换一个</span>
       </div>
       <p>温馨提示：未注册过的账号，登录时将自动注册</p>
       <p>注册过的用户可凭账号密码登录</p>
@@ -111,8 +111,10 @@ input{
   text-align: center;
 }
 .container{
+  width: 100%;
   height: auto;
-  margin-top: 1rem;
+  margin-top: 1.3rem;
+  background-color: #fff;
 }
 .container div{
   width: 100%;
@@ -125,12 +127,12 @@ input{
   display: inline-block;
   vertical-align: middle;
   margin-top: -0.02rem;
-  margin-left: 0.5rem
+  margin-left: 0.4rem
 }
 .container p{
   color: red;
   font-size: 0.25rem;
-  padding: 0.2rem 0.2rem;
+  padding: 0.1rem 0.1rem;
 }
 .container button{
   outline: none;

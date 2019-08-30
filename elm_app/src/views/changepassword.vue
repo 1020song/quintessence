@@ -7,7 +7,7 @@
       <div class="pass">重置密码</div>
     </div> -->
     <elmHead>
-      <template v-slot:left>&lt;</template>
+      <template v-slot:left> <router-link to="/login" class="login"> &lt;</router-link></template>
       <template v-slot:center>重置密码</template>
       <template v-slot:right></template>
     </elmHead>
@@ -27,7 +27,7 @@
       <div>
         <input type="text" placeholder="验证码" v-model="Verify">
         <img :src="yanUrl" class="img">
-        <span @click="random" style="cursor:pointer;margin-left:0.1rem">换一个</span>
+        <span @click="random" style="cursor:pointer;margin-left:0.01rem;font-size:0.22rem;">换一个</span>
       </div>
       <button @click="confirm">确认修改</button>
     </div>
@@ -117,7 +117,8 @@ input{
 }
 .container{
   height: auto;
-  margin-top: 1rem;
+  margin-top: 1.2rem;
+  background-color: #fff;
 }
 .container div{
   width: 100%;
@@ -130,7 +131,7 @@ input{
   display: inline-block;
   vertical-align: middle;
   margin-top: -0.02rem;
-  margin-left: 0.5rem
+  margin-left: 0.4rem
 }
 .container button{
   outline: none;
@@ -142,5 +143,10 @@ input{
   color: #fff;
   border-radius:0.05rem; 
   font-size: 0.3rem;
+  margin-top: 0.3rem;
+}
+.login{
+  color: #fff;
+  text-decoration: none;
 }
 </style>

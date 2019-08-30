@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import login from './views/login.vue'
-import change from './views/changepassword.vue'
+import login from './views/login.vue' /*登录 lz*/
+import change from './views/changepassword.vue' /*重置密码 lz*/
+import info from './views/info.vue' /*用户信息 lz*/
 import Index from './views/Index.vue'
 import About from './views/About.vue'
 import City from './views/City.vue'
@@ -67,7 +68,13 @@ export default new Router({
         {
           path: 'user',
           name: 'user',
-          component: user
+          component: user,
+          children:[
+            {
+              path:'info',
+              component:info
+          }
+        ]
         }
       ]
     },
