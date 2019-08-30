@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from './views/Index.vue'
-import About from './views/About.vue'
+import login from './views/login.vue'
+import change from './views/changepassword.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -9,16 +9,22 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
-      name: 'index',
-      component: Index
-      // props: route => ({ name: route.query.data })
+      path: '/login',
+      name: 'login',
+      component: login
+    },
+    {
+      path:'/change',
+      name:'change',
+      component:change
     },
     {
       path: '/about',
       name: 'about',
-      component: About
-      // props: route => ({ name: route.query.data })
-    },
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+    }
   ]
 })

@@ -4,75 +4,83 @@
       <div class="r">
         <router-link to class="color"><</router-link>
       </div>
-      <div class="pass">密码登录</div>
+      <div class="pass">重置密码</div>
     </div>
     <div class="container">
       <div>
         <input type="text" v-model="user" placeholder="账号">
       </div>
       <div>
-        <input type="password" placeholder="密码" v-model="password">
+        <input type="password" placeholder="旧密码" v-model="oldpassword">
+      </div>
+      <div>
+        <input type="password" placeholder="请输入新密码" v-model="newpassword">
+      </div>
+      <div>
+        <input type="password" placeholder="请确认密码" v-model="confirmpassword">
       </div>
       <div>
         <input type="text" placeholder="验证码" v-model="Verify">
         <img :src="yanUrl" class="img">
         <span @click="random" style="cursor:pointer;margin-left:0.1rem">换一个</span>
       </div>
-      <p>温馨提示：未注册过的账号，登录时将自动注册</p>
-      <p>注册过的用户可凭账号密码登录</p>
-      <button @click="login">登录</button>
+      <button @click="confirm">确认修改</button>
     </div>
-    <div class="chong"><router-link to="/change" class="chong">重置密码?</router-link></div>
   </div>
 </template>
-
 <script>
 export default {
-  name: "login",
+  name: "change",
   data() {
-    return {
-      user: "",
-      password: "",
-      Verify: "",
-      randoms: "",
-      yanUrl: ""
-    };
+      return {
+          user:'',/*用户账号*/
+          oldpassword:'',/*旧密码*/
+          newpassword:'',/*新密码*/
+          confirmpassword:'',/*确认密码*/
+          Verify:'',/*验证码的双向绑定*/
+          yanUrl:''/*验证码 */
+      }
   },
   created() {
-    this.random();
+      this.random()
   },
   methods: {
-    login() {
-      this.$axios
-        .post(
-          "https://elm.cangdu.org/v2/login",
-          {
-            username: this.user,
-            password: this.password,
-            captcha_code: this.Verify
-          },
-        )
-        .then(data => {
-          if(!this.user){
+      confirm(){
+      this.$axios.post('https://elm.cangdu.org/v2/changepassword',
+      {
+        username:this.user,
+        oldpassWord:this.oldpassword,
+        newpassword:this.newpassword,
+        confirmpassword:this.confirmpassword,
+        captcha_code:this.Verify
+      }).then(data=>{
+        console.log(data);
+        if(!this.user){
             alert('请输入账号')
-          }else if(!this.password){
-            alert('请输入密码')
-          }else if(!this.Verify){
+        }else if(!this.oldpassword){
+            alert('请输入旧密码')
+        }else if(!this.newpassword){
+            alert('请输入新密码')
+        }else if(!this.confirmpassword){
+            alert('请输入确认密码')
+        }else if(this.newpassword!=this.confirmpassword){
+            alert('两次输入的密码不一致')
+        }else if(!this.Verify){
             alert('请输入验证码')
-          }else if(this.user = data.data.username){
-            alert('登录成功')
-          }else{
+        }else if(data.data.status!=0){
+            alert(data.data.success)
+        }else{
             alert(data.data.message)
-          }
-          console.log(data);
-        });
+        }
+        
+      })
     },
     random() {
       this.$axios.post("http://elm.cangdu.org/v1/captchas",{}).then(data => {
         this.yanUrl = data.data.code;
       });
     },
-  }
+  },
 };
 </script>
 <style scoped>
@@ -130,11 +138,6 @@ input{
   margin-top: -0.02rem;
   margin-left: 0.5rem
 }
-.container p{
-  color: red;
-  font-size: 0.25rem;
-  padding: 0.2rem 0.2rem;
-}
 .container button{
   outline: none;
   background-color: #4cd964;
@@ -145,12 +148,5 @@ input{
   color: #fff;
   border-radius:0.05rem; 
   font-size: 0.3rem;
-}
-.chong{
-  float: right;
-  margin-right:0.2rem; 
-  font-size: 0.3rem;
-  color: #3b95e9;
-  margin-top: 0.1rem;
 }
 </style>
