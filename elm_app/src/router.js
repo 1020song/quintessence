@@ -2,6 +2,13 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import login from './views/login.vue'
 import change from './views/changepassword.vue'
+import Index from './views/Index.vue'
+import About from './views/About.vue'
+import City from './views/City.vue'
+import Takeaway from './components/Takeaway'
+import seach from './components/seach'
+import Order from './components/Order'
+import user from './components/user'
 Vue.use(Router)
 
 export default new Router({
@@ -16,15 +23,44 @@ export default new Router({
     {
       path:'/change',
       name:'change',
-      component:change
+      component:change,
+    },
+    {
+      path: '/',
+      name: 'index',
+      component: Index
+    },
+    {
+      path: '/city/:id',
+      name: 'city',
+      component: City
     },
     {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      component: About,
+      children: [
+        {
+          path: 'Takeaway',
+          name: 'Takeaway',
+          component: Takeaway
+        },
+        {
+          path: 'seach',
+          name: 'seach',
+          component: seach
+        },
+        {
+          path: 'Order',
+          name: 'Order',
+          component: Order
+        },
+        {
+          path: 'user',
+          name: 'user',
+          component: user
+        }
+      ]
     }
   ]
 })

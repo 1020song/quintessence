@@ -1,6 +1,10 @@
 <template>
   <div class="home">
-    <elmHead left='ele' right='登录/注册'></elmHead>
+    <elmHead>
+      <template v-slot:left>ele</template>
+      <template v-slot:center></template>
+      <template v-slot:right>登录/注册</template>
+    </elmHead>
     <div class="con">
       <div class="no1">
         <div>
@@ -79,6 +83,9 @@ export default {
 }
 </script>
 <style scoped>
+*{
+  box-sizing: border-box;
+}
 .home {
   width: 6.4rem;
   height: auto;

@@ -1,18 +1,20 @@
 <template>
     <div class="head">
-      <span class="s1">{{left}}</span>
-      <span class="s2">{{center}}</span>
-      <span class="s3">{{right}}</span>
+      <span class="s1">
+        <slot name='left'></slot>
+      </span>
+      <span class="s2">
+        <slot name='center'></slot>
+      </span>
+      <span class="s3">
+        <slot name='right'></slot>
+      </span>
     </div>
 </template>
 
 <script>
 export default {
-  props: {
-    left: String,
-    center: String,
-    right: String,
-  }
+
 }
 </script>
 
@@ -43,13 +45,16 @@ export default {
   }
   .s1{
     width: 1rem;
+    float: left;
   }
   .s2{
     width: 3.5rem;
     text-align: center;
+    float: left;
   }
   .s3{
     width: 1.5rem;
     text-align: right;
+    float: right;
   }
 </style>

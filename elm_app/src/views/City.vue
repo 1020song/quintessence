@@ -1,10 +1,15 @@
 <template>
   <div class="about">
-    <div class="header">
+    <elmHead>
+      <template v-slot:left><router-link to='/'>&lt;</router-link></template>
+      <template v-slot:center>{{city}}</template>
+      <template v-slot:right>切换城市</template>
+    </elmHead>
+    <!-- <div class="header">
         <span><router-link to='/'><</router-link></span>
         {{city}}
         <span><router-link to='/'>切换城市</router-link></span>
-    </div>
+    </div> -->
     <div class="con">
       <div class="no1">
           <div class="intbox">
@@ -24,7 +29,11 @@
   </div>
 </template>
 <script>
+import elmHead from '../components/head'
 export default {
+  components:{
+    elmHead:elmHead,
+  },
   data(){
     return{
       city:'',
@@ -47,6 +56,10 @@ export default {
 }
 </script>
 <style scoped>
+a{
+  text-decoration: none;
+  color: #fff;
+}
   .header {
     text-align: center;
     color: #fff;
