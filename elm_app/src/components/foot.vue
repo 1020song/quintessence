@@ -47,6 +47,8 @@
     right: 0;
     bottom: 0;
     box-shadow: 0 -0.02667rem 0.05333rem rgba(0,0,0,.1);
+    font-size: 0.2rem;
+    padding: 0.05rem 0;
   }
   .active{
       color: rgb(49, 144, 232);
