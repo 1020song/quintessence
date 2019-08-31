@@ -18,9 +18,6 @@ import Explain from './views/explain.vue'
 import Service from './views/service_cont.vue'
 import serviceD from './views/service_details.vue'
 import service1 from './views/service1.vue'
-// import Integral from './views/user.vue'
-// import Vip from './views/user.vue'
-// import App from './views/user.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -54,6 +51,9 @@ export default new Router({
       children: [
         {
           path: 'Takeaway',
+          props: route => ({
+            name: route.query.geohash
+          }),
           name: 'Takeaway',
           component: Takeaway
         },

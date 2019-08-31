@@ -5,11 +5,6 @@
       <template v-slot:center>{{city}}</template>
       <template v-slot:right>切换城市</template>
     </elmHead>
-    <!-- <div class="header">
-        <span><router-link to='/'><</router-link></span>
-        {{city}}
-        <span><router-link to='/'>切换城市</router-link></span>
-    </div> -->
     <div class="con">
       <div class="no1">
           <div class="intbox">
@@ -22,13 +17,16 @@
          <div v-if="!list">
            <div class="search_hsr">搜索历史</div>
            <div v-for="item in arr" class="list_ars">
-             <div>{{item.split(',')[0]}}</div>
-             <div style="color: #999;font-size: .24rem">{{item.split(',')[1]}}</div>
+              <router-link :to='{path:"/about/Takeaway", query: {geohash: item.split(",")[2]+","+item.split(",")[3]}}'>
+                  <div>{{item.split(',')[0]}}</div>
+                  <div style="color: #999;font-size: .2rem">{{item.split(',')[1]}}</div>
+              </router-link>
+             
            </div>
          </div>
         <ul>
           <li v-for="(i,$index) in list" :key="$index">
-            <router-link @click.native="search_list(i.name,i.address,$index)" to='/page1'>{{i.name}}<br><span>{{i.address}}</span></router-link>
+            <router-link @click.native="search_list(i.name,i.address,i.latitude,i.longitude,$index)" :to='{path:"/about/Takeaway", query: {geohash: i.latitude+","+i.longitude}}'>{{i.name}}<br><span>{{i.address}}</span></router-link>
           </li>
         </ul>
       </div>
@@ -61,12 +59,12 @@ export default {
     }else{
       this.arr = []
     }
-    console.log(this.arr)
+    // console.log(this.arr)
   },
   methods:{
     // 搜索
-    search_list (name, address,index){
-      this.search_history.push([name, address,'&'])
+    search_list (name, address,latitude,longitude,index){
+      this.search_history.push([name, address,latitude,longitude,'&'])
       localStorage.keyword += this.search_history
     },
     // 跳转城市搜索
@@ -122,7 +120,7 @@ a{
   .intbox{
     width: 80%;
     margin: 0 auto;
-    padding-top: 0.8rem;
+    padding-top: 1rem;
     overflow: hidden;
     padding-bottom: 0.2rem;
   }
@@ -135,6 +133,7 @@ a{
     margin: 0 auto;
     margin: 0.2rem 0;
     text-indent: 0.16rem;
+    font-size: 0.24rem;
   }
   .intbox button{
     width: 100%;
@@ -148,18 +147,20 @@ a{
   .search_hsr{
     font-size: 0.2rem;
     border-bottom: 1px solid #e4e4e4;
-    padding-left: .5rem;
+    padding-left: .4rem;
     background-color: #f5f5f5;
   }
   .list .list_ars div{
-    font-size: 0.3rem;
+    font-size: 0.26rem;
     line-height: 0.4rem;
-    padding-left: .5rem;
+    padding-left: .4rem;
     padding-top: .1rem;
+    color:#333; 
   }
   .list_ars{
     border-bottom: #eee solid 2px;
-    padding: .2rem 0;
+    padding: .1rem 0;
+    background: #fff;
   }
   .list ul li{
     /* height: 0.8rem; */
@@ -167,6 +168,7 @@ a{
     border-bottom: 0.01rem solid #ccc;
     font-size: 0.28rem;
     padding: 0.16rem;
+    background: #fff;
   }
   .list ul li span{
     color: #999;

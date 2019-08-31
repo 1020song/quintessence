@@ -29,7 +29,7 @@
           </ul>
       </div>
       <div class="hotbox1" v-for="(i,$key) in group_s" :key="i.id">
-        <h6 v-if="$key=='A'">{{$key}} <span style="color:#ccc;">(按字母排序)</span></h6>
+        <h6 v-if="$key=='A'">{{$key}} <span style="color:#ccc;font-size:0.24rem">(按字母排序)</span></h6>
         <h6 v-else>{{$key}}</h6>
           <ul>
             <li v-for="j in i" :key='j.id' > <router-link :to="/city/+j.id">{{j.name}}</router-link></li>
@@ -67,11 +67,11 @@ export default {
   created(){
     if(localStorage.user){
       this.isbtnlogin = true
-      console.log(1);
+      // console.log(1);
       
     }else{
       this.isbtnlogin = false
-      console.log(2);
+      // console.log(2);
       
     }
     this.$http.get('http://elm.cangdu.org/v1/cities',{

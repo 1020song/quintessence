@@ -2,7 +2,7 @@
     <div>
         <elmHead>
             <template v-slot:left><router-link to="/about/seach"><i class="iconfont">&#xe600;</i></router-link></template>
-            <template v-slot:center><router-link to="/">长宁区北新泾明基商...</router-link></template>
+            <template v-slot:center><router-link to="/">{{ads_name}}</router-link></template>
             <template v-slot:right>登录/注册</template>
         </elmHead>
         <elmBanner>
@@ -85,6 +85,7 @@ import elmHead from './head'
 import merchant from './merchant'
 import elmBanner from './Banner'
     export default {
+        props:['name'],
         name: "Takeaway",
         components:{
             elmBanner,
@@ -94,15 +95,20 @@ import elmBanner from './Banner'
         data(){
             return{
                 list:'',
-                arr:''
+                arr:'',
+                ads_name:'',
                 }
         },
         created(){
-            fetch('https://elm.cangdu.org/shopping/restaurants?latitude=31.22967&longitude=121.4762').then(response=>response.json()).then(res=>{
-               console.log(res);
-               console.log(res[0].supports)
+            console.log(this.$route.query.geohash)
+            fetch('https://elm.cangdu.org/shopping/restaurants?latitude='+this.$route.query.geohash.split(",")[0]+'&longitude='+this.$route.query.geohash.split(",")[1]).then(response=>response.json()).then(res=>{
                this.list = res;
                this.arr = res[0].supports
+               console.log(this.list)
+            })
+            fetch('https://elm.cangdu.org/v2/pois/'+this.$route.query.geohash).then(response=>response.json()).then(res=>{
+            //   console.log(res)
+              this.ads_name=res.name
             })
         },
     }

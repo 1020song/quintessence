@@ -53,6 +53,8 @@ export default {
     width: 3.5rem;
     text-align: center;
     float: left;
+    font-size: 0.3rem;
+    font-weight: 600;
   }
   .head .s2 a{
     font-size: 0.3rem;

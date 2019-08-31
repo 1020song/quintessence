@@ -32,12 +32,12 @@ export default {
          fetch('http://elm.cangdu.org/v2/index_entry?geohash=31.22299,121.36025&group_type=1&flags[]=F')
             .then( response => response.json())
             .then( res => {
-                console.log(res)
+                // console.log(res)
                 this.list=res
             })  
     },
     updated() {
-        console.log(100)
+        // console.log(100)
         new Swiper('.in-banner',{
             loop:true,
             pagination: '.swiper-pagination',
