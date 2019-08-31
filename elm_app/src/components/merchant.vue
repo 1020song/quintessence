@@ -1,5 +1,5 @@
 <template>
-    <div class="head">
+    <div class="list">
         <div class="img fl">
             <slot name='left'>
                 <div>
@@ -42,26 +42,32 @@
         <div class="num fr">
             <slot name='right'>
                 <div class="plan1">
-                    <span class="plan">
-                        <slot name="plan">保准票</slot>
-                    </span>
+                    <div class="planbox">
+                        <span class="plan">
+                            <slot name="plan">保准票</slot>
+                        </span>
+                    </div>
                 </div>
                 
                 <div class="give">
-                    <span class="feng">
-                        <slot name="feng">蜂鸟专送</slot>
-                    </span>
-                    <span class="zhun">
-                        <slot name="zhun">准时答</slot>
-                    </span>
+                    <div class="givebox">
+                        <span class="feng">
+                            <slot name="feng">蜂鸟专送</slot>
+                        </span>
+                        <span class="zhun">
+                            <slot name="zhun">准时答</slot>
+                        </span>
+                    </div>
                 </div>
                 <div class="time">
-                    <span class="km">
-                        <slot name="km">10公里</slot> / 
-                    </span>
-                    <span class="minute">
-                        <slot name="minute">20分钟</slot>
-                    </span>
+                    <div class="timebox">
+                        <span class="km">
+                            <slot name="km">10公里</slot> / 
+                        </span>
+                        <span class="minute">
+                            <slot name="minute">20分钟</slot>
+                        </span>
+                    </div>
                 </div>
             </slot>
         </div>
@@ -77,85 +83,114 @@ export default {
 
 
 <style scoped>
-
     *{
         margin: 0;
         padding: 0;
         list-style: none;
     }
     .give{
-        height: .5rem;
-        margin-top: -0.7rem;
+        width: 100%;
+        float: left;
+        margin-bottom: 0.15rem;
+        font-size: 0.16rem;
+    }
+    .givebox{
+        float: right;
     }
     .time{
-        height: .5rem;
+        width: 2.1rem;
+        float: left;
+        margin-left: -0.1rem;
+    }
+    .timebox{
+        float: right;
+    }
+    .num span{
+        float: left;
     }
     .minute{
-        color: lightblue;
+        color: #3190e8;
         font-size: .1rem;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
     .km{
         font-size: .1rem;
-        color: #ccc;
+        color: #666;
     }
     .zhun{
-        padding: 0.05rem .05rem;
-        border:1px solid lightblue;
-        color: lightblue;
-        font-size: .1rem;
+        padding: 0.01rem .05rem;
+        border:1px solid #3190e8;
+        color: #3190e8;
+        font-size: 0.03rem;
+        border-radius: 0.05rem;
     }
     .feng{
-        padding: 0.05rem .1rem;
-        background-color: lightblue;
+        padding: 0.02rem .1rem;
+        background-color: #3190e8;
         color: white;
-        font-size: 0.05rem;
+        font-size: 0.03rem;
+        border-radius: 0.05rem;
+        margin-right: 0.05rem;
+    }
+    .plan1{
+        overflow: hidden;
+        margin-bottom: 0.15rem;
     }
     .plan{
         font-size: .1rem;
         color: rgb(122, 117, 117);
-        /* height: .5rem; */
         display: inline-block;
+        float: left;
         border: 1px solid #ccc;
     }
+    .planbox{
+        float: right;
+    }
     .top{
-        height: .5rem;
-        width: 3.3rem;
-        margin-top: -0.7rem;
+        width: 100%;
+        overflow: hidden;
+        margin-bottom: 0.15rem;
     }
     .center{
-         height: .5rem;
-          width: 3.3rem;
+          width: 100%;
+          overflow: hidden;
+          clear: both;
+          margin-bottom: 0.15rem;
     }
     .bottom{
-        height: .5rem;
-         width: 3.3rem;
+         width: 100%;
+         clear: both;
+         overflow: hidden;
     }
     .fee{
-         font-size: .1rem;
-        color: #ccc;
+         font-size: .2rem;
+        color: #666;
 
     }
     .send{
-         font-size: .1rem;
-        color: #ccc;
+         font-size: .2rem;
+        color: #666;
     }
     .sell{
         font-size: .1rem;
-        color: #ccc;
+        color: #666;
     }
     .num1{
         font-size: .1rem;
-        color: orange;
+        color: #ff6000;
         margin-right: .05rem;
     }
     .star{
         font-size: .1rem;
          margin-right: .05rem;
     }
-    .head{
+    .list{
         width: 6.4rem;
         height: 2.2rem;
-        border-bottom:1px solid #ccc;
+        background: #fff;
+        border-bottom:1px solid #eee;
         padding: .5rem .2rem;
         box-sizing: border-box;
     }
@@ -176,30 +211,39 @@ export default {
     }
     .con{
         width: 2.7rem;
-        height: 1.5rem;
+        height: 1.2rem;
         white-space: nowrap; /* 1.强制在同一行内显示所有文本，直到文本结束或者遭遇br标签才换行 （一般不会使用 br 标签）*/
-        overflow: hidden; /* 2.超出的部分 隐藏 */
-        text-overflow: ellipsis; /*3. 溢出的部分用省略号替代 */
+       overflow: hidden; /* 2.超出的部分 隐藏 */
+       text-overflow: ellipsis; /*3. 溢出的部分用省略号替代 */
 
+    }
+    .con span{
+        float: left;
     }
     .num{
         width: 2rem;
-        height: 1.5rem;
+        height: 1.2rem;
         text-align: right;
-        margin-top: -0.7rem;
     }
 
     .pinpai{
-        padding: 0.05rem 0.1rem;
+        padding: 0.02rem 0.1rem;
         font-size: .12rem;
-        background-color: yellow;
+        background-color: #ffd930;
         border-radius: .05rem;
+        margin-right: 0.1rem;
     }
     .oName{
+        width: 2rem;
+        color: #333;
+        padding-top: .01rem;
+        font: .26rem/.26rem PingFangSC-Regular;
+        font-weight: 700;
         font-size: .1rem;
         white-space: nowrap; /* 1.强制在同一行内显示所有文本，直到文本结束或者遭遇br标签才换行 （一般不会使用 br 标签）*/
         overflow: hidden; /* 2.超出的部分 隐藏 */
         text-overflow: ellipsis; /*3. 溢出的部分用省略号替代 */
-    }
+        font-size: 0.24rem;
+  }
 
 </style>

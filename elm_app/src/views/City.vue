@@ -28,11 +28,7 @@
          </div>
         <ul>
           <li v-for="(i,$index) in list" :key="$index">
-<<<<<<< HEAD
-            <router-link to='/about/Takeaway/'>{{i.name}}<br><span>{{i.address}}</span></router-link>
-=======
             <router-link @click.native="search_list(i.name,i.address,$index)" to='/page1'>{{i.name}}<br><span>{{i.address}}</span></router-link>
->>>>>>> 06b22e0b41a5c28dce31f12303e374cb7cd83207
           </li>
         </ul>
       </div>

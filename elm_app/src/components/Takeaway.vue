@@ -48,24 +48,32 @@
                 </div>
             </template>
             <template v-slot:right>
-                <div class="plan" v-for="(j,ind) in arr" :key="ind">
-                    <template name="plan">{{j.icon_name}}</template>
+                <div class="plan1">
+                    <div class="planbox">
+                        <div class="plan" v-for="(j,ind) in arr" :key="ind">
+                            <template name="plan">{{j.icon_name}}</template>
+                        </div>
+                    </div>
                 </div>
                 <div class="give">
-                    <span class="feng">
-                        <template name="feng">{{i.delivery_mode.text}}</template>
-                    </span>
-                    <span class="zhun">
-                        <template name="zhun">准时答</template>
-                    </span>
+                    <div class="givebox">
+                        <span class="feng">
+                            <template name="feng">{{i.delivery_mode.text}}</template>
+                        </span>
+                        <span class="zhun">
+                            <template name="zhun">准时答</template>
+                        </span>
+                    </div>
                 </div>
                 <div class="time">
-                    <span class="km">
-                        <template name="km">{{i.distance}}</template> / 
-                    </span>
-                    <span class="minute">
-                        <template name="minute">{{i.order_lead_time}}</template>
-                    </span>
+                    <div class="timebox">
+                        <span class="km">
+                            <template name="km">{{i.distance}}</template> / 
+                        </span>
+                        <span class="minute">
+                            <template name="minute">{{i.order_lead_time}}</template>
+                        </span>
+                    </div>
                 </div>
             </template>
         </merchant>
@@ -101,18 +109,20 @@ import elmBanner from './Banner'
 </script>
 
 <style scoped>
-
-
     .fujin{
-        padding: 0 .2rem;
+        padding: 0 .24rem;
+        background: #fff;
+        line-height: 0.6rem;
+        border-top: 0.14rem solid #eee;
     }
     .fujin span{
-        font-size: .2rem;
+        font-size: .24rem;
         color: rgb(107, 101, 101);
     }
 
     .fujin i{
-        font-size: .2rem;
+        font-size: .24rem;
+        margin-right: 0.14rem;
         color: rgb(107, 101, 101);
     }
 </style>

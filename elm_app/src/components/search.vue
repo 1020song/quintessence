@@ -2,7 +2,7 @@
     <div class="search">
         <div class="search_box">
             <!-- <form action="#"> -->
-                <input type="search" class="search_input"/>
+                <input type="search" class="search_input" placeholder="请输入商家或美食名称"/>
                 <button class="search_button" @click="btnClick">提交</button>
             <!-- </form> -->
         </div>
@@ -66,27 +66,28 @@ export default {
 }
 .search_input{
     width: 4.5rem;
-    height: 0.5rem;
+    height: 0.6rem;
     border: .025rem solid #e4e4e4;
-    font-size: .4rem;
+    font-size: .24rem;
     color: #333;
-    border-radius: .125rem;
+    border-radius: 0.06rem;
     background-color: #f2f2f2;
     font-weight: 500;
     padding: 0 .25rem;
     vertical-align: top;
     outline: none;
-    margin-left: 0.1rem;
+    margin-left: 0.15rem;
+    font-weight: 700;
 }
 .search_button{
     width: 1.5rem;
-    height: 0.5rem;
+    height: 0.6rem;
     line-height: 0.5rem;
     border: .025rem solid #3190e8;
-    margin-left: .2rem;
+    margin-left: .1rem;
     font-size: .3rem;
     color: #fff;
-    border-radius: .125rem;
+    border-radius: .06rem;
     background-color: #3190e8;
     font-weight: 500;
     vertical-align: top;

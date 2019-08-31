@@ -42,21 +42,28 @@ export default {
     left: 0;
   }
   .head span{
-    font-size: 0.24rem;
+    font-size: 0.26rem;
     display: inline-block;
   }
-  .s1{
+ .s1{
     width: 1rem;
     float: left;
   }
-  .s2{
+  .head .s2{
     width: 3.5rem;
     text-align: center;
     float: left;
   }
-  .s3{
+  .head .s2 a{
+    font-size: 0.3rem;
+    font-weight: 600;
+  }
+  .head .s3{
     width: 1.5rem;
     text-align: right;
     float: right;
+  }
+  .head .s3 a{
+    font-size: 0.26rem;
   }
 </style>

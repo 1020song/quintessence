@@ -18,19 +18,19 @@
       <div class="ziliao">
             <dl>
          <router-link to="/balance">
-              <dt><span class="orange">0.00</span> 元</dt>
+              <dt><span class="orange">0.00</span>元</dt>
               <dd>我的余额</dd>
          </router-link>
             </dl>
             <dl>
           <router-link to="discounts">
-              <dt><span class="red">0</span> 个</dt>
+              <dt><span class="red">0</span>个</dt>
               <dd>我的优惠</dd>
           </router-link>
             </dl>
             <dl>
           <router-link to="integral">
-              <dt><span class="green">0</span> 分</dt>
+              <dt><span class="green">0</span>分</dt>
               <dd>我的积分</dd>
           </router-link>
             </dl>
