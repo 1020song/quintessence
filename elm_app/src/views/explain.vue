@@ -1,5 +1,11 @@
 <template>
+	
 	<div id="app">
+		<elmHead>
+		<template v-slot:left><router-link to="/balance">&lt;</router-link></template>
+		<template v-slot:center>余额说明</template>
+		<template v-slot:right></template>
+		</elmHead>
 		<h3>Q1: 使用余额的条件</h3>
 		<p>为了保护账户安全，使用余额前必须先绑定手机号。</p>
 		<h3>Q2: 余额可以怎么用？</h3>
@@ -16,7 +22,11 @@
 </template>
 <script>
 import ex from '../css/explain.css'
+import elmHead from '../components/head'
 export default {
-	
+	components:{
+    elmHead:elmHead,
+    name:'app'
+  },
 }
 </script>

@@ -1,11 +1,16 @@
 <template>
-  <div>
-    <div class="header">
+  <div class="login">
+    <!-- <div class="header">
       <div class="r">
         <router-link to class="color"><</router-link>
       </div>
       <div class="pass">密码登录</div>
-    </div>
+    </div> -->
+    <elmHead>
+      <template v-slot:left><router-link to="/" class="lt">&lt;</router-link></template>
+      <template v-slot:center>密码登录</template>
+      <template v-slot:right></template>
+    </elmHead>
     <div class="container">
       <div>
         <input type="text" v-model="user" placeholder="账号">
@@ -16,7 +21,7 @@
       <div>
         <input type="text" placeholder="验证码" v-model="Verify">
         <img :src="yanUrl" class="img">
-        <span @click="random" style="cursor:pointer;margin-left:0.1rem">换一个</span>
+        <span @click="random" style="cursor:pointer;margin-left:0.06rem;font-size:0.15rem">换一个</span>
       </div>
       <p>温馨提示：未注册过的账号，登录时将自动注册</p>
       <p>注册过的用户可凭账号密码登录</p>
@@ -27,8 +32,12 @@
 </template>
 
 <script>
+import elmHead from '../components/head'
 export default {
   name: "login",
+  components:{
+    elmHead
+  },
   data() {
     return {
       user: "",
@@ -61,8 +70,12 @@ export default {
             alert('请输入验证码')
           }else if(this.user = data.data.username){
             alert('登录成功')
+            location.href='/'
+            localStorage.user = this.user
           }else{
             alert(data.data.message)
+            this.random()
+            this.password=''
           }
           console.log(data);
         });
@@ -89,22 +102,6 @@ input{
   display: inline-block;
   vertical-align: middle;
 }
-.header{
-  width: 100%;
-  height: 0.8rem;
-  line-height: 0.8rem;
-  background-color: #3190e8;
-}
-.r{
-  float: left;
-  font-size: 0.5rem;
-  margin-left: 0.2rem;
-  height: 100%;
-}
-.color{
-  height: 100%;
-  color: #fff;
-}
 .pass{
   width: 50%;  
   margin: 0 auto;
@@ -114,8 +111,10 @@ input{
   text-align: center;
 }
 .container{
+  width: 100%;
   height: auto;
-  margin-top: 0.5rem;
+  margin-top: 1.3rem;
+  background-color: #fff;
 }
 .container div{
   width: 100%;
@@ -128,12 +127,12 @@ input{
   display: inline-block;
   vertical-align: middle;
   margin-top: -0.02rem;
-  margin-left: 0.5rem
+  margin-left: 0.4rem
 }
 .container p{
   color: red;
   font-size: 0.25rem;
-  padding: 0.2rem 0.2rem;
+  padding: 0.1rem 0.1rem;
 }
 .container button{
   outline: none;
@@ -152,5 +151,9 @@ input{
   font-size: 0.3rem;
   color: #3b95e9;
   margin-top: 0.1rem;
+}
+.lt{
+  color: #fff;
+  text-decoration: none;
 }
 </style>

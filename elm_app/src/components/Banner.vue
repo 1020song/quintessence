@@ -15,6 +15,7 @@
             </div>
         </div>
         <div class="swiper-pagination"></div>
+        <div>1</div>
     </div>
     <!-- <div>1</div> -->
 </template>

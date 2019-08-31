@@ -3,7 +3,8 @@
     <elmHead>
       <template v-slot:left>ele</template>
       <template v-slot:center></template>
-      <template v-slot:right>登录/注册</template>
+      <template v-slot:right v-if="!isbtnlogin"><router-link to="/login" class="login">登录/注册</router-link></template>
+      <template v-slot:right v-else-if="isbtnlogin"><router-link to="/login" class="login"><i class="iconfont">&#xe602;</i></router-link></template>
     </elmHead>
     <div class="con">
       <div class="no1">
@@ -46,6 +47,7 @@ export default {
   },
   data(){
     return{
+      isbtnlogin:false,
       hot_city:'',
       group:'',
       id:''
@@ -63,6 +65,15 @@ export default {
    }
   },
   created(){
+    if(localStorage.user){
+      this.isbtnlogin = true
+      console.log(1);
+      
+    }else{
+      this.isbtnlogin = false
+      console.log(2);
+      
+    }
     this.$http.get('http://elm.cangdu.org/v1/cities',{
       params:{
         type:"hot"
@@ -161,5 +172,9 @@ export default {
     margin-top: 0.2rem;
     border-top: 2px solid #ccc;
     border-bottom: 1px solid #ccc;
+  }
+  .login{
+    color: #fff;
+    text-decoration: none;
   }
 </style>
