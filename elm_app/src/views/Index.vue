@@ -4,7 +4,7 @@
       <template v-slot:left>ele</template>
       <template v-slot:center></template>
       <template v-slot:right v-if="!isbtnlogin"><router-link to="/login" class="login">登录/注册</router-link></template>
-      <template v-slot:right v-else-if="isbtnlogin"><router-link to="/login" class="login"><i class="iconfont">&#xe602;</i></router-link></template>
+      <template v-slot:right v-else-if="isbtnlogin"><router-link to="/about/user" class="login"><i class="iconfont">&#xe602;</i></router-link></template>
     </elmHead>
     <div class="con">
       <div class="no1">
@@ -66,12 +66,9 @@ export default {
   },
   created(){
     if(localStorage.user){
-      this.isbtnlogin = true
-      // console.log(1);
-      
+      this.isbtnlogin = true 
     }else{
       this.isbtnlogin = false
-      // console.log(2);
       
     }
     this.$http.get('http://elm.cangdu.org/v1/cities',{

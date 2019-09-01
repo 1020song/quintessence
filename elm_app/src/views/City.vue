@@ -14,15 +14,15 @@
       </div>
       <div class="list">
 <!--        搜索历史-->
-         <div v-if="!list">
+         <div v-if="!list" class="his_tory">
            <div class="search_hsr">搜索历史</div>
-           <div v-for="item in arr" class="list_ars">
+           <div v-for="(item,idx) in arr" class="list_ars" @click="search_his(idx)">
               <router-link :to='{path:"/about/Takeaway", query: {geohash: item.split(",")[2]+","+item.split(",")[3]}}'>
                   <div>{{item.split(',')[0]}}</div>
                   <div style="color: #999;font-size: .2rem">{{item.split(',')[1]}}</div>
               </router-link>
-             
            </div>
+           <p @click='clear'>清空所有</p>
          </div>
         <ul>
           <li v-for="(i,$index) in list" :key="$index">
@@ -62,10 +62,20 @@ export default {
     // console.log(this.arr)
   },
   methods:{
+    // 清空历史
+    clear(){
+      localStorage.removeItem("keyword")
+      this.arr = []
+    },
     // 搜索
     search_list (name, address,latitude,longitude,index){
       this.search_history.push([name, address,latitude,longitude,'&'])
       localStorage.keyword += this.search_history
+      localStorage.geohash=this.list[index].latitude+","+this.list[index].longitude
+    },
+    // 历史中搜索
+    search_his(index){
+      localStorage.geohash=this.arr[index].split(",")[2]+","+this.arr[index].split(",")[3]
     },
     // 跳转城市搜索
     tijiao () {
@@ -143,6 +153,12 @@ a{
    border: none;
    float: left;
    outline: none;
+  }
+  .his_tory p {
+    background: #fff;
+    text-align: center;
+    font-size: 0.26rem;
+    line-height: 0.4rem;
   }
   .search_hsr{
     font-size: 0.2rem;

@@ -1,5 +1,11 @@
 <template>
     <div class="search">
+        <elmHead>
+            <template v-slot:left><router-link to="/about/seach">&lt;</router-link></template>
+            <template v-slot:center>搜索</template>
+            <template v-slot:right v-if="!isbtnlogin"><router-link to="/login" class="login">登录/注册</router-link></template>
+            <template v-slot:right v-else-if="isbtnlogin"><router-link to="/about/user" class="login"><i class="iconfont">&#xe602;</i></router-link></template>
+        </elmHead>
         <div class="search_box">
             <!-- <form action="#"> -->
                 <input type="search" class="search_input" placeholder="请输入商家或美食名称"/>
@@ -12,18 +18,31 @@
             <li></li>
           </ul>
         </div>
+        <elmfoot num=1></elmfoot>
     </div>
 </template>
 
 <script>
+import elmfoot from './foot'
+import elmHead from './head'
 export default {
   name: 'seach',
+  components:{
+      elmHead,
+      elmfoot,
+  },
   data () {
     return {
-
+      isbtnlogin:false,
     }
   },
   created () {
+    if(localStorage.user){
+        this.isbtnlogin = true 
+    }else{
+        this.isbtnlogin = false
+    
+    }
     // fetch('https://elm.cangdu.org/v4/restaurants?geohash=31.22967,121.4762&keyword=肯德基')
     //   .then(response => response.json())
     //   .then(res => {

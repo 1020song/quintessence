@@ -52,7 +52,6 @@ export default {
 						this.data.info.push(res.data[i])
 					}
 				}	
-				console.log(this.data)
 			})
 		}
 	}

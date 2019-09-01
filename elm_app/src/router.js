@@ -71,19 +71,19 @@ export default new Router({
           path: 'user',
           name: 'user',
           component: user,
-          children:[
+          children: [
             {
-              path:'info',
-              component:info
-          }
-        ]
+              path: '/',
+              name: 'users',
+              component: Users
+            },
+            {
+              path: 'info',
+              component: info
+            }
+          ]
         }
       ]
-    },
-    {
-      path: '/users',
-      name: 'users',
-      component: Users
     },
     {
       path: '/balance',

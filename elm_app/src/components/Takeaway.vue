@@ -3,7 +3,8 @@
         <elmHead>
             <template v-slot:left><router-link to="/about/seach"><i class="iconfont">&#xe600;</i></router-link></template>
             <template v-slot:center><router-link to="/">{{ads_name}}</router-link></template>
-            <template v-slot:right>登录/注册</template>
+            <template v-slot:right v-if="!isbtnlogin"><router-link to="/login" class="login">登录/注册</router-link></template>
+            <template v-slot:right v-else-if="isbtnlogin"><router-link to="/about/user" class="login"><i class="iconfont">&#xe602;</i></router-link></template>
         </elmHead>
         <elmBanner>
         </elmBanner>
@@ -77,37 +78,44 @@
                 </div>
             </template>
         </merchant>
+        <elmfoot num=0></elmfoot>
     </div>
 </template>
 
 <script>
-import elmHead from './head'
 import merchant from './merchant'
 import elmBanner from './Banner'
+import elmfoot from './foot'
+import elmHead from './head'
     export default {
         props:['name'],
         name: "Takeaway",
         components:{
             elmBanner,
             merchant,
-            elmHead
+            elmHead,
+            elmfoot,
         },
         data(){
             return{
                 list:'',
                 arr:'',
                 ads_name:'',
+                isbtnlogin:false,
                 }
         },
         created(){
-            console.log(this.$route.query.geohash)
+            if(localStorage.user){
+                this.isbtnlogin = true 
+            }else{
+                this.isbtnlogin = false
+            
+            }
             fetch('https://elm.cangdu.org/shopping/restaurants?latitude='+this.$route.query.geohash.split(",")[0]+'&longitude='+this.$route.query.geohash.split(",")[1]).then(response=>response.json()).then(res=>{
                this.list = res;
                this.arr = res[0].supports
-               console.log(this.list)
             })
             fetch('https://elm.cangdu.org/v2/pois/'+this.$route.query.geohash).then(response=>response.json()).then(res=>{
-            //   console.log(res)
               this.ads_name=res.name
             })
         },

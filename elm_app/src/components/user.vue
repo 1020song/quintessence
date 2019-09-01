@@ -1,15 +1,15 @@
 <template>
     <div class="user">
-        <users></users>
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
-import users from '../views/user.vue'
+// import users from '../views/user.vue'
  export default {
     name:'user',
-    components:{
-        users   
-    }
+    // components:{
+    //     users   
+    // }
 }
 </script>
