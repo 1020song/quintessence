@@ -94,6 +94,9 @@ dl dd{
 	line-height: 0.8rem;
 	border-bottom: 1px solid #eee;
 }
+.fuwu p span{
+	color:rgb(187, 187, 187);
+}
 .lz_info{
 	width: 100%;
 }
