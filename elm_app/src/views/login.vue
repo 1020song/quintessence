@@ -70,8 +70,9 @@ export default {
             alert('请输入验证码')
           }else if(this.user = data.data.username){
             alert('登录成功')
-            location.href='/'
+            this.$router.push('/')
             localStorage.user = this.user
+            this.$store.commit('getUserName',data.data.username)
           }else{
             alert(data.data.message)
             this.random()
@@ -83,6 +84,7 @@ export default {
     random() {
       this.$axios.post("http://elm.cangdu.org/v1/captchas",{}).then(data => {
         this.yanUrl = data.data.code;
+        console.log(data)
       });
     },
   }

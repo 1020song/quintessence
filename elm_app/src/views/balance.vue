@@ -8,6 +8,6 @@
 <script>
 import balance from '../css/balance.css'
 export default {
-	
+	name: "balance",
 }
 </script>

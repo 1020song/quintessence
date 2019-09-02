@@ -27,6 +27,7 @@
 import '../css/serve.css'
 import elmHead from '../components/head'
 export default {
+	name: "service",
 	components:{
 		elmHead:elmHead,
 	},

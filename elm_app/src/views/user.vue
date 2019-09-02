@@ -88,6 +88,7 @@ import user from '../css/user.css'
 import elmfoot from '../components/foot'
 import elmHead from '../components/head'
 export default {
+  name:"user",
   components:{
     elmfoot,
     elmHead
