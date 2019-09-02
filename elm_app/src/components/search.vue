@@ -1,7 +1,7 @@
 <template>
     <div class="search">
         <elmHead>
-            <template v-slot:left><router-link to="/about/seach">&lt;</router-link></template>
+            <template v-slot:left><router-link :to='{path:"/about/Takeaway", query: {geohash: geohash}}'>&lt;</router-link></template>
             <template v-slot:center>搜索</template>
             <template v-slot:right v-if="!isbtnlogin"><router-link to="/login" class="login">登录/注册</router-link></template>
             <template v-slot:right v-else-if="isbtnlogin"><router-link to="/about/user" class="login"><i class="iconfont">&#xe602;</i></router-link></template>
@@ -34,9 +34,11 @@ export default {
   data () {
     return {
       isbtnlogin:false,
+      geohash:''
     }
   },
   created () {
+    this.geohash = localStorage.geohash
     if(localStorage.user){
         this.isbtnlogin = true 
     }else{
