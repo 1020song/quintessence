@@ -34,7 +34,7 @@
           </router-link>
             </dl>
             <dl>
-          <router-link to="integral">
+          <router-link to="/integral">
               <dt><span class="green">0</span>分</dt>
               <dd>我的积分</dd>
           </router-link>
@@ -43,7 +43,7 @@
         <!-- 服务 -->
         <div class="fuwu">
           <div class="item">
-            <router-link to="order">
+            <router-link to="Order">
               <li>
                 <i class="iconfont icon-dingdan"></i>
                 <p>

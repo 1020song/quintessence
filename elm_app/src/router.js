@@ -12,12 +12,20 @@ import Order from './components/Order'
 import user from './components/user'
 
 import Users from './views/user.vue'
+// 金额
 import Balance from './views/balance.vue'
-import Balance1 from './views/balance1.vue'
-import Explain from './views/explain.vue'
+import Balance1 from './views/balance1.vue'// 金额数量
+import Explain from './views/explain.vue'// 金额说明
+
+// 积分
+import integral from './views/score.vue'
+import integral1 from './views/score1.vue'
+import integralDetails from './views/score_details.vue'
+
 import Service from './views/service_cont.vue'
 import serviceD from './views/service_details.vue'
 import service1 from './views/service1.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -101,7 +109,25 @@ export default new Router({
           component: Explain
         }
       ]
-    }, {
+    },
+    {
+      path: '/integral',
+      name: 'integral',
+      component: integral,
+      children: [
+        {
+          path: '/',
+          name: 'integral1',
+          component: integral1
+        },
+        {
+          path: 'details',
+          name: 'details1',
+          component: integralDetails
+        }
+      ]
+    },
+    {
       path: '/service',
       name: 'service',
       component: Service,
