@@ -16,13 +16,13 @@
 <!--        搜索历史-->
          <div v-if="!list" class="his_tory">
            <div class="search_hsr">搜索历史</div>
-           <div v-for="(item,idx) in arr" class="list_ars" @click="search_his(idx)">
+           <div v-for="(item,idx) in unique22(arr)" class="list_ars" @click="search_his(idx)">
               <router-link :to='{path:"/about/Takeaway", query: {geohash: item.split(",")[2]+","+item.split(",")[3]}}'>
                   <div>{{item.split(',')[0]}}</div>
                   <div style="color: #999;font-size: .2rem">{{item.split(',')[1]}}</div>
               </router-link>
            </div>
-           <p @click='clear'>清空所有</p>
+           <p @click='clear' v-show="type">清空所有</p>
          </div>
         <ul>
           <li v-for="(i,$index) in list" :key="$index">
@@ -46,6 +46,8 @@ export default {
       list:'',
       search_history:[],
       arr:'',
+      type:true,
+      name:'',
     }
   },
   created(){
@@ -55,23 +57,40 @@ export default {
     //搜索历史显示
     if(localStorage.keyword){
       this.arr = localStorage.keyword.split('&')
-      this.arr.pop()
+        this.arr.pop()
+      this.type = true
     }else{
       this.arr = []
+      this.type = false
     }
-    // console.log(this.arr)
   },
   methods:{
+      //历史记录去重
+      unique22(arr){
+          var hash=[];
+          for (var i = 0; i < arr.length; i++) {
+              if(hash.indexOf(arr[i])== -1){
+                  hash.push(arr[i]);
+              }
+          }
+          return hash;
+      },
     // 清空历史
     clear(){
       localStorage.removeItem("keyword")
       this.arr = []
+      this.type = false
     },
     // 搜索
     search_list (name, address,latitude,longitude,index){
-      this.search_history.push([name, address,latitude,longitude,'&'])
-      localStorage.keyword += this.search_history
-      localStorage.geohash=this.list[index].latitude+","+this.list[index].longitude
+          this.search_history.push([name, address,latitude,longitude,'&'])
+      if (localStorage.keyword){
+          localStorage.keyword += this.search_history
+      }else{
+          localStorage.keyword = this.search_history
+          localStorage.geohash=this.list[index].latitude+","+this.list[index].longitude
+      }
+      console.log(localStorage.keyword)
     },
     // 历史中搜索
     search_his(index){
@@ -171,7 +190,7 @@ a{
     line-height: 0.4rem;
     padding-left: .4rem;
     padding-top: .1rem;
-    color:#333; 
+    color:#333;
   }
   .list_ars{
     border-bottom: #eee solid 2px;

@@ -40,6 +40,7 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 99;
   }
   .head span{
     font-size: 0.26rem;
