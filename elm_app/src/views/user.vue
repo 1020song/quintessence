@@ -2,7 +2,7 @@
   <div>
     <div class="contain">
       <elmHead>
-          <template v-slot:left><router-link to="/about/seach">&lt;</router-link></template>
+          <template v-slot:left><router-link to="/about/search">&lt;</router-link></template>
           <template v-slot:center>我的</template>
           <template v-slot:right></template>
       </elmHead>
@@ -23,19 +23,19 @@
       <div class="ziliao">
             <dl>
          <router-link to="/balance">
-              <dt><span class="orange">0.00</span>元</dt>
+              <dt><span class="orange">{{$store.state.user.balance}}.00</span>元</dt>
               <dd>我的余额</dd>
          </router-link>
             </dl>
             <dl>
           <router-link to="discounts">
-              <dt><span class="red">0</span>个</dt>
+              <dt><span class="red">{{$store.state.user.gift_amount}}</span>个</dt>
               <dd>我的优惠</dd>
           </router-link>
             </dl>
             <dl>
           <router-link to="integral">
-              <dt><span class="green">0</span>分</dt>
+              <dt><span class="green">{{$store.state.user.point}}</span>分</dt>
               <dd>我的积分</dd>
           </router-link>
             </dl>

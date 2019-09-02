@@ -4,10 +4,10 @@ export default {
     selectList: '',
     totalPrice: 0,
     deliveryFee: 0
-  },
-  mutations: {
-    getUserName (state, value) {
-      state.products = value
-    }
   }
+  // mutations: {
+  //   setUserName (state, value) {
+  //     state.products = value
+  //   }
+  // }
 }
