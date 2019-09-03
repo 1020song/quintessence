@@ -34,13 +34,8 @@
           </router-link>
             </dl>
             <dl>
-<<<<<<< HEAD
-          <router-link to="/integral">
-              <dt><span class="green">0</span>分</dt>
-=======
           <router-link to="integral">
               <dt><span class="green">{{$store.state.user.point}}</span>分</dt>
->>>>>>> c82fe308ad323631c5186c49404166cafcc2d84a
               <dd>我的积分</dd>
           </router-link>
             </dl>
