@@ -5,7 +5,11 @@
 		<template v-slot:center>{{$route.params.tit}}</template>
 		<template v-slot:right></template>
 		</elmHead>
-		<p style="padding:.2rem;font-size:.3rem" v-html="$route.params.info"></p>
+		<div v-for="(i,$index) in data.img" :key="$index" >
+		<img :src="i" alt="" style="width:100%">
+		<p style="padding:.2rem;font-size:.3rem" v-html="data.info[$index]"></p>
+		</div>
+		
 	</div>
 </template>
 <script>
@@ -16,12 +20,18 @@ export default {
 	},
 	data(){
 		return{
-			data:''
+			data:{}
 		}
 	},
 	created(){
-		this.data=this.$route.params.info
-		console.log(this.$route)
+		var arr=this.$route.params.info.split('![](')
+		var Img=[],Info=[]
+		arr.forEach(element => {
+			Img.push(element.split(') ##')[0])
+			Info.push(element.split(') ##')[1])
+		});
+		this.data.img=Img.slice(1)
+		this.data.info=Info.slice(1)
 	}
 }
 </script>
