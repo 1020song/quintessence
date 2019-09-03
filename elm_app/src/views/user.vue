@@ -57,7 +57,7 @@
               <p>积分商城<span class="f-r">></span></p>
             </li>
           </router-link>
-          <router-link to="vip">
+          <router-link to="/vip">
             <li>
               <i class="iconfont icon-fuwu"></i>
               <p>饿了么会员卡<span class="f-r">></span></p>
@@ -71,7 +71,7 @@
               <p>服务中心<span class="f-r">></span></p>
             </li>
           </router-link>
-          <router-link to="app">
+          <router-link to="/app">
             <li>
               <i class="iconfont icon-changyonglogo40"></i>
               <p>下载饿了么APP<span class="f-r">></span></p>
@@ -83,8 +83,10 @@
     </div>
   </div>
 </template>
+<style scoped>
+@import '../css/user.css'
+</style>
 <script>
-import user from '../css/user.css'
 import elmfoot from '../components/foot'
 import elmHead from '../components/head'
 export default {

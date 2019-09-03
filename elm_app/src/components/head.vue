@@ -50,6 +50,9 @@ export default {
     width: 1rem;
     float: left;
   }
+  .s1 a{
+    font-size: .4rem
+  }
   .head .s2{
     width: 3.5rem;
     text-align: center;

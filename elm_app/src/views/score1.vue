@@ -20,8 +20,10 @@
 		</userdata>
 	</div>
 </template>
+<style scoped>
+	@import '../css/balance.css'
+</style>
 <script>
-import balance from '../css/balance.css'
 import elmHead from '../components/head'
 import userdata from '../components/user_data'
 export default {
