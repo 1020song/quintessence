@@ -70,7 +70,13 @@ export default {
             alert('请输入验证码')
           }else if(this.user = data.data.username){
             alert('登录成功')
-            location.href='/'
+            this.$store.commit('setUserName',data.data.username)
+            this.$store.commit('setUserId',data.data.user_id)
+            this.$store.commit('setUsercity',data.data.city)
+            this.$store.commit('setPoint',data.data.point)
+            this.$store.commit('setBalance',data.data.balance)
+            this.$store.commit('setGift_amount',data.data.gift_amount)
+            this.$router.push('/')
             localStorage.user = this.user
             localStorage.uid = data.data.user_id
           }else{
@@ -84,6 +90,7 @@ export default {
     random() {
       this.$axios.post("http://elm.cangdu.org/v1/captchas",{}).then(data => {
         this.yanUrl = data.data.code;
+        console.log(data)
       });
     },
   }

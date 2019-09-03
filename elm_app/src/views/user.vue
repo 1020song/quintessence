@@ -2,7 +2,7 @@
   <div>
     <div class="contain">
       <elmHead>
-          <template v-slot:left><router-link to="/about/seach">&lt;</router-link></template>
+          <template v-slot:left><router-link to="/about/search">&lt;</router-link></template>
           <template v-slot:center>我的</template>
           <template v-slot:right></template>
       </elmHead>
@@ -24,19 +24,19 @@
       <div class="ziliao">
             <dl>
          <router-link to="/balance">
-              <dt><span class="orange">0.00</span>元</dt>
+              <dt><span class="orange">{{$store.state.user.balance}}.00</span>元</dt>
               <dd>我的余额</dd>
          </router-link>
             </dl>
             <dl>
           <router-link to="discounts">
-              <dt><span class="red">0</span>个</dt>
+              <dt><span class="red">{{$store.state.user.gift_amount}}</span>个</dt>
               <dd>我的优惠</dd>
           </router-link>
             </dl>
             <dl>
           <router-link to="integral">
-              <dt><span class="green">0</span>分</dt>
+              <dt><span class="green">{{$store.state.user.point}}</span>分</dt>
               <dd>我的积分</dd>
           </router-link>
             </dl>
@@ -44,7 +44,7 @@
         <!-- 服务 -->
         <div class="fuwu">
           <div class="item">
-            <router-link to="order">
+            <router-link to="Order">
               <li>
                 <i class="iconfont icon-dingdan"></i>
                 <p>
@@ -58,7 +58,7 @@
               <p>积分商城<span class="f-r">></span></p>
             </li>
           </router-link>
-          <router-link to="vip">
+          <router-link to="/vip">
             <li>
               <i class="iconfont icon-fuwu"></i>
               <p>饿了么会员卡<span class="f-r">></span></p>
@@ -72,7 +72,7 @@
               <p>服务中心<span class="f-r">></span></p>
             </li>
           </router-link>
-          <router-link to="app">
+          <router-link to="/app">
             <li>
               <i class="iconfont icon-changyonglogo40"></i>
               <p>下载饿了么APP<span class="f-r">></span></p>
@@ -84,11 +84,14 @@
     </div>
   </div>
 </template>
+<style scoped>
+@import '../css/user.css'
+</style>
 <script>
-import user from '../css/user.css'
 import elmfoot from '../components/foot'
 import elmHead from '../components/head'
 export default {
+  name:"user",
   components:{
     elmfoot,
     elmHead

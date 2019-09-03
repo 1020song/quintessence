@@ -42,6 +42,7 @@
 <script>
 import elmHead from '../components/head'
 export default {
+  name: "index",
   components:{
     elmHead:elmHead,
   },
@@ -65,6 +66,7 @@ export default {
    }
   },
   created(){
+    console.log(this.$store.state)
     if(localStorage.user){
       this.isbtnlogin = true 
     }else{
@@ -77,15 +79,18 @@ export default {
       }
     }).then((data)=>{
        this.hot_city=data.data
+       console.log(data)
     })
     // fetch("http://elm.cangdu.org/v1/cities?type=hot").then(response=>response.json()).then(res=>{
     //   this.hot_city=res
     // })
     fetch("http://elm.cangdu.org/v1/cities?type=guess").then(response=>response.json()).then(res=>{
       this.id=res
+      console.log(res)
     })
     fetch("http://elm.cangdu.org/v1/cities?type=group").then(response=>response.json()).then(res=>{
       this.group=res
+      console.log(res)
     })
   }
 }

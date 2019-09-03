@@ -69,4 +69,7 @@
     color: #666;
     font-size:0.2rem;
   }
+  .link p{
+    font-size: 0.24rem;
+  }
 </style>

@@ -50,12 +50,18 @@ export default {
     width: 1rem;
     float: left;
   }
+  .s1 a{
+    font-size: .4rem
+  }
   .head .s2{
     width: 3.5rem;
     text-align: center;
     float: left;
     font-size: 0.3rem;
     font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .head .s2 a{
     font-size: 0.3rem;
