@@ -1,30 +1,8 @@
 <template>
-<<<<<<< HEAD
-    <div class="search">
-        <elmHead>
-            <template v-slot:left><router-link :to='{path:"/about/Takeaway", query: {geohash: geohash}}'>&lt;</router-link></template>
-            <template v-slot:center>搜索</template>
-            <template v-slot:right v-if="!isbtnlogin"><router-link to="/login" class="login">登录/注册</router-link></template>
-            <template v-slot:right v-else-if="isbtnlogin"><router-link to="/about/user" class="login"><i class="iconfont">&#xe602;</i></router-link></template>
-        </elmHead>
-        <div class="search_box">
-            <!-- <form action="#"> -->
-                <input type="search" class="search_input" placeholder="请输入商家或美食名称"/>
-                <button class="search_button" @click="btnClick">提交</button>
-            <!-- </form> -->
-        </div>
-        <div class="search_history">
-          <h3>搜索历史</h3>
-          <ul>
-            <li></li>
-          </ul>
-        </div>
-        <elmfoot num=1></elmfoot>
-=======
   <div class="search">
     <elmHead>
       <template v-slot:left>
-        <router-link to="/about/seach">&lt;</router-link>
+        <router-link :to='{path:"/about/Takeaway", query: {geohash: geohash}}'>&lt;</router-link>
       </template>
       <template v-slot:center>搜索</template>
       <template v-slot:right
@@ -42,33 +20,65 @@
       <!-- <form action="#"> -->
       <input type="search"
              class="search_input"
-             placeholder="请输入商家或美食名称"
-             v-model="iptValue" />
+             placeholder="请输入商家或美食名称" />
       <button class="search_button"
               @click="btnClick">提交</button>
       <!-- </form> -->
-      <ul class="commit_list">
-        <li v-if="iptValue==''"></li>
-        <li v-else
-            v-for="(item,index) in searchlist"
-            :key="index">
-          <!-- <router-link :to='{path:"/about/Takeaway", query: {geohash: searchlist[item]}}'> -->
-          <p>{{item.name}}</p>
-          <p>{{item.address}}</p>
-          <!-- </router-link> -->
-        </li>
-
-      </ul>
     </div>
     <div class="search_history">
       <h3>搜索历史</h3>
       <ul>
-        <!-- <li v-for=""></li> -->
+        <li></li>
       </ul>
->>>>>>> 586c29b275a7dcb200732974146a2f105504bb02
     </div>
     <elmfoot num=1></elmfoot>
-  </div>
+    <div class="search">
+      <elmHead>
+        <template v-slot:left>
+          <router-link to="/about/seach">&lt;</router-link>
+        </template>
+        <template v-slot:center>搜索</template>
+        <template v-slot:right
+                  v-if="!isbtnlogin">
+          <router-link to="/login"
+                       class="login">登录/注册</router-link>
+        </template>
+        <template v-slot:right
+                  v-else-if="isbtnlogin">
+          <router-link to="/about/user"
+                       class="login"><i class="iconfont">&#xe602;</i></router-link>
+        </template>
+      </elmHead>
+      <div class="search_box">
+        <!-- <form action="#"> -->
+        <input type="search"
+               class="search_input"
+               placeholder="请输入商家或美食名称"
+               v-model="iptValue" />
+        <button class="search_button"
+                @click="btnClick">提交</button>
+        <!-- </form> -->
+        <ul class="commit_list">
+          <li v-if="iptValue==''"></li>
+          <li v-else
+              v-for="(item,index) in searchlist"
+              :key="index">
+            <!-- <router-link :to='{path:"/about/Takeaway", query: {geohash: searchlist[item]}}'> -->
+            <p>{{item.name}}</p>
+            <p>{{item.address}}</p>
+            <!-- </router-link> -->
+          </li>
+
+        </ul>
+      </div>
+      <div class="search_history">
+        <h3>搜索历史</h3>
+        <ul>
+          <!-- <li v-for=""></li> -->
+        </ul>
+      </div>
+      <elmfoot num=1></elmfoot>
+    </div>
 </template>
 
 <script>
@@ -82,20 +92,8 @@ export default {
   },
   data () {
     return {
-<<<<<<< HEAD
-      isbtnlogin:false,
-      geohash:''
-    }
-  },
-  created () {
-    this.geohash = localStorage.geohash
-    if(localStorage.user){
-        this.isbtnlogin = true 
-    }else{
-        this.isbtnlogin = false
-    
-=======
       isbtnlogin: false,
+      geohash: '',
       iptValue: '',
       searchlist: '',
       city_id: '',
@@ -104,14 +102,11 @@ export default {
     }
   },
   created () {
-    console.log(this.$route)
-    // localStorage.name = this.$route.query.data
-
+    this.geohash = localStorage.geohash
     if (localStorage.user) {
       this.isbtnlogin = true
     } else {
       this.isbtnlogin = false
->>>>>>> 586c29b275a7dcb200732974146a2f105504bb02
     }
   },
   methods: {
