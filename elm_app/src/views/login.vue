@@ -58,7 +58,7 @@ export default {
           {
             username: this.user,
             password: this.password,
-            captcha_code: this.Verify
+            captcha_code: this.Verify,
           },
         )
         .then(data => {
@@ -72,12 +72,13 @@ export default {
             alert('登录成功')
             location.href='/'
             localStorage.user = this.user
+            localStorage.uid = data.data.user_id
           }else{
             alert(data.data.message)
             this.random()
             this.password=''
+            this.Verify = ''
           }
-          console.log(data);
         });
     },
     random() {

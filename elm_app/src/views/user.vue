@@ -8,12 +8,13 @@
       </elmHead>
       <div class="lz_info" @click="info">
         <router-link to="/about/user/info" class="lz_info_a">
-        <img :src="info_img" alt="">
+        <div class="lz_info_img"><img :src="info_img" alt=""></div>
         <div class="lz_info_user">
-          <p>{{info_user}}</p>
+          <div style="margin-left:0.2rem;" v-if="!isbtn"><router-link to="/login" class="l">登录/注册</router-link></div>
+          <p v-else-if="isbtn">{{info_user}}</p>
           <p>
             <span class="iconfont" style="margin-right:0.1rem">&#xe68a;</span>
-            <span>暂无绑定手机号</span>
+            <span style="font-size:0.25rem;">暂无绑定手机号</span>
             </p>
         </div>
         <span style="float:right;margin-top:0.2rem;color:#fff;">&gt;</span>
@@ -95,18 +96,26 @@ export default {
   data() {
     return {
       info_img:'',
-      info_user:''
+      info_user:'',
+      isbtn:false
     }
   },
   created() {
-    this.info()
+    this.info();
+    if(localStorage.user){
+      this.isbtn = true 
+    }else{
+      this.isbtn = false
+      
+    }
   },
   methods: {
     info(){
       this.$axios.get('https://elm.cangdu.org/v1/user')
       .then(data=>{
         this.info_img = '//elm.cangdu.org/img/'+data.data.avatar
-        this.info_user = data.data.username
+        // this.info_user = data.data.username
+        this.info_user = localStorage.user
       })
     }
   },
