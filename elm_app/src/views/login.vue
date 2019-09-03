@@ -58,7 +58,7 @@ export default {
           {
             username: this.user,
             password: this.password,
-            captcha_code: this.Verify
+            captcha_code: this.Verify,
           },
         )
         .then(data => {
@@ -78,12 +78,13 @@ export default {
             this.$store.commit('setGift_amount',data.data.gift_amount)
             this.$router.push('/')
             localStorage.user = this.user
+            localStorage.uid = data.data.user_id
           }else{
             alert(data.data.message)
             this.random()
             this.password=''
+            this.Verify = ''
           }
-          console.log(data);
         });
     },
     random() {
