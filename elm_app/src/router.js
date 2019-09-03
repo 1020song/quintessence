@@ -19,6 +19,7 @@ import Explain from './views/explain.vue'
 import Service from './views/service_cont.vue'
 import serviceD from './views/service_details.vue'
 import service1 from './views/service1.vue'
+import sweetmeats from './views/sweetmeats.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -67,13 +68,21 @@ export default new Router({
             name: route.query.geohash
           }),
           name: 'Takeaway',
-          component: Takeaway
+          component: Takeaway,
+        },
+        {
+          path: 'sweetmeats',
+              name: 'sweetmeats',
+              component: sweetmeats
         },
         // 搜索
         {
           path: 'search',
           name: 'search',
-          component: search
+          component: search,
+          props: route => ({
+            name: route.query
+          })
         },
         // 订单
         {
