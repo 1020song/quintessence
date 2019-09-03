@@ -5,7 +5,7 @@
             <template v-slot:center>我问问</template>
         </elmhead>
         <div class="imgbox">
-            <img src="../../../../seven/7/19.5.24效果/img/0.jpg" alt="">
+            <img src="" alt="">
         </div>
         <div class="con">
             <p>hh</p>
@@ -42,7 +42,7 @@ import elmhead from '../components/head'
                 value: 3.7
             }
         }
-        
+
     }
 </script>
 
