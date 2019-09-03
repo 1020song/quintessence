@@ -1,37 +1,4 @@
 <template>
-  <div class="search">
-    <elmHead>
-      <template v-slot:left>
-        <router-link :to='{path:"/about/Takeaway", query: {geohash: geohash}}'>&lt;</router-link>
-      </template>
-      <template v-slot:center>搜索</template>
-      <template v-slot:right
-                v-if="!isbtnlogin">
-        <router-link to="/login"
-                     class="login">登录/注册</router-link>
-      </template>
-      <template v-slot:right
-                v-else-if="isbtnlogin">
-        <router-link to="/about/user"
-                     class="login"><i class="iconfont">&#xe602;</i></router-link>
-      </template>
-    </elmHead>
-    <div class="search_box">
-      <!-- <form action="#"> -->
-      <input type="search"
-             class="search_input"
-             placeholder="请输入商家或美食名称" />
-      <button class="search_button"
-              @click="btnClick">提交</button>
-      <!-- </form> -->
-    </div>
-    <div class="search_history">
-      <h3>搜索历史</h3>
-      <ul>
-        <li></li>
-      </ul>
-    </div>
-    <elmfoot num=1></elmfoot>
     <div class="search">
       <elmHead>
         <template v-slot:left>
