@@ -59,6 +59,9 @@ export default {
     float: left;
     font-size: 0.3rem;
     font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .head .s2 a{
     font-size: 0.3rem;

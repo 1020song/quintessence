@@ -9,9 +9,15 @@ import './assets/iconfont/iconfont.css'
 import './assets/lz.iconfont/iconfont.css'
 import './assets/user_iconfont/iconfont.css'
 // Vue.use(VueAxios, axios)
+import axios from 'axios'
 import '../node_modules/swiper/dist/css/swiper.min.css'
+import elementUi from 'element-ui'
+import '../node_modules/element-ui/lib/index'
+import '../node_modules/element-ui/lib/theme-chalk/index.css'
 import vueResource from 'vue-resource'
+// Vue.use(VueAxios, axios)
 Vue.use(vueResource)
+Vue.use(elementUi)
 Vue.config.productionTip = false
 axios.defaults.withCredentials = true
 Vue.prototype.$axios = axios
