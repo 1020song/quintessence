@@ -28,7 +28,7 @@
          </router-link>
             </dl>
             <dl>
-          <router-link to="discounts">
+          <router-link to="/benefit">
               <dt><span class="red">{{$store.state.user.gift_amount}}</span>个</dt>
               <dd>我的优惠</dd>
           </router-link>
@@ -51,7 +51,7 @@
                 </p>
               </li>
             </router-link>
-          <router-link to="integral">
+          <router-link :to="{name:'shopping'}">
             <li>
               <i class="iconfont icon-baobao"></i>
               <p>积分商城<span class="f-r">></span></p>

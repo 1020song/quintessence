@@ -14,7 +14,6 @@
 		<div else>
 			<p  style="padding:.2rem;font-size:.3rem" v-html="$route.params.info"></p>
 		</div>
-		
 	</div>
 </template>
 <script>

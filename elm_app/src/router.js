@@ -11,6 +11,11 @@ import Takeaway from './components/Takeaway'
 import search from './components/search'
 import Order from './components/Order'
 import user from './components/user'
+// 优惠
+import Benefit from './views/benefit.vue'
+import benefits from './views/benefits.vue'
+import Retails from './views/reddetails.vue'
+import Coupon from './views/coupon.vue'
 // 金额
 import Balance from './views/balance.vue'
 import Balance1 from './views/balance1.vue'// 金额数量
@@ -20,6 +25,8 @@ import Explain from './views/explain.vue'// 金额说明
 import integral from './views/score.vue'
 import integral1 from './views/score1.vue'
 import integralDetails from './views/score_details.vue'
+// 积分商城
+import jf_Shopping from './views/jf_shopping.vue'
 // Vip
 import Vip from './views/vip.vue'
 import vip1 from './views/vip1.vue'
@@ -37,6 +44,32 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
+    {
+      path: '/shopping',
+      name: 'shopping',
+      component: jf_Shopping
+    },
+    {
+      path: '/benefit',
+      component: Benefit,
+      children: [
+        {
+          path: '/',
+          name: 'benefit',
+          component: benefits
+        },
+        {
+          path: 'hbDescription',
+          name: 'red',
+          component: Retails
+        },
+        {
+          path: 'coupon',
+          name: 'coupon',
+          component: Coupon
+        }
+      ]
+    },
     {
       path: '/login',
       name: 'login',
