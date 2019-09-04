@@ -34,10 +34,13 @@
             class="list clearfix">
           <!-- <router-link :to='{path:"/about/Takeaway", query: {geohash: searchlist[item]}}'> -->
           <!-- <div class="list_left fl"></div> -->
-          <div class="list_right">
-            <p>{{item.name}}</p>
-            <p>{{item.address}}</p>
-          </div>
+
+          <router-link to="/about/search/searchdetail">
+            <div class="list_right">
+              <p>{{item.name}}</p>
+              <p>{{item.address}}</p>
+            </div>
+          </router-link>
           <!-- </router-link> -->
         </li>
 
@@ -47,14 +50,18 @@
       <h3>搜索历史</h3>
       <ul>
         <li v-if="iptValueArray==''"></li>
-        <li v-else
-            @click="searchtodetail(item)"
+        <li class="histroy_list"
+            v-else
             v-for="(item,index) in iptValueArray"
             :key="index">
           <router-link to="/about/search/searchdetail">
-            <p>{{item.name}}</p>
-            <p>{{item.address}}</p>
+            <div>
+              <p>{{item.name}}</p>
+              <p>{{item.address}}</p>
+            </div>
           </router-link>
+          <span class="fr"
+                @click="clearItem">×</span>
         </li>
       </ul>
       <p class="clearhistory"
@@ -101,14 +108,6 @@ export default {
     }
   },
   methods: {
-    // gotoIndex (item) {
-    //   this.$router.push({
-    //     path: '/about/Takeaway'
-    //     // path: '/about/Takeaway?geohash=' + localStorage.geohash
-    //     // query: {abc:item}
-    //   })
-    // },
-
     btnClick () {
       if (this.iptValue == '') {
         this.nulls = '输入为空！！！'
@@ -122,10 +121,6 @@ export default {
         }).then((res) => {
           console.log(res.body)
           this.searchlist = res.body
-          // console.log(this.searchlist)
-          // this.iptValueArray.unshift(this.iptValue)
-          // console.log(this.iptValueArray)
-          // localStorage.setItem('item', this.iptValueArray)
         })
       }
     },
@@ -140,13 +135,17 @@ export default {
       this.iptValueArray = []
       localStorage.clear()
     },
-    searchtodetail (aaa) {
-      console.log(123)
-      // this.$router.push({
-      //   path: '/about/search/searchdetail',
-      //   query: { name: aaa }
-      // })
+    clearItem (b) {
+      this.iptValueArray.shift(b)
     }
+    // gotoIndex (item) {
+    //   this.$router.push({
+    //     path: '/about/Takeaway'
+    //     // path: '/about/Takeaway?geohash=' + localStorage.geohash
+    //     // query: {abc:item}
+    //   })
+    // },
+
   }
 
 }
@@ -244,7 +243,7 @@ export default {
   padding-left: 0.2rem;
 }
 .clearhistory {
-  font-size: 0.2rem;
+  font-size: 0.3rem;
   /* padding-left: 0.2rem; */
   color: #3190e8;
   text-align: center;
@@ -260,5 +259,15 @@ export default {
 }
 .list_right {
   width: 80%;
+  display: inline-block;
+}
+.histroy_list {
+  height: 1rem;
+  line-height: 1rem;
+}
+.histroy_list span {
+  display: inline-block;
+  margin-top: -0.9rem;
+  margin-right: 0.5rem;
 }
 </style>
