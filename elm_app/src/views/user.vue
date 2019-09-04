@@ -35,7 +35,7 @@
           </router-link>
             </dl>
             <dl>
-          <router-link to="integral">
+          <router-link to="/integral">
               <dt><span class="green">{{$store.state.user.point}}</span>分</dt>
               <dd>我的积分</dd>
           </router-link>
