@@ -134,29 +134,30 @@ export default new Router({
               component: info,
             },
             {
-              path:'setusername',
-              name:'setusername',
-              component:setusername
+              path: 'setusername',
+              name: 'setusername',
+              component: setusername
             },
             {
-              path:'add',
-              component:add
+              path: 'add',
+              component: add
             },
             {
-              path:'adds',
-              name:'adds',
-              component:adds,
+              path: 'adds',
+              name: 'adds',
+              component: adds,
               children:[
                 {
-                  path:'/',
-                  component:addsss
+                  path: '/',
+                  name: 'adds',
+                  component: addsss
                 },
                 {
-                  path:'addss',
-                  component:addss
+                  path: 'addss',
+                  component: addss
                 }
               ]
-            },
+            }
             
           ]
         }

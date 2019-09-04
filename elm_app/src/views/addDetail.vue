@@ -48,8 +48,7 @@ export default {
   methods: {
     adds(a){
       console.log(a)
-        this.$router.push({name: 'adds', params: {name:a}})
-        console.log(a.name);
+        this.$router.push({name: 'adds', params: {name:a.name}})
         
     },
     search() {
@@ -117,10 +116,10 @@ export default {
 }
 .list_data li{
     padding: 0.15rem;
-    border-bottom:0.01rem solid #ccc; 
+    border-bottom:0.01rem solid #ccc;
 }
 .list_data li p{
     font-size: 0.27rem;
-    color: #ccc;
+    color: #969696;
 }
 </style>
