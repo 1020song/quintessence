@@ -40,8 +40,7 @@ export default {
     elmHead
   },
   created() {
-      this.arr=JSON.parse(localStorage.arr)
-      console.log(this.arr)
+    console.log(this.$route)
   },
 };
 </script>

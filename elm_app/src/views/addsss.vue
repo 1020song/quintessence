@@ -89,10 +89,8 @@ export default {
           if(data.data.status == 0){
             alert(data.data.message)
           }else{
-            // this.$router.push('/about/user/add')
             alert(data.data.success)
-          this.$router.push({name: 'add', params: {data:this.user_s}})
-            // localStorage.arr=JSON.stringify(this.arr)
+            this.$router.push({name: 'add', params: {data:this.user_s}})
           }
         });
     }

@@ -78,7 +78,7 @@ export default new Router({
             name: route.query.geohash
           }),
           name: 'Takeaway',
-          component: Takeaway,
+          component: Takeaway
         },
         {
           path: 'sweetmeats',
@@ -127,33 +127,34 @@ export default new Router({
             // 账户信息
             {
               path: 'info',
-              component: info,
+              component: info
             },
             {
-              path:'setusername',
-              name:'setusername',
-              component:setusername
+              path: 'setusername',
+              name: 'setusername',
+              component: setusername
             },
             {
-              path:'add',
-              component:add
+              path: 'add',
+              name:'add',
+              component: add
             },
             {
-              path:'adds',
-              name:'adds',
-              component:adds,
-              children:[
+              path: 'adds',
+              name: 'adds',
+              component: adds,
+              children: [
                 {
-                  path:'/',
-                  component:addsss
+                  path: '/',
+                  name: 'adds',
+                  component: addsss
                 },
                 {
-                  path:'addss',
-                  component:addss
+                  path: 'addss',
+                  component: addss
                 }
               ]
-            },
-            
+            }
           ]
         }
       ]
