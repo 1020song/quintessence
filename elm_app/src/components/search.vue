@@ -137,6 +137,8 @@ export default {
     },
     clearItem (b) {
       this.iptValueArray.shift(b)
+      localStorage.iptValueArray = JSON.stringify(this.iptValueArray)
+      // localStorage.removeItem('iptValueArray')
     }
     // gotoIndex (item) {
     //   this.$router.push({

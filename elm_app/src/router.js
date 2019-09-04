@@ -30,6 +30,9 @@ import sweetmeats from './views/sweetmeats.vue'
 import searchtodetail from './components/searchToDetail.vue' /*搜索的时候，点击li，进入详情页*/
 import searchaa from './views/searchaa.vue'
 
+// 确认订单
+import confirmOrder from './views/confirmOrder.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -113,6 +116,12 @@ export default new Router({
           name: 'Order',
           component: Order
         },
+        // 确认订单
+        {
+          path: 'confirmOrder',
+          name: 'confirmOrder',
+          component: confirmOrder
+        },
         // 我的
         {
           path: 'user',
@@ -136,7 +145,7 @@ export default new Router({
             },
             {
               path: 'add',
-              name:'add',
+              name: 'add',
               component: add
             },
             {
