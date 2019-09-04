@@ -47,9 +47,8 @@ export default {
   },
   methods: {
     adds(a){
-      console.log(a)
         this.$router.push({name: 'adds', params: {name:a.name}})
-        
+        localStorage.add_geohash=a.geohash
     },
     search() {
       this.$axios
@@ -58,6 +57,7 @@ export default {
         }})
         .then(data => {
           this.poisdata = data.data
+          console.log(data)
         });
     }
   }

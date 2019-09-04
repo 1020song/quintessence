@@ -1,115 +1,85 @@
-<template>
+<template >
   <div>
     <elmHead>
       <template v-slot:left>
-        <router-link to="/about/user/add">&lt;</router-link>
+        <router-link to="/about/user/info">&lt;</router-link>
       </template>
-      <template v-slot:center>新增地址</template>
-      <template v-slot:right></template>
+      <template v-slot:center>编辑地址</template>
+      <template v-slot:right>编辑</template>
     </elmHead>
     <div class="content">
-      <div>
-        <input type="text" placeholder="请填写你的姓名" v-model="user_s.users" @input="update_dta">
-      </div>
-      <div>
-        <router-link to="/about/user/adds/addss">
-          <input type="text" placeholder="小区/写字楼/学校等" v-model="user_s.add_ress" @input="update_dta">
-        </router-link>
-      </div>
-      <div>
-        <input type="text" placeholder="请填写详细送餐地址" v-model="user_s.add_d" @input="update_dta">
-      </div>
-      <div>
-        <input type="text" placeholder="请填写能够联系到您的手机号" v-model="user_s.user_number" @input="update_dta">
-      </div>
-      <div>
-        <input type="text" placeholder="备用联系电话（选填）" v-model="user_s.snumber" @input="update_dta">
-      </div>
+        <ul>
+            <li v-for=" i in arr">
+                <div>
+                    <p>{{i.users}}</p>
+                    <p>{{i.user_number}}</p>
+                </div>
+                <div>
+                    <span>X</span>
+                </div>
+            </li>
+        </ul>
+        <div class="addsite">
+            <router-link to="/about/user/adds" class="r">
+                <span>新增地址</span>
+                <span class="c">></span>
+            </router-link>
+        </div>
     </div>
-    <button @click="add">新增地址</button>
-    <router-view></router-view>
   </div>
 </template>
-
 <script>
 import elmHead from "../components/head";
 export default {
+    data() {
+        return {
+            arr:''
+        }
+    },
   components: {
     elmHead
   },
-  data() {
-      return {
-          user_s:{
-              users:'',
-              add_d:'',
-              user_number:'',
-              snumber:'',
-              add_ress:''
-          },
-          uid:''
-      }
-  },
   created() {
-    this.user_s.add_ress=this.$route.params.name
-    localStorage.add_ress=this.user_s.add_ress
-    console.log(this.user_s.add_ress)
-    if(localStorage.user_s){
-      this.user_s.users=JSON.parse(localStorage.user_s).users
-      this.user_s.add_d=JSON.parse(localStorage.user_s).add_d
-      this.user_s.user_number=JSON.parse(localStorage.user_s).user_number
-      this.user_s.snumber=JSON.parse(localStorage.user_s).snumber
-    }
-  },
-  methods: {
-    update_dta(){
-      localStorage.user_s=JSON.stringify(this.user_s)
-    },
-      add(){
-          this.$axios.post('https://elm.cangdu.org/v1/users/:user_id/addresses',{
-                user_id:localStorage.uid,
-                address:this.user_s.add_ress,    	
-                address_detail:this.user_s.add_d,     	 
-                name:this.users,	   
-                phone:this.user_s.user_number,   		
-                phone_bk:this.user_s.snumber	  		
-          })
-          .then(data=>{
-              console.log(data);
-          })
-      }
+      this.arr=JSON.parse(localStorage.arr)
+      console.log(this.arr)
   },
 };
 </script>
 <style scoped>
-.content {
-  width: 100%;
-  background-color: #fff;
-  margin-top: 1.2rem;
-  padding-top: 0.15rem;
+*{
+    list-style: none;
 }
-.content div {
-  width: 100%;
-  padding-bottom: 0.15rem;
-  background: #fff;
+.content{
+    width: 100%;
+    margin-top: 1rem;
+    border-top:1px solid #ccc;
+    border-bottom:1px solid #ccc;  
 }
-.content div input {
-  display: block;
-  width: 6rem;
-  font-size: 0.2rem;
-  margin: 0 auto;
-  padding: 0.15rem;
-  background: #f2f2f2;
-  border: 1px solid #ddd;
-  border-radius: 0.07rem;
+.content ul li{
+    padding: 0.15rem;
+    display: flex;
+    border-bottom:1px solid #ccc; 
+    background: #fff8c3;
+    justify-content: space-between;
+    margin: 0.2rem 0;
 }
-button {
-  width: 95%;
-  height: 0.6rem;
-  margin: 0.3rem 0.16rem;
-  background: #4cd964;
-  border-radius: 0.05rem;
-  border: none;
-  color: #fff;
-  font-size: 0.3rem;
+.addsite{
+    margin-top: .2rem;
+    background: #fff;
+    padding: .15rem .15rem;
+    border-top: 1px solid #d9d9d9;
+    display: flex;
+    justify-content: space-between;
+}
+.r{
+    width: 100%;
+    
+}
+.r span{
+    font-size: 0.3rem;
+}
+.c{
+    color: #ccc;
+    float: right;
 }
 </style>
