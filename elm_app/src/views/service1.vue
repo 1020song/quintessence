@@ -6,14 +6,20 @@
 		<template v-slot:right></template>
 		</elmHead>
 		<div class="tit">
-			<div class="items" v-for="(i,$index) in 2" :key="$index">
+			<div class="items">
 				<dl>
-					<dt><img src="" alt=""></dt>
+					<dt style="margin-bottom:.2rem"><i class="iconfont" style="font-size:.5rem">&#xe653;</i></dt>
+					<dd><span style="font-size:.3rem">在线客服</span></dd>
+				</dl>
+			</div>
+			<div class="items">
+				<dl>
+					<dt style="margin-bottom:.25rem"><i class="iconfont" style="font-size:.45rem">&#xe62f;</i></dt>
 					<dd><span style="font-size:.3rem">在线客服</span></dd>
 				</dl>
 			</div>
 		</div>
-		<h3>热门问题</h3>
+		<h3 style="padding-left:.2rem">热门问题</h3>
 		<div class="list">
 			<router-link v-for=" (i,$index) in data.tit" :key="$index" :to= "{name:'details',params:{tit:i,info:data.info[$index]}}">
 				<li>{{i}} 

@@ -40,12 +40,16 @@
 			</div>
 			<div class="vip-item">
 				<div class="tits">
-					<p>兑换会员<span style="float:right">使用卡号卡密 ></span></p>
+					<router-link :to="{name:'useCart'}">
+						<p>兑换会员<span style="float:right">使用卡号卡密 ></span></p>
+					</router-link>
 				</div>
 			</div>
 			<div class="vip-item">
 				<div class="tits">
+					<router-link :to="{name:'invoiceRecord'}">
 					<p>购买记录<span style="float:right">开发票 ></span></p>
+					</router-link>
 				</div>
 			</div>
 			</div>

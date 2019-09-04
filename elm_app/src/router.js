@@ -38,6 +38,8 @@ import Vip from './views/vip.vue'
 import vip1 from './views/vip1.vue'
 import vipDescription from './views/vipDescription.vue'
 import payment from './views/payment.vue'
+import useCart from './views/useCart.vue'
+import invoiceRecord from './views/invoiceRecord'
 // 服务中心
 import Service from './views/service_cont.vue'
 import serviceD from './views/service_details.vue'
@@ -226,13 +228,23 @@ export default new Router({
         },
         {
           path: 'vipDescription',
-          name:'vipDescription',
+          name: 'vipDescription',
           component: vipDescription
         },
         {
           path: 'payment',
           name: 'payment',
           component: payment
+        },
+        {
+          path: 'useCart',
+          name: 'useCart',
+          component: useCart
+        },
+        {
+          path: 'invoiceRecord',
+          name: 'invoiceRecord',
+          component: invoiceRecord
         }
       ]
     },
