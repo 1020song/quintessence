@@ -30,10 +30,14 @@
         <li v-else
             v-for="(item,index) in searchlist"
             :key="index"
-            @click="place(item)">
+            @click="place(item)"
+            class="list clearfix">
           <!-- <router-link :to='{path:"/about/Takeaway", query: {geohash: searchlist[item]}}'> -->
-          <p>{{item.name}}</p>
-          <p>{{item.address}}</p>
+          <!-- <div class="list_left fl"></div> -->
+          <div class="list_right">
+            <p>{{item.name}}</p>
+            <p>{{item.address}}</p>
+          </div>
           <!-- </router-link> -->
         </li>
 
@@ -43,12 +47,14 @@
       <h3>搜索历史</h3>
       <ul>
         <li v-if="iptValueArray==''"></li>
-        <li @click="searchtodetail"
-            v-else
+        <li v-else
+            @click="searchtodetail(item)"
             v-for="(item,index) in iptValueArray"
             :key="index">
-          <p>{{item.name}}</p>
-          <p>{{item.address}}</p>
+          <router-link to="/about/search/searchdetail">
+            <p>{{item.name}}</p>
+            <p>{{item.address}}</p>
+          </router-link>
         </li>
       </ul>
       <p class="clearhistory"
@@ -114,6 +120,7 @@ export default {
             keyword: this.iptValue
           }
         }).then((res) => {
+          console.log(res.body)
           this.searchlist = res.body
           // console.log(this.searchlist)
           // this.iptValueArray.unshift(this.iptValue)
@@ -123,6 +130,9 @@ export default {
       }
     },
     place (a) {
+      // this.$http.get('https://elm.cangdu.org/v4/restaurants?geohash=31.22967,121.4762&keyword=肯德基',{
+      //   params:{}
+      // })
       this.iptValueArray.unshift(a)
       localStorage.iptValueArray = JSON.stringify(this.iptValueArray)
     },
@@ -130,12 +140,12 @@ export default {
       this.iptValueArray = []
       localStorage.clear()
     },
-    searchtodetail () {
+    searchtodetail (aaa) {
       console.log(123)
-      this.$route.push({
-        path: '/about/search/searchdetail'
-
-      })
+      // this.$router.push({
+      //   path: '/about/search/searchdetail',
+      //   query: { name: aaa }
+      // })
     }
   }
 
@@ -147,6 +157,25 @@ export default {
   margin: 0;
   padding: 0;
 }
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.clearfix {
+  zoom: 1;
+}
+.clearfix::after,
+.clearfix::before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  visibility: hidden;
+  clear: both;
+}
+
 .search {
   width: 6.4rem;
   padding-top: 1rem;
@@ -221,5 +250,15 @@ export default {
   text-align: center;
   line-height: 0.6rem;
   font-weight: bolder;
+}
+.list {
+  height: 1rem;
+  margin-top: 0.2rem;
+}
+.list_left {
+  width: 20%;
+}
+.list_right {
+  width: 80%;
 }
 </style>
