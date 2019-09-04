@@ -28,6 +28,7 @@ import service1 from './views/service1.vue'
 import sweetmeats from './views/sweetmeats.vue'
 
 import searchtodetail from './components/searchToDetail.vue' /*搜索的时候，点击li，进入详情页*/
+import searchaa from './views/searchaa.vue'
 
 Vue.use(Router)
 
@@ -88,11 +89,16 @@ export default new Router({
         {
           path: 'search',
           name: 'search',
-          component: search,
-          props: route => ({
-            name: route.query
-          }),
+          component: searchaa,
           children: [
+            {
+              path: '/',
+              name: 'search',
+              component: search,
+              props: route => ({
+                name: route.query
+              }),
+            },
             // 点击每一个li，进入食物详情
             {
               path: 'searchdetail',
