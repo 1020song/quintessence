@@ -4,9 +4,9 @@ import login from './views/login.vue' /*登录 lz*/
 import change from './views/changepassword.vue' /*重置密码 lz*/
 import info from './views/info.vue' /*用户信息 lz*/
 import setusername from './views/setusername.vue'
-import add from './views/address.vue'
-import addsss from './views/add.vue'
-import addss from './views/addDetail.vue'
+import add from './views/add.vue'
+import addsss from './views/addsss.vue'
+import addss from './views/addss.vue'
 import adds from './views/adds.vue'
 
 import Index from './views/Index.vue'
@@ -101,30 +101,29 @@ export default new Router({
               component: info,
             },
             {
-              path: 'setusername',
-              name: 'setusername',
-              component: setusername
+              path:'setusername',
+              name:'setusername',
+              component:setusername
             },
             {
-              path: 'add',
-              component: add
+              path:'add',
+              component:add
             },
             {
-              path: 'adds',
-              name: 'adds',
-              component: adds,
+              path:'adds',
+              name:'adds',
+              component:adds,
               children:[
                 {
-                  path: '/',
-                  name: 'adds',
-                  component: addsss
+                  path:'/',
+                  component:addsss
                 },
                 {
-                  path: 'addss',
-                  component: addss
+                  path:'addss',
+                  component:addss
                 }
               ]
-            }
+            },
             
           ]
         }
