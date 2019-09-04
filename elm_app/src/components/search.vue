@@ -1,51 +1,61 @@
 <template>
-    <div class="search">
-      <elmHead>
-        <template v-slot:left>
-          <router-link to="/about/seach">&lt;</router-link>
-        </template>
-        <template v-slot:center>搜索</template>
-        <template v-slot:right
-                  v-if="!isbtnlogin">
-          <router-link to="/login"
-                       class="login">登录/注册</router-link>
-        </template>
-        <template v-slot:right
-                  v-else-if="isbtnlogin">
-          <router-link to="/about/user"
-                       class="login"><i class="iconfont">&#xe602;</i></router-link>
-        </template>
-      </elmHead>
-      <div class="search_box">
-        <!-- <form action="#"> -->
-        <input type="search"
-               class="search_input"
-               placeholder="请输入商家或美食名称"
-               v-model="iptValue" />
-        <button class="search_button"
-                @click="btnClick">提交</button>
-        <!-- </form> -->
-        <ul class="commit_list">
-          <li v-if="iptValue==''"></li>
-          <li v-else
-              v-for="(item,index) in searchlist"
-              :key="index">
-            <!-- <router-link :to='{path:"/about/Takeaway", query: {geohash: searchlist[item]}}'> -->
-            <p>{{item.name}}</p>
-            <p>{{item.address}}</p>
-            <!-- </router-link> -->
-          </li>
+  <div class="search">
+    <elmHead>
+      <template v-slot:left>
+        <router-link to="/about/seach">&lt;</router-link>
+      </template>
+      <template v-slot:center>搜索</template>
+      <template v-slot:right
+                v-if="!isbtnlogin">
+        <router-link to="/login"
+                     class="login">登录/注册</router-link>
+      </template>
+      <template v-slot:right
+                v-else-if="isbtnlogin">
+        <router-link to="/about/user"
+                     class="login"><i class="iconfont">&#xe602;</i></router-link>
+      </template>
+    </elmHead>
+    <div class="search_box">
+      <!-- <form action="#"> -->
+      <input type="search"
+             class="search_input"
+             placeholder="请输入商家或美食名称"
+             v-model="iptValue" />
+      <button class="search_button"
+              @click="btnClick">提交</button>
+      <!-- </form> -->
+      <ul class="commit_list">
+        <li v-if="iptValue==''"></li>
+        <li v-else
+            v-for="(item,index) in searchlist"
+            :key="index"
+            @click="place(item)">
+          <!-- <router-link :to='{path:"/about/Takeaway", query: {geohash: searchlist[item]}}'> -->
+          <p>{{item.name}}</p>
+          <p>{{item.address}}</p>
+          <!-- </router-link> -->
+        </li>
 
-        </ul>
-      </div>
-      <div class="search_history">
-        <h3>搜索历史</h3>
-        <ul>
-          <!-- <li v-for=""></li> -->
-        </ul>
-      </div>
-      <elmfoot num=1></elmfoot>
+      </ul>
     </div>
+    <div class="search_history">
+      <h3>搜索历史</h3>
+      <ul>
+        <li v-if="iptValueArray==''"></li>
+        <li @click="searchtodetail"
+            v-else
+            v-for="(item,index) in iptValueArray"
+            :key="index">
+          <p>{{item.name}}</p>
+          <p>{{item.address}}</p>
+        </li>
+      </ul>
+      <p class="clearhistory"
+         @click="clearHistory()">清空历史</p>
+    </div>
+    <elmfoot num=1></elmfoot>
+  </div>
 </template>
 
 <script>
@@ -65,10 +75,18 @@ export default {
       searchlist: '',
       city_id: '',
       keyword: '',
-      nulls: ''
+      nulls: '',
+      // 搜索历史
+      iptValueArray: []
     }
   },
   created () {
+    if (localStorage.iptValueArray) {
+      this.iptValueArray = JSON.parse(localStorage.iptValueArray)
+    } else {
+      this.iptValueArray = []
+    }
+
     this.geohash = localStorage.geohash
     if (localStorage.user) {
       this.isbtnlogin = true
@@ -96,18 +114,28 @@ export default {
             keyword: this.iptValue
           }
         }).then((res) => {
-          // console.log(res)
           this.searchlist = res.body
-          localStorage.setItem('item', this.$route.query)
           // console.log(this.searchlist)
+          // this.iptValueArray.unshift(this.iptValue)
+          // console.log(this.iptValueArray)
+          // localStorage.setItem('item', this.iptValueArray)
         })
       }
+    },
+    place (a) {
+      this.iptValueArray.unshift(a)
+      localStorage.iptValueArray = JSON.stringify(this.iptValueArray)
+    },
+    clearHistory () {
+      this.iptValueArray = []
+      localStorage.clear()
+    },
+    searchtodetail () {
+      console.log(123)
+      this.$route.push({
+        path: '/about/search/searchdetail'
 
-      // fetch('https://elm.cangdu.org/v4/restaurants?geohash=' + localStorage.geohash + '&keyword=' + this.iptValue)
-      //   .then(response => response.json())
-      //   .then(res => {
-      //     console.log(res)
-      //   })
+      })
     }
   }
 
@@ -124,6 +152,7 @@ export default {
   padding-top: 1rem;
   min-height: 10rem;
   background-color: #f5f5f5;
+  padding-bottom: 1rem;
 }
 .search_box {
   width: 6.4rem;
@@ -184,5 +213,13 @@ export default {
   padding-bottom: 0.1rem;
   background-color: #fff;
   padding-left: 0.2rem;
+}
+.clearhistory {
+  font-size: 0.2rem;
+  /* padding-left: 0.2rem; */
+  color: #3190e8;
+  text-align: center;
+  line-height: 0.6rem;
+  font-weight: bolder;
 }
 </style>
