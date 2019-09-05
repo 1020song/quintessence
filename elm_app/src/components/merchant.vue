@@ -106,6 +106,7 @@ export default {
         float: left;
     }
     .minute{
+        width: 0.9rem;
         color: #3190e8;
         font-size: .1rem;
         overflow: hidden;
@@ -138,7 +139,6 @@ export default {
     .plan{
         font-size: .1rem;
         color: rgb(122, 117, 117);
-        display: inline-block;
         float: left;
         border: 1px solid #ccc;
     }

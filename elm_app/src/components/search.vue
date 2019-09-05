@@ -234,6 +234,13 @@ export default {
   background-color: #fff;
   padding-left: 0.2rem;
 }
+.search_history ul li p{
+  width: 80%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 0.2rem;
+  overflow: hidden;
+}
 .commit_list {
   width: 100%;
   background-color: #fff;
@@ -243,6 +250,13 @@ export default {
   padding-bottom: 0.1rem;
   background-color: #fff;
   padding-left: 0.2rem;
+}
+.commit_list li p{
+  width: 80%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 0.2rem;
 }
 .clearhistory {
   font-size: 0.3rem;

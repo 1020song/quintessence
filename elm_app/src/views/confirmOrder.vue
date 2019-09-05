@@ -1,10 +1,21 @@
 <template>
   <div class="confirmOrder">
-    <header>
-      <span class="h_left">&lt;</span>
-      <span class="h_center">确认订单</span>
-      <span class="fr iconfont headIcon">1</span>
-    </header>
+    <elmHead>
+      <template v-slot:left>
+        <router-link :to="{name:'search'}"><</router-link>
+      </template>
+      <template v-slot:center>确认订单</template>
+      <template v-slot:right
+                v-if="!isbtnlogin">
+        <router-link :to="{name:'login'}"
+                     class="login">登录/注册</router-link>
+      </template>
+      <template v-slot:right
+                v-else-if="isbtnlogin">
+        <router-link :to="{name:'users'}"
+                     class="login"><i class="iconfont">&#xe602;</i></router-link>
+      </template>
+    </elmHead>
     <div class="add_address">
       <p>请添加一个收货地址 <span class="fr">&gt;</span></p>
     </div>
@@ -35,31 +46,19 @@
         <span class="detail_two_c fr">￥20</span>
         <span class="detail_two_r fr red cuo">×</span>
       </div>
-      <div class="detail_three">
-        <span class="fl ccc">餐盒</span>
-        <span class="fr ccc">￥7662</span>
-      </div>
-      <div class="detail_four">
-        <span class="fl ccc">配送费</span>
-        <span class="fr ccc">￥4</span>
-      </div>
       <div class="detail_five">
         <p>订单<span>￥7687</span></p>
-        <div class="fr toPay">
-          <span class="red">待支付</span>
-          <br />
-          <span class="red yuan">￥7687</span>
-        </div>
+        <p class="fr">待支付<span>￥7687</span></p>
       </div>
     </div>
     <div class="beizhu">
       <p class="beizhu1">
         <span>定单备注</span>
-        <span>口味、偏好等 &gt;</span>
+        <span class="fr">口味、偏好等 &gt;</span>
       </p>
       <p class="beizhu2">
         <span>发票抬头</span>
-        <span>不需要开发票 &gt;</span>
+        <span class="fr">不需要开发票 &gt;</span>
       </p>
     </div>
     <div class="footer">
@@ -71,14 +70,34 @@
   </div>
 </template>
 <script>
+import elmHead from '../components/head'
 export default {
-
+  components: {
+    elmHead
+  },
+  data(){
+    return{
+      isbtnlogin: false,
+    }
+  },
+  created(){
+    if (localStorage.user) {
+      this.isbtnlogin = true
+    } else {
+      this.isbtnlogin = false
+    }
+  }
 }
 </script>
 <style scoped>
-.red {
+.confirmOrder{
+  padding-top: 1rem;
+}
+.detail_two .red {
   color: #f60;
   margin-right: 0.3rem;
+  font-weight: 400;
+  line-height: 0.8rem;
 }
 .ccc {
   color: #aaa;
@@ -131,7 +150,7 @@ header {
 .add_address {
   width: 100%;
   height: 1rem;
-  border-bottom: 2px dashed #ccc;
+  border-bottom: 2px dashed #f5f5f5;
   background: #fff;
 }
 .add_address p {
@@ -142,11 +161,12 @@ header {
 }
 .add_address p span {
   margin-right: 0.2rem;
+  color: #999;
 }
 .deliveryTime {
   background-color: white;
   margin-top: 0.3rem;
-  border-left: 0.2rem solid #3190e8;
+  border-left: 0.1rem solid #3190e8;
   min-height: 1.6rem;
   display: flex;
   justify-content: space-between;
@@ -168,17 +188,17 @@ header {
   font-size: 0.26rem;
   color: #3190e8;
   margin-right: 0.1rem;
+  font-weight: 400;
 }
 .quickly p:nth-of-type(2) {
   font-size: 0.2rem;
   color: #fff;
   background-color: #3190e8;
-  width: 1.4rem;
-  margin-top: 0.5rem;
-  margin-right: 0.3rem;
-  text-align: center;
-  border-radius: 0.2rem;
-  padding: 0.1rem;
+    width: 1.2rem;
+    margin-top: 0.05rem;
+    margin-right: 0.3rem;
+    text-align: center;
+    padding: 0rem;
 }
 .PayWay {
   margin-top: 0.2rem;
@@ -190,11 +210,11 @@ header {
   height: 0.8rem;
   line-height: 0.8rem;
   padding: 0 0.2rem;
-  border-bottom: 1px solid lightgray;
+  border-bottom: 1px solid #f5f5f5;
 }
 .PayWay_top span,
 .PayWay_bottom span {
-  font-size: 0.2rem;
+  font-size: 0.26rem;
 }
 .detail {
   background-color: white;
@@ -205,7 +225,7 @@ header {
 .detail_three,
 .detail_four,
 .detail_five {
-  border-bottom: 1px solid lightgray;
+  border-bottom: 1px solid #f5f5f5;
 }
 .detail_one {
   height: 1.2rem;
@@ -213,15 +233,16 @@ header {
   padding-left: 0.2rem;
 }
 .detail_one img {
-  width: 0.8rem;
-  height: 0.8rem;
+  width: 0.6rem;
+  height: 0.6rem;
   border: 1px solid;
   vertical-align: middle;
 }
 .detail_one span {
-  font-size: 0.2rem;
+  font-size: 0.3rem;
   vertical-align: middle;
   margin-left: 0.2rem;
+  color: #333;
 }
 .detail_two {
   padding: 0 0.2rem;
@@ -229,10 +250,15 @@ header {
   height: 0.8rem;
   line-height: 0.8rem;
   margin-bottom: 0.1rem;
+  font-size: 0.24rem;
 }
-.cuo {
+.detail_two span{
+  font-size: 0.24rem;
+  color: #666;
+}
+/* .cuo {
   margin-top: -0.1rem;
-}
+} */
 .detail_two_l,
 .detail_two_c,
 .detail_two_r {
@@ -258,20 +284,29 @@ header {
 }
 .detail_five {
   background-color: white;
-  height: 2rem;
-  line-height: 2rem;
-  position: relative;
+  height: 1rem;
+  line-height: 1rem;
+  padding: 0 0.2rem;
 }
 .detail_five > p {
-  font-size: 0.3rem;
-  position: absolute;
-  left: 0.2rem;
-  top: 0.2rem;
-  padding-left: 0.3rem;
+  font-size: 0.24rem;
   display: inline-block;
+  line-height: 1rem;
+  color: #666;
 }
 .detail_five > p > span {
-  font-size: 0.3rem;
+  font-size: 0.24rem;
+  color: #666;
+}
+.detail_five > p:first-of-type span{
+  margin-left: 0.2rem;
+}
+.detail_five > p:last-of-type{
+  color: #f60;
+}
+.detail_five > p:last-of-type span{
+  color: #f60;
+  margin-left: 0.2rem;
 }
 .toPay {
   height: 1.2rem;
@@ -295,12 +330,17 @@ header {
 .beizhu2 {
   height: 1rem;
   line-height: 1rem;
-  padding-left: 0.2rem;
-  border-bottom: 1px solid #ccc;
+  padding: 0 0.2rem;
+  border-bottom: 1px solid #f5f5f5;
+  color: #666;
 }
 .beizhu1 span,
 .beizhu2 span {
   font-size: 0.24rem;
+}
+.beizhu1 span:last-of-type,
+.beizhu2 span:last-of-type {
+  color: #aaa;
 }
 .footer {
   width: 100%;
