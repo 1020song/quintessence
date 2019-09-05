@@ -84,9 +84,6 @@
     </div>
   </div>
 </template>
-<style scoped>
-@import '../css/user.css'
-</style>
 <script>
 import elmfoot from '../components/foot'
 import elmHead from '../components/head'
@@ -117,10 +114,13 @@ export default {
       this.$axios.get('https://elm.cangdu.org/v1/user')
       .then(data=>{
         this.info_img = '//elm.cangdu.org/img/'+data.data.avatar
-        // this.info_user = data.data.username
+        /* // this.info_user = data.data.username */
         this.info_user = localStorage.user
       })
     }
   },
 }
 </script>
+<style scoped>
+@import '../css/user.css'
+</style>

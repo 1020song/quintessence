@@ -190,6 +190,7 @@ export default new Router({
             // 账户信息
             {
               path: 'info',
+              name: 'info',
               component: info
             },
             {
