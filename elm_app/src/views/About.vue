@@ -13,6 +13,9 @@ export default {
 }
 </script>
 <style scoped>
+.about{
+  padding-bottom: 1rem;
+}
   .login{
     color: #fff;
     text-decoration: none;
