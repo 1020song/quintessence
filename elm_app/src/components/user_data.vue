@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="contain">
 		<div class="nav">
 			<div class="price">
 				<span style="font-size:.2rem"><slot name="tit-left"></slot></span>
@@ -23,3 +23,9 @@
 		</div>
 	</div>
 </template>
+<script>
+import balance from '../css/balance.css'
+export default {
+	
+}
+</script>

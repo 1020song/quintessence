@@ -2,7 +2,7 @@
   <div class="search">
     <elmHead>
       <template v-slot:left>
-        <router-link to="/about/seach">&lt;</router-link>
+        <router-link :to="{name:'Takeaway'}">&lt;</router-link>
       </template>
       <template v-slot:center>搜索</template>
       <template v-slot:right

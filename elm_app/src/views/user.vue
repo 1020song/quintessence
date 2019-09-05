@@ -7,7 +7,7 @@
           <template v-slot:right></template>
       </elmHead>
       <div class="lz_info" @click="info">
-        <router-link to="/about/user/info" class="lz_info_a">
+        <router-link :to="{name:'info'}" class="lz_info_a">
         <div class="lz_info_img"><img :src="info_img" alt=""></div>
         <div class="lz_info_user">
           <div style="margin-left:0.2rem;" v-if="!isbtn"><router-link to="/login" class="l">登录/注册</router-link></div>
@@ -23,19 +23,19 @@
       <!-- 个人资料/信息 -->
       <div class="ziliao">
             <dl>
-         <router-link to="/balance">
+         <router-link :to="{name:'explain'}">
               <dt><span class="orange">{{$store.state.user.balance}}.00</span>元</dt>
               <dd>我的余额</dd>
          </router-link>
             </dl>
             <dl>
-          <router-link to="discounts">
+          <router-link :to="{name:'benefit'}">
               <dt><span class="red">{{$store.state.user.gift_amount}}</span>个</dt>
               <dd>我的优惠</dd>
           </router-link>
             </dl>
             <dl>
-          <router-link to="integral">
+          <router-link :to="{name:'integral1'}">
               <dt><span class="green">{{$store.state.user.point}}</span>分</dt>
               <dd>我的积分</dd>
           </router-link>
@@ -52,13 +52,13 @@
                 </p>
               </li>
             </router-link>
-          <router-link to="integral">
+          <router-link :to="{name:'shopping'}">
             <li>
               <i class="iconfont icon-baobao"></i>
               <p>积分商城<span class="f-r">></span></p>
             </li>
           </router-link>
-          <router-link to="/vip">
+          <router-link :to="{name:'vip'}">
             <li>
               <i class="iconfont icon-fuwu"></i>
               <p>饿了么会员卡<span class="f-r">></span></p>
@@ -66,13 +66,13 @@
           </router-link>
           </div>
           <div class="item">
-            <router-link to="/service">
+            <router-link :to="{name:'service'}">
             <li>
               <i class="iconfont icon-vip"></i>
               <p>服务中心<span class="f-r">></span></p>
             </li>
           </router-link>
-          <router-link to="/app">
+          <router-link :to="{name:'app'}">
             <li>
               <i class="iconfont icon-changyonglogo40"></i>
               <p>下载饿了么APP<span class="f-r">></span></p>
