@@ -19,8 +19,10 @@ import Order from './components/Order'
 import user from './components/user'
 // 优惠
 import benefits from './views/benefits.vue'
+import historied from './views/historyred.vue'
 import Retails from './views/reddetails.vue'
 import Coupon from './views/coupon.vue'
+import exchange from './views/exchange.vue'
 // 金额
 import Balance1 from './views/balance1.vue'// 金额数量
 import Explain from './views/explain.vue'// 金额说明
@@ -46,7 +48,7 @@ import App from './views/appdetails.vue'
 // 用户
 import Users from './views/user.vue'
 
-import searchtodetail from './components/searchToDetail.vue' /*搜索的时候，点击li，进入详情页*/
+import searchtodetail from './components/searchToDetail.vue'
 import searchaa from './views/searchaa.vue'
 
 // 确认订单
@@ -85,11 +87,21 @@ export default new Router({
       path: '/benefit',
       name: 'benefit',
       component: benefits,
-      children:[
+      children: [
+        {
+          path: 'exchange',
+          name: 'exchange',
+          component: exchange
+        },
         {
           path: '/hbDescription',
           name: 'red',
           component: Retails
+        },
+        {
+          path: 'historied',
+          name: 'historied',
+          component: historied
         },
         {
           path: '/coupon',
@@ -98,7 +110,6 @@ export default new Router({
         }
       ]
     },
-    
     // 登录
     {
       path: '/login',

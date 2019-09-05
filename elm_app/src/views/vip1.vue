@@ -5,7 +5,7 @@
 			<template v-slot:center>会员中心</template>
 		</elmHead>	
 		<div >
-			<div class="contain" v-if="$store.state.user.name">
+			<div class="contain" v-if="$store.state.user.userName">
 				<p style="padding:.1rem">为账户 <span style="font-weight: 700;font-size:.25rem">{{$store.state.user.userName}}</span> 购买会员</p>
 			<div class="vip-item">
 				<div class="tits" style="border-bottom: 1px solid gainsboro">

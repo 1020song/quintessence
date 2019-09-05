@@ -2,7 +2,7 @@
   <div>
     <div class="contain">
       <elmHead>
-          <template v-slot:left><router-link to="/about/search">&lt;</router-link></template>
+          <template v-slot:left><router-link :to="{name:'search'}">&lt;</router-link></template>
           <template v-slot:center>我的</template>
           <template v-slot:right></template>
       </elmHead>
@@ -10,7 +10,7 @@
         <router-link :to="{name:'info'}" class="lz_info_a">
         <div class="lz_info_img"><img :src="info_img" alt=""></div>
         <div class="lz_info_user">
-          <div style="margin-left:0.2rem;" v-if="!isbtn"><router-link to="/login" class="l">登录/注册</router-link></div>
+          <div style="margin-left:0.2rem;" v-if="!isbtn"><router-link :to="{name:'login'}" class="l">登录/注册</router-link></div>
           <p v-else-if="isbtn">{{info_user}}</p>
           <p>
             <span class="iconfont" style="margin-right:0.1rem">&#xe68a;</span>
@@ -44,7 +44,7 @@
         <!-- 服务 -->
         <div class="fuwu">
           <div class="item">
-            <router-link to="Order">
+            <router-link :to="{name:'Order'}">
               <li>
                 <i class="iconfont icon-dingdan"></i>
                 <p>
