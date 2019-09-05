@@ -3,7 +3,13 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import login from './views/login.vue' /*登录 lz*/
 import change from './views/changepassword.vue' /*重置密码 lz*/
-import info from './views/info.vue' /*用户信息 lz */
+import info from './views/info.vue' /*用户信息 lz*/
+import setusername from './views/setusername.vue'
+import add from './views/add.vue'
+import addsss from './views/addsss.vue'
+import addss from './views/addss.vue'
+import adds from './views/adds.vue'
+
 import Index from './views/Index.vue'
 import About from './views/About.vue'
 import City from './views/City.vue'
@@ -35,10 +41,19 @@ import invoiceRecord from './views/invoiceRecord'
 import serviceD from './views/service_details.vue'
 import service1 from './views/service1.vue'
 import sweetmeats from './views/sweetmeats.vue'
+<<<<<<< HEAD
 // 应用下载
 import App from './views/appdetails.vue'
 // 用户
 import Users from './views/user.vue'
+=======
+
+import searchtodetail from './components/searchToDetail.vue' /*搜索的时候，点击li，进入详情页*/
+import searchaa from './views/searchaa.vue'
+
+// 确认订单
+import confirmOrder from './views/confirmOrder.vue'
+>>>>>>> 4f0bf43f1496a77c7316200c86fbce8bd2cb082b
 
 Vue.use(Router)
 
@@ -123,7 +138,7 @@ export default new Router({
             name: route.query.geohash
           }),
           name: 'Takeaway',
-          component: Takeaway,
+          component: Takeaway
         },
         {
           path: 'sweetmeats',
@@ -134,10 +149,30 @@ export default new Router({
         {
           path: 'search',
           name: 'search',
+<<<<<<< HEAD
           component: search,
           props: route => ({
             name: route.query
           })
+=======
+          component: searchaa,
+          children: [
+            {
+              path: '/',
+              name: 'search',
+              component: search,
+              props: route => ({
+                name: route.query
+              }),
+            },
+            // 点击每一个li，进入食物详情
+            {
+              path: 'searchdetail',
+              name: 'searchdetail',
+              component: searchtodetail
+            }
+          ]
+>>>>>>> 4f0bf43f1496a77c7316200c86fbce8bd2cb082b
         },
         // 订单
         {
@@ -145,9 +180,16 @@ export default new Router({
           name: 'Order',
           component: Order
         },
+        // 确认订单
+        {
+          path: 'confirmOrder',
+          name: 'confirmOrder',
+          component: confirmOrder
+        },
         // 我的
         {
           path: 'user',
+<<<<<<< HEAD
           name: 'users',
           component: Users
         },
@@ -156,6 +198,48 @@ export default new Router({
           path: 'info',
           name: 'info',
           component: info
+=======
+          name: 'user',
+          component: user,
+          children: [
+            {
+              path: '/',
+              name: 'users',
+              component: Users
+            },
+            // 账户信息
+            {
+              path: 'info',
+              component: info
+            },
+            {
+              path: 'setusername',
+              name: 'setusername',
+              component: setusername
+            },
+            {
+              path: 'add',
+              name: 'add',
+              component: add
+            },
+            {
+              path: 'adds',
+              name: 'adds',
+              component: adds,
+              children: [
+                {
+                  path: '/',
+                  name: 'adds',
+                  component: addsss
+                },
+                {
+                  path: 'addss',
+                  component: addss
+                }
+              ]
+            }
+          ]
+>>>>>>> 4f0bf43f1496a77c7316200c86fbce8bd2cb082b
         }
       ]
     },

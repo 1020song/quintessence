@@ -43,10 +43,15 @@
         </div>
         <div class="center">
           <span class="star">
-            <template name="star">11111</template>
-          </span>
-          <span class="num1">
-            <template name="num1">{{i.rating}}</template>
+            <template name="star">
+              <el-rate
+                  v-model="i.rating"
+                  disabled
+                  show-score
+                  text-color="#ff9900"
+                  score-template="{value}">
+              </el-rate>
+            </template>
           </span>
           <span class="sell">
             <template name="sell">月售{{i.rating_count}}单</template>
@@ -117,7 +122,8 @@ export default {
       list: '',
       arr: '',
       ads_name: '',
-      isbtnlogin: false
+      isbtnlogin: false,
+      value:3.7
 
       //   jieshouList: this.$route.query.geohash
     }
@@ -139,7 +145,18 @@ export default {
   }
 }
 </script>
-
+<style>
+.el-rate__icon{
+    font-size: 0.14rem !important;
+    margin-right: 0 !important;
+}
+.el-rate__decimal{
+  font-size: 0.14rem !important;
+}
+.el-rate__text{
+  font-size: 0.14rem !important;
+}
+</style>
 <style scoped>
 .fujin {
   padding: 0 0.24rem;

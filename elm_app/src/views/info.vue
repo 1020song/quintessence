@@ -80,6 +80,7 @@ export default {
           alert(data.data.message);
           history.go(-1);
           localStorage.user = "";
+          localStorage.uid = "";
         }
       });
     }
