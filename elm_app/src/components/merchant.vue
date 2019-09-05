@@ -106,6 +106,7 @@ export default {
         float: left;
     }
     .minute{
+        width: 0.9rem;
         color: #3190e8;
         font-size: .1rem;
         overflow: hidden;
