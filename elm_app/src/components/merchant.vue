@@ -139,7 +139,6 @@ export default {
     .plan{
         font-size: .1rem;
         color: rgb(122, 117, 117);
-        display: inline-block;
         float: left;
         border: 1px solid #ccc;
     }
