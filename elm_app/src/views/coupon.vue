@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div id="contain">
 		<elmHead>
 			<template v-slot:left><router-link :to="{name:'benefit'}">&lt;</router-link></template>
 			<template v-slot:center>代金券说明</template>

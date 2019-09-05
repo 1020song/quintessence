@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import Vue from 'vue'
 import Router from 'vue-router'
 import login from './views/login.vue' /*登录 lz*/
@@ -10,45 +11,34 @@ import Takeaway from './components/Takeaway'
 import search from './components/search'
 import Order from './components/Order'
 import user from './components/user'
-<<<<<<< HEAD
 // 优惠
-import Benefit from './views/benefit.vue'
 import benefits from './views/benefits.vue'
 import Retails from './views/reddetails.vue'
 import Coupon from './views/coupon.vue'
 // 金额
-import Balance from './views/balance.vue'
 import Balance1 from './views/balance1.vue'// 金额数量
 import Explain from './views/explain.vue'// 金额说明
 
 // 积分
-import integral from './views/score.vue'
-import integral1 from './views/score1.vue'
-import integralDetails from './views/score_details.vue'
+import score from './views/score.vue'
+import score1 from './views/score1.vue'
+import scoreinfo from './views/score_info.vue'
 // 积分商城
 import jf_Shopping from './views/jf_shopping.vue'
 // Vip
-import Vip from './views/vip.vue'
 import vip1 from './views/vip1.vue'
 import vipDescription from './views/vipDescription.vue'
 import payment from './views/payment.vue'
 import useCart from './views/useCart.vue'
 import invoiceRecord from './views/invoiceRecord'
 // 服务中心
-=======
-
-import foodDetail from './views/foodDetail.vue'
-import Users from './views/user.vue'
-import Balance from './views/balance.vue'
-import Balance1 from './views/balance1.vue'
-import Explain from './views/explain.vue'
->>>>>>> 59c572b4fc3c6a9c8fae0e8306ff46e9a8fc7741
-import Service from './views/service_cont.vue'
 import serviceD from './views/service_details.vue'
 import service1 from './views/service1.vue'
 import sweetmeats from './views/sweetmeats.vue'
-
-import searchtodetail from './components/searchToDetail.vue' /*搜索的时候，点击li，进入详情页*/
+// 应用下载
+import App from './views/appdetails.vue'
+// 用户
+import Users from './views/user.vue'
 
 Vue.use(Router)
 
@@ -56,41 +46,48 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
+    // 积分
     {
-<<<<<<< HEAD
+      path: '/integral',
+      name: 'integral',
+      component: score
+    },
+    {
+      path: '/integral1',
+      name: 'integral1',
+      component: score1,
+      children: [{
+        path: 'scoreinfo',
+        name: 'scoreinfo',
+        component:scoreinfo
+      }]
+    },
+    // 积分商城
+    {
       path: '/shopping',
       name: 'shopping',
       component: jf_Shopping
     },
+    // 优惠
     {
       path: '/benefit',
-      component: Benefit,
-      children: [
+      name: 'benefit',
+      component: benefits,
+      children:[
         {
-          path: '/',
-          name: 'benefit',
-          component: benefits
-        },
-        {
-          path: 'hbDescription',
+          path: '/hbDescription',
           name: 'red',
           component: Retails
         },
         {
-          path: 'coupon',
+          path: '/coupon',
           name: 'coupon',
           component: Coupon
         }
       ]
     },
-=======
-      // 商品详情
-      path: '/foodDetail',
-      name: 'foodDetail',
-      component: foodDetail
-    },
+    
     // 登录
->>>>>>> 59c572b4fc3c6a9c8fae0e8306ff46e9a8fc7741
     {
       path: '/login',
       name: 'login',
@@ -140,15 +137,7 @@ export default new Router({
           component: search,
           props: route => ({
             name: route.query
-          }),
-          children: [
-            // 点击每一个li，进入食物详情
-            {
-              path: 'searchdetail',
-              name: 'searchdetail',
-              component: searchtodetail
-            }
-          ]
+          })
         },
         // 订单
         {
@@ -159,52 +148,37 @@ export default new Router({
         // 我的
         {
           path: 'user',
-          name: 'user',
-          component: user,
-          children: [
-            {
-              path: '/',
-              name: 'users',
-              component: Users
-            },
-            // 账户信息
-            {
-              path: 'info',
-              component: info
-            }
-          ]
+          name: 'users',
+          component: Users
+        },
+        // 账户信息
+        {
+          path: 'info',
+          name: 'info',
+          component: info
         }
       ]
     },
     // 我的余额
     {
-      path: '/balance',
-      name: 'balance',
-      component: Balance,
-      children: [
+      path: '/explain',
+      name: 'explain',
+      component: Balance1,
+      children:[
         {
-          path: '/',
-          name: 'explain',
-          component: Balance1
-        },
-        // 余额说明
-        {
-          path: 'explain',
-          name: 'explain',
+          // 余额说明
+          path: '/explain1',
+          name: 'explain1',
           component: Explain
         }
       ]
-    }, {
-      // 服务中心
+    },
+    // 服务中心
+    {
       path: '/service',
       name: 'service',
-      component: Service,
+      component: service1,
       children: [
-        {
-          path: '/',
-          name: 'service',
-          component: service1
-        },
         // 热门问题
         {
           path: 'Details',
@@ -212,18 +186,13 @@ export default new Router({
           component: serviceD
         }
       ]
-<<<<<<< HEAD
     },
+    // 饿了么会员卡
     {
       path: '/vip',
       name: 'vip',
-      component: Vip,
+      component: vip1,
       children: [
-        {
-          path: '/',
-          name: 'vip1',
-          component: vip1
-        },
         {
           path: 'vipDescription',
           name: 'vipDescription',
@@ -246,12 +215,11 @@ export default new Router({
         }
       ]
     },
+    // 应用下载
     {
       path: '/app',
       name: 'app',
       component: App
-=======
->>>>>>> 59c572b4fc3c6a9c8fae0e8306ff46e9a8fc7741
     }
   ]
 })

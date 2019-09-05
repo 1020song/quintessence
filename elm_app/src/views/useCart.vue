@@ -1,8 +1,8 @@
 <template>
-	<div>
+	<div id="contain">
 		<elmHead>
 			<template v-slot:left>
-				<router-link :to="{name:'vip1'}">&lt;</router-link>
+				<router-link :to="{name:'vip'}">&lt;</router-link>
 				</template>
 			<template v-slot:center>兑换会员</template>
 		</elmHead>

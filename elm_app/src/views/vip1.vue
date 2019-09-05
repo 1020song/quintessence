@@ -1,17 +1,15 @@
 <template>
 	<div>
 		<elmHead>
-			<template v-slot:left><router-link to="/about/user">&lt;</router-link></template>	
+			<template v-slot:left><router-link :to="{name:'users'}">&lt;</router-link></template>	
 			<template v-slot:center>会员中心</template>
 		</elmHead>	
-		<div v-if="$store.state.user.userName">
-			<div class="contain">
+		<div >
+			<div class="contain" v-if="$store.state.user.name">
 				<p style="padding:.1rem">为账户 <span style="font-weight: 700;font-size:.25rem">{{$store.state.user.userName}}</span> 购买会员</p>
 			<div class="vip-item">
-				<div class="tits" style="
-		border-bottom: 1px solid gainsboro">
-					
-					<router-link to='/vip/vipDescription'><span style="float:right;color:gray;font-size:.3rem">会员说明 > </span> </router-link>
+				<div class="tits" style="border-bottom: 1px solid gainsboro">
+					<router-link :to="{name:'vipDescription'}"><span style="float:right;color:gray;font-size:.3rem">会员说明 > </span> </router-link>
 			<p>	会员特权</p>
 				</div>
 				<div class="vip-logo">
@@ -32,7 +30,7 @@
 			<div class="vip-item">
 				<div class="tits">
 					<p style=" border-bottom: 1px solid gainsboro">开通会员</p>	
-					<router-link to="/vip/payment"><div class="btn">购买</div></router-link>	
+					<router-link :to="{name:'payment'}"><div class="btn">购买</div></router-link>	
 					<p>1个月
 						<span style="color:#f60">￥20</span> 
 					</p>
@@ -54,6 +52,7 @@
 			</div>
 			</div>
 		</div>
+		<router-view></router-view>
 	</div>
 </template>
 <style scoped>

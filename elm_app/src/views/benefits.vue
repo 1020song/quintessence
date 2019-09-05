@@ -1,10 +1,10 @@
 <template>
 	<div>
 		<elmHead>
-			<template v-slot:left><router-link to="/about/user">&lt;</router-link> </template>
+			<template v-slot:left><router-link :to="{name:'users'}">&lt;</router-link> </template>
 			<template v-slot:center>我的优惠</template>
 		</elmHead>
-		<div class="contain" v-if="$store.state.user.userName">
+		<div class="contain" v-if="$store.state.user.name">
 			<div class="yh-btn">
 				<div class="yh-item">
 					<span style="margin-right:1.5rem" @click="Is=0" :class="{active:Is==0}">优惠</span>
@@ -87,8 +87,8 @@
 				</div>
 			</div>
 		</div>
+		<router-view></router-view>
 	</div>
-	
 </template>
 <style scoped>
 .item-center p{
