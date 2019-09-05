@@ -41,19 +41,16 @@ import invoiceRecord from './views/invoiceRecord'
 import serviceD from './views/service_details.vue'
 import service1 from './views/service1.vue'
 import sweetmeats from './views/sweetmeats.vue'
-<<<<<<< HEAD
 // 应用下载
 import App from './views/appdetails.vue'
 // 用户
 import Users from './views/user.vue'
-=======
 
 import searchtodetail from './components/searchToDetail.vue' /*搜索的时候，点击li，进入详情页*/
 import searchaa from './views/searchaa.vue'
 
 // 确认订单
 import confirmOrder from './views/confirmOrder.vue'
->>>>>>> 4f0bf43f1496a77c7316200c86fbce8bd2cb082b
 
 Vue.use(Router)
 
@@ -149,12 +146,6 @@ export default new Router({
         {
           path: 'search',
           name: 'search',
-<<<<<<< HEAD
-          component: search,
-          props: route => ({
-            name: route.query
-          })
-=======
           component: searchaa,
           children: [
             {
@@ -172,7 +163,6 @@ export default new Router({
               component: searchtodetail
             }
           ]
->>>>>>> 4f0bf43f1496a77c7316200c86fbce8bd2cb082b
         },
         // 订单
         {
@@ -189,16 +179,6 @@ export default new Router({
         // 我的
         {
           path: 'user',
-<<<<<<< HEAD
-          name: 'users',
-          component: Users
-        },
-        // 账户信息
-        {
-          path: 'info',
-          name: 'info',
-          component: info
-=======
           name: 'user',
           component: user,
           children: [
@@ -239,7 +219,6 @@ export default new Router({
               ]
             }
           ]
->>>>>>> 4f0bf43f1496a77c7316200c86fbce8bd2cb082b
         }
       ]
     },
