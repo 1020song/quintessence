@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import Vue from 'vue'
 import Router from 'vue-router'
 import login from './views/login.vue' /*登录 lz*/
@@ -17,42 +16,27 @@ import Takeaway from './components/Takeaway'
 import search from './components/search'
 import Order from './components/Order'
 import user from './components/user'
-// 优惠
-import benefits from './views/benefits.vue'
-import historied from './views/historyred.vue'
-import Retails from './views/reddetails.vue'
-import Coupon from './views/coupon.vue'
-import exchange from './views/exchange.vue'
-// 金额
-import Balance1 from './views/balance1.vue'// 金额数量
-import Explain from './views/explain.vue'// 金额说明
 
-// 积分
-import score from './views/score.vue'
-import score1 from './views/score1.vue'
-import scoreinfo from './views/score_info.vue'
-// 积分商城
-import jf_Shopping from './views/jf_shopping.vue'
-// Vip
-import vip1 from './views/vip1.vue'
-import vipDescription from './views/vipDescription.vue'
-import payment from './views/payment.vue'
-import useCart from './views/useCart.vue'
-import invoiceRecord from './views/invoiceRecord'
-// 服务中心
+import foodDetail from './views/foodDetail.vue'
+import Users from './views/user.vue'
+import Balance from './views/balance.vue'
+import Balance1 from './views/balance1.vue'
+import Explain from './views/explain.vue'
+import Service from './views/service_cont.vue'
 import serviceD from './views/service_details.vue'
 import service1 from './views/service1.vue'
 import sweetmeats from './views/sweetmeats.vue'
-// 应用下载
-import App from './views/appdetails.vue'
-// 用户
-import Users from './views/user.vue'
 
-import searchtodetail from './components/searchToDetail.vue'
+import searchtodetail from './components/searchToDetail.vue' /*搜索的时候，点击li，进入详情页*/
 import searchaa from './views/searchaa.vue'
 
-// 确认订单
-import confirmOrder from './views/confirmOrder.vue'
+
+import confirmOrder from './views/confirmOrder.vue'// 确认订单
+import chooseaddress from './views/chooseAddress.vue'// 选择地址
+import addaddress from './views/addAddress.vue' //添加地址
+import searchaddress from './views/searchAddress.vue' //搜索地址
+import kouwei from './views/kouwei.vue'//订单备注
+import invoice from './views/invoice.vue' //订单的发票
 
 Vue.use(Router)
 
@@ -60,55 +44,11 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
-    // 积分
     {
-      path: '/integral',
-      name: 'integral',
-      component: score
-    },
-    {
-      path: '/integral1',
-      name: 'integral1',
-      component: score1,
-      children: [{
-        path: 'scoreinfo',
-        name: 'scoreinfo',
-        component:scoreinfo
-      }]
-    },
-    // 积分商城
-    {
-      path: '/shopping',
-      name: 'shopping',
-      component: jf_Shopping
-    },
-    // 优惠
-    {
-      path: '/benefit',
-      name: 'benefit',
-      component: benefits,
-      children: [
-        {
-          path: 'exchange',
-          name: 'exchange',
-          component: exchange
-        },
-        {
-          path: '/hbDescription',
-          name: 'red',
-          component: Retails
-        },
-        {
-          path: 'historied',
-          name: 'historied',
-          component: historied
-        },
-        {
-          path: '/coupon',
-          name: 'coupon',
-          component: Coupon
-        }
-      ]
+      // 商品详情
+      path: '/foodDetail',
+      name: 'foodDetail',
+      component: foodDetail
     },
     // 登录
     {
@@ -185,7 +125,43 @@ export default new Router({
         {
           path: 'confirmOrder',
           name: 'confirmOrder',
-          component: confirmOrder
+          component: confirmOrder,
+          children: [
+            // 选择地址
+            {
+              path: 'chooseaddress',
+              name: 'chooseaddress',
+              component: chooseaddress,
+              children: [
+                // 新增收货地址
+                {
+                  path: 'addaddress',
+                  name: 'addaddress',
+                  component: addaddress,
+                  children: [
+                    // 搜索地址
+                    {
+                      path: 'searchaddress',
+                      name: 'searchaddress',
+                      component: searchaddress
+                    }
+                  ]
+                }
+              ]
+            },
+            // 订单备注（口味）
+            {
+              path: 'kouwei',
+              name: 'kouwei',
+              component: kouwei
+            },
+            // invoice发票
+            {
+              path: 'invoice',
+              name: 'invoice',
+              component: invoice
+            }
+          ]
         },
         // 我的
         {
@@ -201,7 +177,6 @@ export default new Router({
             // 账户信息
             {
               path: 'info',
-              name: 'info',
               component: info
             },
             {
@@ -236,24 +211,33 @@ export default new Router({
     },
     // 我的余额
     {
-      path: '/explain',
-      name: 'explain',
-      component: Balance1,
-      children:[
+      path: '/balance',
+      name: 'balance',
+      component: Balance,
+      children: [
         {
-          // 余额说明
-          path: '/explain1',
-          name: 'explain1',
+          path: '/',
+          name: 'explain',
+          component: Balance1
+        },
+        // 余额说明
+        {
+          path: 'explain',
+          name: 'explain',
           component: Explain
         }
       ]
-    },
-    // 服务中心
-    {
+    }, {
+      // 服务中心
       path: '/service',
       name: 'service',
-      component: service1,
+      component: Service,
       children: [
+        {
+          path: '/',
+          name: 'service',
+          component: service1
+        },
         // 热门问题
         {
           path: 'Details',
@@ -261,40 +245,6 @@ export default new Router({
           component: serviceD
         }
       ]
-    },
-    // 饿了么会员卡
-    {
-      path: '/vip',
-      name: 'vip',
-      component: vip1,
-      children: [
-        {
-          path: 'vipDescription',
-          name: 'vipDescription',
-          component: vipDescription
-        },
-        {
-          path: 'payment',
-          name: 'payment',
-          component: payment
-        },
-        {
-          path: 'useCart',
-          name: 'useCart',
-          component: useCart
-        },
-        {
-          path: 'invoiceRecord',
-          name: 'invoiceRecord',
-          component: invoiceRecord
-        }
-      ]
-    },
-    // 应用下载
-    {
-      path: '/app',
-      name: 'app',
-      component: App
     }
   ]
 })
