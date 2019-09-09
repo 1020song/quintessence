@@ -26,7 +26,7 @@
         </div>
       </div>
       <div class="item_user">
-        <router-link to="/about/user/add" class="add">
+        <router-link :to="{name:'add'}" class="add">
           <h2>收货地址</h2>
           <span style="color:#ccc;">></span>
         </router-link>
@@ -41,7 +41,7 @@
         <h2>登录密码</h2>
         <div>
           <span>
-            <router-link to="/change" class="password">修改</router-link>
+            <router-link to="/change" class="password">修改密码</router-link>
           </span>
           <span>></span>
         </div>

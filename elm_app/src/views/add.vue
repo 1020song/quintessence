@@ -12,7 +12,7 @@
     </elmHead>
     <div class="content">
       <ul>
-        <li v-for=" (i,$index) in arr">
+        <li v-for=" (i,$index) in arr" :key="i">
           <div>
             <p>{{i.name}}</p>
             <p>{{i.phone}}</p>

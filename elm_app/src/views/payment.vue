@@ -1,7 +1,7 @@
 <template>
-	<div>
+	<div id="contain">
 		<elmHead>
-			<template v-slot:left><router-link to="/vip">&lt;</router-link></template>
+			<template v-slot:left><router-link :to="{name:'vip'}">&lt;</router-link></template>
 			<template v-slot:center>在线支付</template>
 		</elmHead>
 		<div class="contain">
@@ -19,7 +19,7 @@
 					<div class="zf-btn" @click="num=0" :class="{active:num==0}">√</div>
 				</li>
 				<li>
-					<div class="zf-img"><img src="../assets/zfb.png" alt=""></div>
+					<div class="zf-img"><img src="../assets/wx.png" alt=""></div>
 					<span>微信</span>
 					<div class="zf-btn" @click="num=1" :class="{active:num==1}">√</div>
 				</li>
@@ -30,14 +30,14 @@
 </template>
 <style scoped>
 	.determine{
-		width: 80%;
+		width: 90%;
 		height: 1rem;
 		text-align: center;
 		color: white;
 		background: #4cd964;
-		margin: .2rem 10%;
+		margin: 0 auto;
 		line-height: 1rem;
-		border-radius: .02rem;
+		border-radius: .06rem;
 	}
 	.payment{
 		background: white
@@ -48,6 +48,10 @@
 	}
 	.payment .zf-img{
 		margin-right:.3rem 
+	}
+	.payment .zf-img img{
+		width: 1rem;
+		height: 1rem;
 	}
 	.payment .active{
 		background: #4cd964

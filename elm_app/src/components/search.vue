@@ -30,10 +30,17 @@
         <li v-else
             v-for="(item,index) in searchlist"
             :key="index"
-            @click="place(item)">
+            @click="place(item)"
+            class="list clearfix">
           <!-- <router-link :to='{path:"/about/Takeaway", query: {geohash: searchlist[item]}}'> -->
-          <p>{{item.name}}</p>
-          <p>{{item.address}}</p>
+          <!-- <div class="list_left fl"></div> -->
+
+          <router-link to="/about/search/searchdetail">
+            <div class="list_right">
+              <p>{{item.name}}</p>
+              <p>{{item.address}}</p>
+            </div>
+          </router-link>
           <!-- </router-link> -->
         </li>
 
@@ -43,12 +50,18 @@
       <h3>搜索历史</h3>
       <ul>
         <li v-if="iptValueArray==''"></li>
-        <li @click="searchtodetail"
+        <li class="histroy_list"
             v-else
             v-for="(item,index) in iptValueArray"
             :key="index">
-          <p>{{item.name}}</p>
-          <p>{{item.address}}</p>
+          <router-link to="/about/search/searchdetail">
+            <div>
+              <p>{{item.name}}</p>
+              <p>{{item.address}}</p>
+            </div>
+          </router-link>
+          <span class="fr"
+                @click="clearItem">×</span>
         </li>
       </ul>
       <p class="clearhistory"
@@ -95,14 +108,6 @@ export default {
     }
   },
   methods: {
-    // gotoIndex (item) {
-    //   this.$router.push({
-    //     path: '/about/Takeaway'
-    //     // path: '/about/Takeaway?geohash=' + localStorage.geohash
-    //     // query: {abc:item}
-    //   })
-    // },
-
     btnClick () {
       if (this.iptValue == '') {
         this.nulls = '输入为空！！！'
@@ -114,15 +119,15 @@ export default {
             keyword: this.iptValue
           }
         }).then((res) => {
+          console.log(res.body)
           this.searchlist = res.body
-          // console.log(this.searchlist)
-          // this.iptValueArray.unshift(this.iptValue)
-          // console.log(this.iptValueArray)
-          // localStorage.setItem('item', this.iptValueArray)
         })
       }
     },
     place (a) {
+      // this.$http.get('https://elm.cangdu.org/v4/restaurants?geohash=31.22967,121.4762&keyword=肯德基',{
+      //   params:{}
+      // })
       this.iptValueArray.unshift(a)
       localStorage.iptValueArray = JSON.stringify(this.iptValueArray)
     },
@@ -130,13 +135,19 @@ export default {
       this.iptValueArray = []
       localStorage.clear()
     },
-    searchtodetail () {
-      console.log(123)
-      this.$route.push({
-        path: '/about/search/searchdetail'
-
-      })
+    clearItem (b) {
+      this.iptValueArray.shift(b)
+      localStorage.iptValueArray = JSON.stringify(this.iptValueArray)
+      // localStorage.removeItem('iptValueArray')
     }
+    // gotoIndex (item) {
+    //   this.$router.push({
+    //     path: '/about/Takeaway'
+    //     // path: '/about/Takeaway?geohash=' + localStorage.geohash
+    //     // query: {abc:item}
+    //   })
+    // },
+
   }
 
 }
@@ -147,6 +158,25 @@ export default {
   margin: 0;
   padding: 0;
 }
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.clearfix {
+  zoom: 1;
+}
+.clearfix::after,
+.clearfix::before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  visibility: hidden;
+  clear: both;
+}
+
 .search {
   width: 6.4rem;
   padding-top: 1rem;
@@ -204,6 +234,13 @@ export default {
   background-color: #fff;
   padding-left: 0.2rem;
 }
+.search_history ul li p{
+  width: 80%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 0.2rem;
+  overflow: hidden;
+}
 .commit_list {
   width: 100%;
   background-color: #fff;
@@ -214,12 +251,39 @@ export default {
   background-color: #fff;
   padding-left: 0.2rem;
 }
-.clearhistory {
+.commit_list li p{
+  width: 80%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
   font-size: 0.2rem;
+}
+.clearhistory {
+  font-size: 0.3rem;
   /* padding-left: 0.2rem; */
   color: #3190e8;
   text-align: center;
   line-height: 0.6rem;
   font-weight: bolder;
+}
+.list {
+  height: 1rem;
+  margin-top: 0.2rem;
+}
+.list_left {
+  width: 20%;
+}
+.list_right {
+  width: 80%;
+  display: inline-block;
+}
+.histroy_list {
+  height: 1rem;
+  line-height: 1rem;
+}
+.histroy_list span {
+  display: inline-block;
+  margin-top: -0.9rem;
+  margin-right: 0.5rem;
 }
 </style>

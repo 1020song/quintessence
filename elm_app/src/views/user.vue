@@ -27,26 +27,20 @@
       <!-- 个人资料/信息 -->
       <div class="ziliao">
         <dl>
-          <router-link to="/balance">
-            <dt>
-              <span class="orange">{{$store.state.user.balance}}.00</span>元
-            </dt>
+          <router-link :to="{name:'explain'}">
+            <dt><span class="orange">{{$store.state.user.balance}}.00</span>元</dt>
             <dd>我的余额</dd>
           </router-link>
         </dl>
         <dl>
-          <router-link to="discounts">
-            <dt>
-              <span class="red">{{$store.state.user.gift_amount}}</span>个
-            </dt>
+          <router-link :to="{name:'benefit'}">
+            <dt><span class="red">{{$store.state.user.gift_amount}}</span>个</dt>
             <dd>我的优惠</dd>
           </router-link>
         </dl>
         <dl>
-          <router-link to="integral">
-            <dt>
-              <span class="green">{{$store.state.user.point}}</span>分
-            </dt>
+          <router-link :to="{name:'integral1'}">
+            <dt><span class="green">{{$store.state.user.point}}</span>分</dt>
             <dd>我的积分</dd>
           </router-link>
         </dl>
@@ -54,16 +48,15 @@
       <!-- 服务 -->
       <div class="fuwu">
         <div class="item">
-          <router-link to="Order">
+          <router-link :to="{name:'Order'}">
             <li>
               <i class="iconfont icon-dingdan"></i>
               <p>
-                我的订单
-                <span class="f-r">></span>
+                我的订单<span class="f-r">></span>
               </p>
             </li>
           </router-link>
-          <router-link to="integral">
+          <router-link :to="{name:'shopping'}">
             <li>
               <i class="iconfont icon-baobao"></i>
               <p>
@@ -72,7 +65,7 @@
               </p>
             </li>
           </router-link>
-          <router-link to="/vip">
+          <router-link :to="{name:'vip'}">
             <li>
               <i class="iconfont icon-fuwu"></i>
               <p>
@@ -83,7 +76,7 @@
           </router-link>
         </div>
         <div class="item">
-          <router-link to="/service">
+          <router-link :to="{name:'service'}">
             <li>
               <i class="iconfont icon-vip"></i>
               <p>
@@ -92,7 +85,7 @@
               </p>
             </li>
           </router-link>
-          <router-link to="/app">
+          <router-link :to="{name:'app'}">
             <li>
               <i class="iconfont icon-changyonglogo40"></i>
               <p>
@@ -103,13 +96,10 @@
           </router-link>
         </div>
       </div>
-      <elmfoot num="3"></elmfoot>
+      <elmfoot num=3></elmfoot>
     </div>
   </div>
 </template>
-<style scoped>
-@import "../css/user.css";
-</style>
 <script>
 import elmfoot from "../components/foot";
 import elmHead from "../components/head";
@@ -119,7 +109,7 @@ export default {
     elmfoot,
     elmHead
   },
-  data() {
+  data () {
     return {
       info_img: "",
       info_user: "",

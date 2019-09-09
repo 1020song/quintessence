@@ -1,7 +1,7 @@
 <template>
-	<div>
+	<div id="contain">
 		<elmHead>
-			<template v-slot:left><router-link to="/vip">&lt;</router-link> </template>
+			<template v-slot:left><router-link :to="{name:'vip'}">&lt;</router-link> </template>
 			<template v-slot:center>我的优惠</template>
 		</elmHead>
 		<div class="contain">

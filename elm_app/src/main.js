@@ -8,6 +8,7 @@ import './assets/iconfont/iconfont.css'
 // import VueAxios from 'vue-axios'
 import './assets/lz.iconfont/iconfont.css'
 import './assets/user_iconfont/iconfont.css'
+import './assets/service_iconfont/iconfont.css'
 // Vue.use(VueAxios, axios)
 // import axios from 'axios'
 import '../node_modules/swiper/dist/css/swiper.min.css'

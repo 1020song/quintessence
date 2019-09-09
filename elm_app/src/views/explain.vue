@@ -1,8 +1,8 @@
 <template>
-	
-	<div id="app">
+	<div id="contain">
+	<div class="contain">
 		<elmHead>
-		<template v-slot:left><router-link to="/balance">&lt;</router-link></template>
+		<template v-slot:left><router-link :to="{name:'explain'}">&lt;</router-link></template>
 		<template v-slot:center>余额说明</template>
 		<template v-slot:right></template>
 		</elmHead>
@@ -18,6 +18,7 @@
 		<p>
 			可能原因有：您的姓名、开户行、银行卡号等信息不匹配；您当日的提现次数和金额超过限制；您的账户存在异常，被风控拦截。
 		</p>
+	</div>
 	</div>
 </template>
 <script>

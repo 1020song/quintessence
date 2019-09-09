@@ -13,7 +13,7 @@
                 <li>我问问</li>
                 <li>
                     <span>评分</span>
-                    <span>
+                    <span class="span">
                         <el-rate
                             v-model="value"
                             disabled
@@ -45,7 +45,11 @@ import elmhead from '../components/head'
 
     }
 </script>
-
+<style>
+    .span>div>span>i{
+    margin-right: 0;
+}
+</style>
 <style scoped>
 .foodDetail{
     background: #fff;
@@ -110,4 +114,5 @@ import elmhead from '../components/head'
     font-size: .28rem;
     color: #f60;
 }
+
 </style>

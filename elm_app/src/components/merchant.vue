@@ -21,9 +21,6 @@
                     <span class="star">
                         <slot name="star">11111</slot>
                     </span>
-                    <span class="num1">
-                        <slot name="num1">5.0</slot>
-                    </span>
                     <span class="sell">
                         <slot name="sell">月售111单</slot>
                     </span>
@@ -109,6 +106,7 @@ export default {
         float: left;
     }
     .minute{
+        width: 0.9rem;
         color: #3190e8;
         font-size: .1rem;
         overflow: hidden;
@@ -141,7 +139,6 @@ export default {
     .plan{
         font-size: .1rem;
         color: rgb(122, 117, 117);
-        display: inline-block;
         float: left;
         border: 1px solid #ccc;
     }
@@ -176,11 +173,13 @@ export default {
     .sell{
         font-size: .1rem;
         color: #666;
+        margin-top: 0.1rem;
     }
     .num1{
         font-size: .1rem;
         color: #ff6000;
         margin-right: .05rem;
+        margin-top: 0.1rem;
     }
     .star{
         font-size: .1rem;

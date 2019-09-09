@@ -1,12 +1,10 @@
 <template>
 	<div>
-		<div class="contain">
-			<router-view></router-view>
-		</div>
+		<router-view></router-view>
 	</div>
 </template>
 <script>
-import balance from '../css/balance.css'
+
 export default {
 	name: "balance",
 }
