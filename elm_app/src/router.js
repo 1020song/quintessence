@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import Vue from 'vue'
 import Router from 'vue-router'
 import login from './views/login.vue' /*登录 lz*/
@@ -17,6 +16,27 @@ import Takeaway from './components/Takeaway'
 import search from './components/search'
 import Order from './components/Order'
 import user from './components/user'
+
+// 服务中心
+import foodDetail from './views/foodDetail.vue'
+import Users from './views/user.vue'
+import Balance from './views/balance.vue'
+import Service from './views/service_cont.vue'
+import serviceD from './views/service_details.vue'
+import service1 from './views/service1.vue'
+import sweetmeats from './views/sweetmeats.vue'
+
+import searchtodetail from './components/searchToDetail.vue' /*搜索的时候，点击li，进入详情页*/
+import searchaa from './views/searchaa.vue'
+
+
+import confirmOrder from './views/confirmOrder.vue'// 确认订单
+import chooseaddress from './views/chooseAddress.vue'// 选择地址
+import addaddress from './views/addAddress.vue' //添加地址
+import searchaddress from './views/searchAddress.vue' //搜索地址
+import kouwei from './views/kouwei.vue'//订单备注
+import invoice from './views/invoice.vue' //订单的发票
+// -----------------------  李军
 // 优惠
 import benefits from './views/benefits.vue'
 import historied from './views/historyred.vue'
@@ -34,28 +54,17 @@ import score1 from './views/score1.vue'
 import scoreinfo from './views/score_info.vue'
 // 积分商城
 import jf_Shopping from './views/jf_shopping.vue'
+Vue.use(Router)
+
+// 应用下载
+import App from './views/appdetails.vue'
+
 // Vip
 import vip1 from './views/vip1.vue'
 import vipDescription from './views/vipDescription.vue'
 import payment from './views/payment.vue'
 import useCart from './views/useCart.vue'
 import invoiceRecord from './views/invoiceRecord'
-// 服务中心
-import serviceD from './views/service_details.vue'
-import service1 from './views/service1.vue'
-import sweetmeats from './views/sweetmeats.vue'
-// 应用下载
-import App from './views/appdetails.vue'
-// 用户
-import Users from './views/user.vue'
-
-import searchtodetail from './components/searchToDetail.vue'
-import searchaa from './views/searchaa.vue'
-
-// 确认订单
-import confirmOrder from './views/confirmOrder.vue'
-
-Vue.use(Router)
 
 export default new Router({
   mode: 'history',
@@ -115,6 +124,12 @@ export default new Router({
           component: Coupon
         }
       ]
+    },
+    {
+      // 商品详情
+      path: '/foodDetail',
+      name: 'foodDetail',
+      component: foodDetail
     },
     // 登录
     {
@@ -191,7 +206,43 @@ export default new Router({
         {
           path: 'confirmOrder',
           name: 'confirmOrder',
-          component: confirmOrder
+          component: confirmOrder,
+          children: [
+            // 选择地址
+            {
+              path: 'chooseaddress',
+              name: 'chooseaddress',
+              component: chooseaddress,
+              children: [
+                // 新增收货地址
+                {
+                  path: 'addaddress',
+                  name: 'addaddress',
+                  component: addaddress,
+                  children: [
+                    // 搜索地址
+                    {
+                      path: 'searchaddress',
+                      name: 'searchaddress',
+                      component: searchaddress
+                    }
+                  ]
+                }
+              ]
+            },
+            // 订单备注（口味）
+            {
+              path: 'kouwei',
+              name: 'kouwei',
+              component: kouwei
+            },
+            // invoice发票
+            {
+              path: 'invoice',
+              name: 'invoice',
+              component: invoice
+            }
+          ]
         },
         // 我的
         {

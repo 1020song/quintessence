@@ -10,22 +10,19 @@
       <p>快速备注</p>
       <ul class="clearfix"
           id="list">
-        <li>不要辣</li>
-        <li>少点辣</li>
-        <li>多点辣</li>
-        <li>不要香菜</li>
-        <li>不要洋葱</li>
-        <li>多放醋</li>
-        <li>多放葱</li>
-        <li>去冰</li>
-        <li>少冰</li>
+        <li v-for="(item, index) in arr"
+            :key="index"
+            @click="toChange($event)">
+          <!-- $event  形参 -->
+          {{item}}</li>
       </ul>
     </div>
     <div class="other_beizhu">
       <p>快速备注</p>
       <textarea placeholder="请输入备注内容(可不填)"
                 class="input_text"></textarea>
-      <div class="determine">确定</div>
+      <div class="determine"
+           @click="$router.back(-1)">确定</div>
     </div>
   </div>
 </template>
@@ -33,12 +30,19 @@
 export default {
   data () {
     return {
-      list: ''
+      arr: ['不要辣', '少点辣', '多点辣', '不要香菜', '不要洋葱', '多放醋', '多放葱', '去冰', '少冰'],
+      aLi: ''
     }
   },
-  mounted () {
-    this.list = document.querySelectorAll('.list li')
-    console.log(this.list)
+  methods: {
+    toChange (e) {
+      // console.log(e.target)
+      if (e.target.style.background === '') {
+        e.target.style.background = '#3190e8'
+      } else {
+        e.target.style.background = ''
+      }
+    }
   }
 }
 </script>
@@ -135,5 +139,43 @@ header span {
   padding: 0.1rem 0.2rem;
   margin: 0.2rem;
   border: 0.02rem solid #3190e8;
+}
+
+.list li:after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  border-style: solid;
+  border-width: 26px 26px 0 0;
+  border-color: transparent #f00 transparent transparent;
+  display: none;
+}
+
+.list li:before {
+  content: "";
+  width: 8px;
+  height: 4px;
+  border-left: solid 2px #fff;
+  border-bottom: solid 2px #fff;
+  position: absolute;
+  right: 4px;
+  bottom: 6px;
+  z-index: 2;
+  transform: rotate(-45deg);
+  display: none;
+}
+
+.list li:hover {
+  border-color: red;
+}
+
+.list .active {
+  border-color: #f00;
+}
+
+.list .active:after,
+.list .active:before {
+  display: block;
 }
 </style>

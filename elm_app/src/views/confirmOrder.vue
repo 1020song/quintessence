@@ -29,7 +29,8 @@
       </div>
     </div>
     <div class="PayWay">
-      <div class="PayWay_top clearfix">
+      <div class="PayWay_top clearfix"
+           @click="PayWay_top($event)">
         <span class="fl">支付方式</span>
         <span class="fr ccc">在线支付&nbsp;&nbsp; &gt;</span>
       </div>
@@ -74,7 +75,41 @@
       <div class="footer_l fl">
         待支付￥<span>7687</span>
       </div>
-      <div class="footer_r fr">确认下单</div>
+      <div class="footer_r fr"
+           @click="confimInformation()">确认下单</div>
+    </div>
+    <div v-show="show">
+      <div class="cover"
+           @click="notShow"></div>
+      <div class="payToTop">
+        <div class="pay">
+          <p>支付方式</p>
+          <ul>
+            <li>
+              <span> 货到付款(商家不支持货到付款) </span>
+              <input type="checkbox"
+                     disabled
+                     class="fr">
+            </li>
+            <li>
+              <span>在线支付</span>
+              <input type="checkbox"
+                     class="fr">
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="alet_container"
+         v-show="isconfirm">
+      <section class="tip_text_container">
+        <div class="tip_icon">
+          <span></span>
+          <span></span>
+        </div>
+        <p class="tip_text">请添加一个收货地址</p>
+        <div class="confrim">确认</div>
+      </section>
     </div>
     <router-view></router-view>
   </div>
@@ -88,12 +123,12 @@ export default {
   data () {
     return {
       isbtnlogin: false,
-      ff: ''
+      // ff: '',
+      covers: '', // cover
+      payWay: '', // 支付方式
+      show: false,
+      isconfirm: false
     }
-  },
-  mounted () {
-    this.f = document.querySelector('#foot')
-    this.f.style.display = 'block'
   },
   created () {
     if (localStorage.user) {
@@ -101,10 +136,128 @@ export default {
     } else {
       this.isbtnlogin = false
     }
+  },
+  methods: {
+    PayWay_top (e) {
+      this.show = !this.show
+
+      // this.cover.style.display = 'block'
+
+      // console.log(this.PayWay_top)  不会报错，会打印出一个function
+      // ƒ PayWay_top() { console.log(this.PayWay_top); }
+    },
+    notShow () {
+      this.show = !this.show
+    },
+    confimInformation () {
+      this.isconfirm = !this.isconfirm
+    }
+  },
+  mounted () {
+    // this.f = document.querySelector('#foot')
+    // this.f.style.zIndex = '2000'
+    // this.f.style.display = 'block'
   }
 }
 </script>
 <style scoped>
+.cover {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 203;
+}
+.cover,
+.payToTop {
+  /* display: none; */
+}
+.pay {
+  min-height: 4rem;
+  background-color: #fff;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 204;
+}
+.pay p {
+  background-color: #fafafa;
+  font-size: 0.3rem;
+  color: #333;
+  text-align: center;
+  line-height: 0.8rem;
+}
+.pay ul li {
+  line-height: 1rem;
+  position: relative;
+  padding-left: 0.2rem;
+  border-bottom: #999 1px solid;
+}
+.pay ul li input {
+  width: 0.3rem;
+  height: 0.3rem;
+  position: absolute;
+  right: 0.3rem;
+  top: 0.3rem;
+}
+.pay ul li:first-of-type span {
+  color: #ccc;
+  font-size: 0.3rem;
+}
+.pay ul li:last-of-type span {
+  font-size: 0.3rem;
+}
+.alet_container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+}
+.tip_text_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 3rem;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -1.5rem;
+  margin-left: -6rem;
+  width: 12rem;
+  animation: tipMove 0.4s;
+  background-color: #fff;
+  padding-top: 0.6rem;
+  border: 1px;
+  border-radius: 0.25rem;
+}
+..tip_text_container .tip_icon {
+  width: 3rem;
+  height: 3rem;
+  border: 0.15rem solid #f8cb86;
+  border-radius: 50%;
+}
+.tip_text_container .tip_icon span:first-of-type {
+  width: 0.12rem;
+  height: 1.5rem;
+  background-color: #f8cb86;
+}
+.tip_text_container .tip_icon span:nth-of-type(2) {
+  width: 0.2rem;
+  height: 0.2rem;
+  border: 1px;
+  border-radius: 50%;
+  margin-top: 0.2rem;
+  background-color: #f8cb86;
+}
+
 .confirmOrder {
   padding-top: 1rem;
 }
@@ -361,6 +514,7 @@ header {
   width: 100%;
   height: 1rem;
   line-height: 1rem;
+  z-index: 200;
 }
 .footer_l {
   width: 70%;
