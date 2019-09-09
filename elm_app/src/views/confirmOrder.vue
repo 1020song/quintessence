@@ -108,7 +108,8 @@
           <span></span>
         </div>
         <p class="tip_text">请添加一个收货地址</p>
-        <div class="confrim">确认</div>
+        <p class="con"
+           @click="confimInformation()">确认</p>
       </section>
     </div>
     <router-view></router-view>
@@ -141,8 +142,6 @@ export default {
     PayWay_top (e) {
       this.show = !this.show
 
-      // this.cover.style.display = 'block'
-
       // console.log(this.PayWay_top)  不会报错，会打印出一个function
       // ƒ PayWay_top() { console.log(this.PayWay_top); }
     },
@@ -161,103 +160,6 @@ export default {
 }
 </script>
 <style scoped>
-.cover {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.3);
-  z-index: 203;
-}
-.cover,
-.payToTop {
-  /* display: none; */
-}
-.pay {
-  min-height: 4rem;
-  background-color: #fff;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  z-index: 204;
-}
-.pay p {
-  background-color: #fafafa;
-  font-size: 0.3rem;
-  color: #333;
-  text-align: center;
-  line-height: 0.8rem;
-}
-.pay ul li {
-  line-height: 1rem;
-  position: relative;
-  padding-left: 0.2rem;
-  border-bottom: #999 1px solid;
-}
-.pay ul li input {
-  width: 0.3rem;
-  height: 0.3rem;
-  position: absolute;
-  right: 0.3rem;
-  top: 0.3rem;
-}
-.pay ul li:first-of-type span {
-  color: #ccc;
-  font-size: 0.3rem;
-}
-.pay ul li:last-of-type span {
-  font-size: 0.3rem;
-}
-.alet_container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 200;
-}
-.tip_text_container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  min-height: 3rem;
-
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -1.5rem;
-  margin-left: -6rem;
-  width: 12rem;
-  animation: tipMove 0.4s;
-  background-color: #fff;
-  padding-top: 0.6rem;
-  border: 1px;
-  border-radius: 0.25rem;
-}
-..tip_text_container .tip_icon {
-  width: 3rem;
-  height: 3rem;
-  border: 0.15rem solid #f8cb86;
-  border-radius: 50%;
-}
-.tip_text_container .tip_icon span:first-of-type {
-  width: 0.12rem;
-  height: 1.5rem;
-  background-color: #f8cb86;
-}
-.tip_text_container .tip_icon span:nth-of-type(2) {
-  width: 0.2rem;
-  height: 0.2rem;
-  border: 1px;
-  border-radius: 50%;
-  margin-top: 0.2rem;
-  background-color: #f8cb86;
-}
-
 .confirmOrder {
   padding-top: 1rem;
 }
@@ -510,6 +412,122 @@ header {
 .beizhu2 span:last-of-type {
   color: #aaa;
 }
+
+.cover {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 203;
+}
+.pay {
+  min-height: 4rem;
+  background-color: #fff;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 204;
+}
+.pay p {
+  background-color: #fafafa;
+  font-size: 0.3rem;
+  color: #333;
+  text-align: center;
+  line-height: 0.8rem;
+}
+.pay ul li {
+  line-height: 1rem;
+  position: relative;
+  padding-left: 0.2rem;
+  border-bottom: #999 1px solid;
+}
+.pay ul li input {
+  width: 0.3rem;
+  height: 0.3rem;
+  position: absolute;
+  right: 0.3rem;
+  top: 0.3rem;
+}
+.pay ul li:first-of-type span {
+  color: #ccc;
+  font-size: 0.3rem;
+}
+.pay ul li:last-of-type span {
+  font-size: 0.3rem;
+}
+.alet_container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+}
+.tip_text_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 5rem;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  margin-top: -1.5rem;
+  margin-left: -6rem;
+  width: 12rem;
+  padding-top: 0.6rem;
+  border: 1px;
+  border-radius: 0.25rem;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.tip_text_container .tip_icon {
+  width: 2rem;
+  height: 2rem;
+  border: 0.15rem solid #f8cb86;
+  border-radius: 50%;
+}
+.tip_text_container .tip_icon span:first-of-type {
+  width: 0.12rem;
+  height: 0.9rem;
+  display: inline-block;
+  background-color: #f8cb86;
+  position: relative;
+  left: 0.8rem;
+  top: 0.2rem;
+}
+.tip_text_container .tip_icon span:nth-of-type(2) {
+  width: 0.2rem;
+  height: 0.2rem;
+  border: 1px;
+  border-radius: 50%;
+  margin-top: 0.2rem;
+  background-color: #f8cb86;
+  display: inline-block;
+  position: relative;
+  left: 0.64rem;
+  top: 0.6rem;
+}
+.tip_text {
+  color: orangered;
+  margin-top: 0.3rem;
+}
+.con {
+  height: 1rem;
+  margin-top: 0.3rem;
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: bolder;
+  display: inline-block;
+}
+.con:hover {
+  color: #ccc;
+  cursor: pointer;
+}
+
 .footer {
   width: 100%;
   height: 1rem;
