@@ -7,7 +7,7 @@
       <div class="pass">重置密码</div>
     </div> -->
     <elmHead>
-      <template v-slot:left> <router-link to="/login" class="login"> &lt;</router-link></template>
+      <template v-slot:left> <span class="login" @click="$router.back(-1)">&lt;</span></template>
       <template v-slot:center>重置密码</template>
       <template v-slot:right></template>
     </elmHead>

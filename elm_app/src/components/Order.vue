@@ -1,7 +1,7 @@
 <template>
     <div>
         <elmHead>
-            <template v-slot:left><router-link to="/about/search">&lt;</router-link></template>
+            <template v-slot:left><span @click="$router.back(-1)">&lt;</span></template>
             <template v-slot:center>订单列表</template>
             <template v-slot:right v-if="!isbtnlogin"><router-link to="/login" class="login">登录/注册</router-link></template>
             <template v-slot:right v-else-if="isbtnlogin"><router-link to="/about/user" class="login"><i class="iconfont">&#xe602;</i></router-link></template>

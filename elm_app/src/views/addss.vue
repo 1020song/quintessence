@@ -2,7 +2,7 @@
   <div>
     <elmHead>
       <template v-slot:left>
-        <router-link to="/about/user/adds">&lt;</router-link>
+        <span @click="$router.back(-1)">&lt;</span>
       </template>
       <template v-slot:center>搜索地址</template>
       <template v-slot:right></template>
@@ -57,7 +57,6 @@ export default {
         }})
         .then(data => {
           this.poisdata = data.data
-          console.log(data)
         });
     }
   }

@@ -7,7 +7,7 @@
       <div class="pass">密码登录</div>
     </div> -->
     <elmHead>
-      <template v-slot:left><router-link to="/" class="lt">&lt;</router-link></template>
+      <template v-slot:left><span class="lt" @click="$router.back(-1)">&lt;</span></template>
       <template v-slot:center>密码登录</template>
       <template v-slot:right></template>
     </elmHead>
@@ -76,7 +76,7 @@ export default {
             this.$store.commit('setPoint',data.data.point)
             this.$store.commit('setBalance',data.data.balance)
             this.$store.commit('setGift_amount',data.data.gift_amount)
-            this.$router.push('/')
+            this.$router.back(-1)
             localStorage.user = this.user
             localStorage.uid = data.data.user_id
           }else{
@@ -90,7 +90,6 @@ export default {
     random() {
       this.$axios.post("http://elm.cangdu.org/v1/captchas",{}).then(data => {
         this.yanUrl = data.data.code;
-        console.log(data)
       });
     },
   }

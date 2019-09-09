@@ -2,7 +2,7 @@
   <div>
     <elmHead>
       <template v-slot:left>
-        <router-link to="/about/user">&lt;</router-link>
+        <span @click="$router.back(-1)">&lt;</span>
       </template>
       <template v-slot:center>账户信息</template>
       <template v-slot:right></template>
@@ -20,7 +20,7 @@
         <h2>用户名</h2>
         <div>
           <span>
-            <router-link to="/about/user/setusername">{{info_user2}}</router-link>
+            <router-link to="/about/user/setusername" class="n">{{info_user2}}</router-link>
           </span>
           <span>></span>
         </div>
@@ -41,7 +41,7 @@
         <h2>登录密码</h2>
         <div>
           <span>
-            <router-link to="/change" class="password">修改密码</router-link>
+            <router-link to="/change" class="password">修改</router-link>
           </span>
           <span>></span>
         </div>
@@ -79,8 +79,7 @@ export default {
         } else {
           alert(data.data.message);
           history.go(-1);
-          localStorage.user = "";
-          localStorage.uid = "";
+          localStorage.removeItem('user')
         }
       });
     }
@@ -165,7 +164,7 @@ h1 {
 }
 .password {
   font-size: 0.3rem;
-  color: #ccc;
+  color: #999;
 }
 button {
   width: 95%;
@@ -192,5 +191,9 @@ button {
 }
 .add span{
     float: right;
+}
+.n{
+  color: #999;
+  font-size: 0.28rem;
 }
 </style>

@@ -121,6 +121,7 @@ export default new Router({
             // 账户信息
             {
               path: 'info',
+              name:'info',
               component: info,
             },
             {
@@ -130,6 +131,7 @@ export default new Router({
             },
             {
               path:'add',
+              name:'add',
               component:add
             },
             {
@@ -139,6 +141,7 @@ export default new Router({
               children:[
                 {
                   path:'/',
+                  name:'adds',
                   component:addsss
                 },
                 {
