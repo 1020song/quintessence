@@ -2,7 +2,7 @@
   <div>
     <elmHead>
       <template v-slot:left>
-        <router-link :to="{name:'search'}"><i class="iconfont">&#xe600;</i></router-link>
+        <router-link to="/about/search"><i class="iconfont">&#xe600;</i></router-link>
       </template>
       <template v-slot:center>
         <router-link to="/">{{ads_name}}</router-link>

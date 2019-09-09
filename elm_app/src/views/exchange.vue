@@ -25,6 +25,9 @@
 	</div>
 </template>
 <style scoped>
+#contain{
+	background: #f5f5f5;
+}
 .captcha_code_container .img_change_img img {
     width: 1.7rem;
     height: .7rem;
@@ -35,18 +38,26 @@
     font-size: .25rem;
     color: #666;
     padding: .3rem .1rem;
-    border-radius: .15rem;
+	border-radius: .15rem;
+	border: none;
+	outline: none;
 }
 .captcha_code_container input {
     font-size: .25rem;
     color: #666;
     padding: .1rem;
     border-radius: .15rem;
-    flex: 3;
+	flex: 3;
+	border: none;
+	outline: none;
 }
 .change_img p{
+	width: 0.6rem;
 	font-size: .2rem;
     color: #666;
+}
+.change_img{
+	width: 0.6rem !important;
 }
 	.captcha_code_container .img_change_img .change_img {
 		display: -ms-flexbox;
