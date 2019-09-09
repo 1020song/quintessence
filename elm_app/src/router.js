@@ -74,7 +74,7 @@ export default new Router({
       children: [{
         path: 'scoreinfo',
         name: 'scoreinfo',
-        component:scoreinfo
+        component: scoreinfo
       }]
     },
     // 积分商城
