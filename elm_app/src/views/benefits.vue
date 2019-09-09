@@ -4,7 +4,7 @@
 			<template v-slot:left><router-link :to="{name:'users'}">&lt;</router-link> </template>
 			<template v-slot:center>我的优惠</template>
 		</elmHead>
-		 <div class="contain"> <!-- v-if="$store.state.user.userName" -->
+		 <div class="contain" v-if="$store.state.user.userName" >
 			<div class="yh-btn">
 				<div class="yh-item">
 					<span style="margin-right:1.5rem" @click="Is=0" :class="{active:Is==0}">优惠</span>
@@ -82,9 +82,7 @@
 					<router-link :to="{name:'exchange'}" class="hongbao_style" style="border-right: 1px solid rgb(245, 245, 245);">
                           兑换红包
                     </router-link>
-					<a class="hongbao_style">
-						推荐有奖
-					</a>
+					<router-link :to="{name:'commend'}" class="hongbao_style">推荐有奖 </router-link>
 				</footer>
 			</div>
 			<div v-else class="con">

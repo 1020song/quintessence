@@ -20,4 +20,10 @@ export default {
     color: #fff;
     text-decoration: none;
   }
+  .contain{
+    position: absolute !important;
+  }
+  #contain{
+    position: absolute !important;
+  }
 </style>
