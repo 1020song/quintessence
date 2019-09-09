@@ -8,7 +8,7 @@
     </header>
     <section class="choose_invoice">
       <span>不需要开发票</span>
-      <input type="radio">
+      <input type="checkbox">
 
     </section>
 
@@ -79,10 +79,14 @@ header span {
   padding-left: 0.2rem;
   vertical-align: middle;
 }
+.choose_invoice span {
+  vertical-align: bottom;
+}
 .choose_invoice input {
   width: 0.5rem;
   height: 0.5rem;
   margin-top: 0.2rem;
-  margin-left: 0.2rem;
+  margin-left: 2.8rem;
+  vertical-align: bottom;
 }
 </style>

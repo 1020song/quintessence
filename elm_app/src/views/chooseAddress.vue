@@ -28,8 +28,9 @@ export default {
     }
   },
   mounted () {
-    this.f = document.querySelector('#foot')
-    this.f.style.display = 'none'
+    // this.f = document.querySelector('#foot')
+    // this.f.style.zIndex = '199'
+    // this.f.style.display = 'none'
   }
 }
 </script>
