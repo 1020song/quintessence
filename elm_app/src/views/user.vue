@@ -68,7 +68,7 @@
               <p>积分商城<span class="f-r">></span></p>
             </li>
           </router-link>
-          <router-link :to="{path:'/vip'}">
+          <router-link :to="{name:'vip'}">
             <li>
               <i class="iconfont icon-fuwu"></i>
               <p>饿了么会员卡<span class="f-r">></span></p>

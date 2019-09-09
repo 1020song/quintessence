@@ -31,11 +31,10 @@ import searchaa from './views/searchaa.vue'
 
 import confirmOrder from './views/confirmOrder.vue'// 确认订单
 import chooseaddress from './views/chooseAddress.vue'// 选择地址
-import addaddress from './views/addAddress.vue' // 添加地址
-import searchaddress from './views/searchAddress.vue' // 搜索地址
-import kouwei from './views/kouwei.vue'// 订单备注
-import invoice from './views/invoice.vue' // 订单的发票
-
+import addaddress from './views/addAddress.vue' //添加地址
+import searchaddress from './views/searchAddress.vue' //搜索地址
+import kouwei from './views/kouwei.vue'//订单备注
+import invoice from './views/invoice.vue' //订单的发票
 // -----------------------  李军
 // 优惠
 import benefits from './views/benefits.vue'
@@ -52,11 +51,13 @@ import Explain from './views/explain.vue'// 金额说明
 import score from './views/score.vue'
 import score1 from './views/score1.vue'
 import scoreinfo from './views/score_info.vue'
-
 // 积分商城
 // eslint-disable-next-line camelcase
 import jf_Shopping from './views/jf_shopping.vue'
 Vue.use(Router)
+
+// 应用下载
+import App from './views/appdetails.vue'
 
 // Vip
 // eslint-disable-next-line import/first
@@ -69,10 +70,6 @@ import payment from './views/payment.vue'
 import useCart from './views/useCart.vue'
 // eslint-disable-next-line import/first
 import invoiceRecord from './views/invoiceRecord'
-
-// 应用下载
-// eslint-disable-next-line import/first
-import App from './views/appdetails.vue'
 
 export default new Router({
   mode: 'history',
@@ -301,33 +298,24 @@ export default new Router({
     },
     // 我的余额
     {
-      path: '/balance',
-      name: 'balance',
-      component: Balance,
-      children: [
+      path: '/explain',
+      name: 'explain',
+      component: Balance1,
+      children:[
         {
-          path: '/',
-          name: 'explain',
-          component: Balance1
-        },
-        // 余额说明
-        {
-          path: 'explain',
-          name: 'explain',
+          // 余额说明
+          path: '/explain1',
+          name: 'explain1',
           component: Explain
-        }]
+        }
+      ]
     },
+    // 服务中心
     {
-      // 服务中心
       path: '/service',
       name: 'service',
-      component: Service,
+      component: service1,
       children: [
-        {
-          path: '/',
-          name: 'service',
-          component: service1
-        },
         // 热门问题
         {
           path: 'Details',
