@@ -23,6 +23,7 @@ import historied from './views/historyred.vue'
 import Retails from './views/reddetails.vue'
 import Coupon from './views/coupon.vue'
 import exchange from './views/exchange.vue'
+import commend from './views/commend.vue'
 // 金额
 import Balance1 from './views/balance1.vue'// 金额数量
 import Explain from './views/explain.vue'// 金额说明
@@ -88,6 +89,11 @@ export default new Router({
       name: 'benefit',
       component: benefits,
       children: [
+        {
+          path: 'commend',
+          name: 'commend',
+          component: commend
+        },
         {
           path: 'exchange',
           name: 'exchange',

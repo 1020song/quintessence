@@ -50,7 +50,7 @@
 					<section class="list_item">
 						<div class="list_item_left">
 							<span >¥</span> 
-							<span >5</span> 
+							<span >4</span> 
 							<span >.</span> 
 							<span >0</span> 
 							<p >满 25 元可用</p>
@@ -69,7 +69,7 @@
 					<section class="list_item">
 						<div class="list_item_left">
 							<span >¥</span> 
-							<span >5</span> 
+							<span >4</span> 
 							<span >.</span> 
 							<span >0</span> 
 							<p >满 25 元可用</p>
