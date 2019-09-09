@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import login from './views/login.vue' /*登录 lz*/
-import change from './views/changepassword.vue' /*重置密码 lz*/
-import info from './views/info.vue' /*用户信息 lz*/
+import login from './views/login.vue' /* 登录 lz */
+import change from './views/changepassword.vue' /* 重置密码 lz */
+import info from './views/info.vue' /* 用户信息 lz */
 import setusername from './views/setusername.vue'
 import add from './views/add.vue'
 import addsss from './views/addsss.vue'
@@ -26,9 +26,8 @@ import serviceD from './views/service_details.vue'
 import service1 from './views/service1.vue'
 import sweetmeats from './views/sweetmeats.vue'
 
-import searchtodetail from './components/searchToDetail.vue' /*搜索的时候，点击li，进入详情页*/
+import searchtodetail from './components/searchToDetail.vue' /* 搜索的时候，点击li，进入详情页 */
 import searchaa from './views/searchaa.vue'
-
 
 import confirmOrder from './views/confirmOrder.vue'// 确认订单
 import chooseaddress from './views/chooseAddress.vue'// 选择地址
@@ -36,8 +35,6 @@ import addaddress from './views/addAddress.vue' //添加地址
 import searchaddress from './views/searchAddress.vue' //搜索地址
 import kouwei from './views/kouwei.vue'//订单备注
 import invoice from './views/invoice.vue' //订单的发票
-
-
 // -----------------------  李军
 // 优惠
 import benefits from './views/benefits.vue'
@@ -54,21 +51,25 @@ import Explain from './views/explain.vue'// 金额说明
 import score from './views/score.vue'
 import score1 from './views/score1.vue'
 import scoreinfo from './views/score_info.vue'
-
-
 // 积分商城
+// eslint-disable-next-line camelcase
 import jf_Shopping from './views/jf_shopping.vue'
 Vue.use(Router)
 
-// Vip
-import vip1 from './views/vip1.vue'
-import vipDescription from './views/vipDescription.vue'
-import payment from './views/payment.vue'
-import useCart from './views/useCart.vue'
-import invoiceRecord from './views/invoiceRecord'
-
 // 应用下载
 import App from './views/appdetails.vue'
+
+// Vip
+// eslint-disable-next-line import/first
+import vip1 from './views/vip1.vue'
+// eslint-disable-next-line import/first
+import vipDescription from './views/vipDescription.vue'
+// eslint-disable-next-line import/first
+import payment from './views/payment.vue'
+// eslint-disable-next-line import/first
+import useCart from './views/useCart.vue'
+// eslint-disable-next-line import/first
+import invoiceRecord from './views/invoiceRecord'
 
 export default new Router({
   mode: 'history',
@@ -190,7 +191,7 @@ export default new Router({
               component: search,
               props: route => ({
                 name: route.query
-              }),
+              })
             },
             // 点击每一个li，进入食物详情
             {
@@ -262,6 +263,7 @@ export default new Router({
             // 账户信息
             {
               path: 'info',
+              name: 'info',
               component: info
             },
             {
@@ -296,33 +298,24 @@ export default new Router({
     },
     // 我的余额
     {
-      path: '/balance',
-      name: 'balance',
-      component: Balance,
-      children: [
+      path: '/explain',
+      name: 'explain',
+      component: Balance1,
+      children:[
         {
-          path: '/',
-          name: 'explain',
-          component: Balance1
-        },
-        // 余额说明
-        {
-          path: 'explain',
-          name: 'explain',
+          // 余额说明
+          path: '/explain1',
+          name: 'explain1',
           component: Explain
-        }]
+        }
+      ]
     },
+    // 服务中心
     {
-      // 服务中心
       path: '/service',
       name: 'service',
-      component: Service,
+      component: service1,
       children: [
-        {
-          path: '/',
-          name: 'service',
-          component: service1
-        },
         // 热门问题
         {
           path: 'Details',

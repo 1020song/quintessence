@@ -2,7 +2,7 @@
   <div>
     <elmHead>
       <template v-slot:left>
-        <router-link to="/about/user/adds">&lt;</router-link>
+        <router-link :to="{name:'adds'}">&lt;</router-link>
       </template>
       <template v-slot:center>搜索地址</template>
       <template v-slot:right></template>

@@ -9,7 +9,7 @@
     </elmHead>
     <div class="content">
         <ul>
-            <li v-for=" i in arr">
+            <li v-for=" i in arr" :key="i">
                 <div>
                     <p>{{i.users}}</p>
                     <p>{{i.user_number}}</p>
