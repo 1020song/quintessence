@@ -142,3 +142,6 @@ export default {
   }
 };
 </script>
+<style scoped>
+@import '../css/user.css'
+</style>
