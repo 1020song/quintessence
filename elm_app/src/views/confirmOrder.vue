@@ -2,7 +2,7 @@
   <div class="confirmOrder">
     <elmHead>
       <template v-slot:left>
-        <router-link :to="{name:'search'}"><</router-link>
+        <router-link :to="{name:'search'}">&lt;</router-link>
       </template>
       <template v-slot:center>确认订单</template>
       <template v-slot:right
@@ -17,7 +17,9 @@
       </template>
     </elmHead>
     <div class="add_address">
-      <p>请添加一个收货地址 <span class="fr">&gt;</span></p>
+      <router-link :to="{path:'/about/confirmOrder/chooseaddress'}">
+        <p>请添加一个收货地址 <span class="fr">&gt;</span></p>
+      </router-link>
     </div>
     <div class="deliveryTime">
       <p>送达时间</p>
@@ -52,21 +54,29 @@
       </div>
     </div>
     <div class="beizhu">
-      <p class="beizhu1">
-        <span>定单备注</span>
-        <span class="fr">口味、偏好等 &gt;</span>
-      </p>
-      <p class="beizhu2">
-        <span>发票抬头</span>
-        <span class="fr">不需要开发票 &gt;</span>
-      </p>
+      <router-link to="/about/confirmOrder/kouwei">
+        <p class="beizhu1">
+          <span>定单备注</span>
+          <span class="fr">口味、偏好等 &gt;</span>
+        </p>
+      </router-link>
+
+      <router-link to="/about/confirmOrder/invoice">
+        <p class="beizhu2">
+          <span>发票抬头</span>
+          <span class="fr">不需要开发票 &gt;</span>
+        </p>
+      </router-link>
+
     </div>
-    <div class="footer">
+    <div class="footer"
+         id="foot">
       <div class="footer_l fl">
         待支付￥<span>7687</span>
       </div>
       <div class="footer_r fr">确认下单</div>
     </div>
+    <router-view></router-view>
   </div>
 </template>
 <script>
@@ -75,12 +85,17 @@ export default {
   components: {
     elmHead
   },
-  data(){
-    return{
+  data () {
+    return {
       isbtnlogin: false,
+      ff: ''
     }
   },
-  created(){
+  mounted () {
+    this.f = document.querySelector('#foot')
+    this.f.style.display = 'block'
+  },
+  created () {
     if (localStorage.user) {
       this.isbtnlogin = true
     } else {
@@ -90,7 +105,7 @@ export default {
 }
 </script>
 <style scoped>
-.confirmOrder{
+.confirmOrder {
   padding-top: 1rem;
 }
 .detail_two .red {
@@ -127,7 +142,7 @@ export default {
 
 .confirmOrder {
   background-color: #f5f5f5;
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
 }
 header {
   width: 100%;
@@ -194,11 +209,11 @@ header {
   font-size: 0.2rem;
   color: #fff;
   background-color: #3190e8;
-    width: 1.2rem;
-    margin-top: 0.05rem;
-    margin-right: 0.3rem;
-    text-align: center;
-    padding: 0rem;
+  width: 1.2rem;
+  margin-top: 0.05rem;
+  margin-right: 0.3rem;
+  text-align: center;
+  padding: 0rem;
 }
 .PayWay {
   margin-top: 0.2rem;
@@ -252,7 +267,7 @@ header {
   margin-bottom: 0.1rem;
   font-size: 0.24rem;
 }
-.detail_two span{
+.detail_two span {
   font-size: 0.24rem;
   color: #666;
 }
@@ -298,13 +313,13 @@ header {
   font-size: 0.24rem;
   color: #666;
 }
-.detail_five > p:first-of-type span{
+.detail_five > p:first-of-type span {
   margin-left: 0.2rem;
 }
-.detail_five > p:last-of-type{
+.detail_five > p:last-of-type {
   color: #f60;
 }
-.detail_five > p:last-of-type span{
+.detail_five > p:last-of-type span {
   color: #f60;
   margin-left: 0.2rem;
 }
