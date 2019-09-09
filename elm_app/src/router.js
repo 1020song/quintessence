@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import login from './views/login.vue' /*登录 lz*/
-import change from './views/changepassword.vue' /*重置密码 lz*/
-import info from './views/info.vue' /*用户信息 lz*/
+import login from './views/login.vue' /* 登录 lz */
+import change from './views/changepassword.vue' /* 重置密码 lz */
+import info from './views/info.vue' /* 用户信息 lz */
 import setusername from './views/setusername.vue'
 import add from './views/add.vue'
 import addsss from './views/addsss.vue'
@@ -27,16 +27,15 @@ import serviceD from './views/service_details.vue'
 import service1 from './views/service1.vue'
 import sweetmeats from './views/sweetmeats.vue'
 
-import searchtodetail from './components/searchToDetail.vue' /*搜索的时候，点击li，进入详情页*/
+import searchtodetail from './components/searchToDetail.vue' /* 搜索的时候，点击li，进入详情页 */
 import searchaa from './views/searchaa.vue'
-
 
 import confirmOrder from './views/confirmOrder.vue'// 确认订单
 import chooseaddress from './views/chooseAddress.vue'// 选择地址
-import addaddress from './views/addAddress.vue' //添加地址
-import searchaddress from './views/searchAddress.vue' //搜索地址
-import kouwei from './views/kouwei.vue'//订单备注
-import invoice from './views/invoice.vue' //订单的发票
+import addaddress from './views/addAddress.vue' // 添加地址
+import searchaddress from './views/searchAddress.vue' // 搜索地址
+import kouwei from './views/kouwei.vue'// 订单备注
+import invoice from './views/invoice.vue' // 订单的发票
 
 Vue.use(Router)
 
@@ -105,7 +104,7 @@ export default new Router({
               component: search,
               props: route => ({
                 name: route.query
-              }),
+              })
             },
             // 点击每一个li，进入食物详情
             {
