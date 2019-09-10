@@ -9,12 +9,12 @@
       </template>
       <template v-slot:right
                 v-if="!isbtnlogin">
-        <router-link :to="{name:'login'}"
+        <router-link to="/login"
                      class="login">登录/注册</router-link>
       </template>
       <template v-slot:right
                 v-else-if="isbtnlogin">
-        <router-link :to="{name:'users'}"
+        <router-link to="/about/user"
                      class="login"><i class="iconfont">&#xe602;</i></router-link>
       </template>
     </elmHead>
@@ -26,7 +26,8 @@
       <span>附近商家</span>
     </div>
 
-    <merchant v-for="(i,index) in list" :key="index">
+    <merchant v-for="(i,index) in list" @int="shop(i.id)"
+              :key="index">
 
       <template v-slot:left>
         <img :src="'https://elm.cangdu.org/img/'+i.image_path"
@@ -43,15 +44,10 @@
         </div>
         <div class="center">
           <span class="star">
-            <template name="star">
-              <el-rate
-                  v-model="i.rating"
-                  disabled
-                  show-score
-                  text-color="#ff9900"
-                  score-template="{value}">
-              </el-rate>
-            </template>
+            <template name="star">11111</template>
+          </span>
+          <span class="num1">
+            <template name="num1">{{i.rating}}</template>
           </span>
           <span class="sell">
             <template name="sell">月售{{i.rating_count}}单</template>
@@ -117,14 +113,18 @@ export default {
     elmHead,
     elmfoot
   },
+  methods:{
+     shop(i){
+        localStorage.id = i
+        location.href = 'http://localhost:8080/shop'
+    }
+  },
   data () {
     return {
       list: '',
       arr: '',
       ads_name: '',
-      isbtnlogin: false,
-      value:3.7
-
+      isbtnlogin: false
       //   jieshouList: this.$route.query.geohash
     }
   },
@@ -145,18 +145,7 @@ export default {
   }
 }
 </script>
-<style>
-.el-rate__icon{
-    font-size: 0.14rem !important;
-    margin-right: 0 !important;
-}
-.el-rate__decimal{
-  font-size: 0.14rem !important;
-}
-.el-rate__text{
-  font-size: 0.14rem !important;
-}
-</style>
+
 <style scoped>
 .fujin {
   padding: 0 0.24rem;
