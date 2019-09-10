@@ -28,7 +28,6 @@
 
     <merchant v-for="(i,index) in list" @int="shop(i.id)"
               :key="index">
-
       <template v-slot:left>
         <img :src="'https://elm.cangdu.org/img/'+i.image_path"
              alt="">
@@ -115,8 +114,10 @@ export default {
   },
   methods:{
      shop(i){
+         console.log(i)
         localStorage.id = i
         location.href = 'http://localhost:8080/shop'
+
     }
   },
   data () {
