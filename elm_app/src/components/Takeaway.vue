@@ -43,11 +43,19 @@
         </div>
         <div class="center">
           <span class="star">
-            <template name="star">11111</template>
+            <template name="star">
+              <el-rate
+                  v-model="i.rating"
+                  disabled
+                  show-score
+                  text-color="#ff9900"
+                  score-template="{value}">
+              </el-rate>
+            </template>
           </span>
-          <span class="num1">
+          <!-- <span class="num1">
             <template name="num1">{{i.rating}}</template>
-          </span>
+          </span> -->
           <span class="sell">
             <template name="sell">月售{{i.rating_count}}单</template>
           </span>
@@ -146,7 +154,15 @@ export default {
   }
 }
 </script>
-
+<style>
+.el-rate__icon{
+  margin-right: 0 !important;
+  font-size: 0.12rem !important;
+}
+.el-icon-star-on{
+  font-size: 0.12rem !important;
+}
+</style>
 <style scoped>
 .fujin {
   padding: 0 0.24rem;
