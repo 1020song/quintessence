@@ -16,7 +16,7 @@
                 </div>
               </div>
             </div>
-            <span style=" margin-left: -1rem;width: 100%;" v-if="arr.length">
+            <span style="width: 100%;" v-if="arr.length">
               <span class="name">{{arr[0].icon_name}}
               </span>{{arr[0].description}}<span style="margin-left: .1rem;">(APP专享)
             </span><span @click="type=true" style="float: right;font-size: .24rem">{{arr.length}}个活动&gt;</span></span>
@@ -413,6 +413,7 @@
 .tit_info p{
   line-height: .3rem;
   color:#fff;
+  font-size: .23rem;
 }
 .tit_info h3{
   line-height: .4rem;
