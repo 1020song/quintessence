@@ -22,8 +22,6 @@ import user from './components/user'
 // 服务中心
 import foodDetail from './views/foodDetail.vue'
 import Users from './views/user.vue'
-import Balance from './views/balance.vue'
-import Service from './views/service_cont.vue'
 import serviceD from './views/service_details.vue'
 import service1 from './views/service1.vue'
 import sweetmeats from './views/sweetmeats.vue'
