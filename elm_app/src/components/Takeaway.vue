@@ -53,9 +53,6 @@
               </el-rate>
             </template>
           </span>
-          <!-- <span class="num1">
-            <template name="num1">{{i.rating}}</template>
-          </span> -->
           <span class="sell">
             <template name="sell">月售{{i.rating_count}}单</template>
           </span>
@@ -161,6 +158,9 @@ export default {
 }
 .el-icon-star-on{
   font-size: 0.12rem !important;
+}
+.el-rate__text {
+  font-size: 0.14rem !important;
 }
 </style>
 <style scoped>

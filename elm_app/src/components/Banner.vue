@@ -2,15 +2,19 @@
     <div class="swiper-container in-banner">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
-                <div class="item" v-for="j in list.slice(0,8)">
-                    <img :src="'https://fuss10.elemecdn.com'+j.image_url" alt="">
-                    <p>{{j.title}}</p>
+                <div class="item" v-for="j in list.slice(0,8)" :key="j.id">
+                    <router-link :to="{name:'sweetmeats',params:{title:j.title}}">
+                        <img :src="'https://fuss10.elemecdn.com'+j.image_url" alt="">
+                        <p>{{j.title}}</p>
+                    </router-link>
                 </div>
             </div>
             <div class="swiper-slide">
-                <div class="item" v-for="j in list.slice(8)">
-                    <img :src="'https://fuss10.elemecdn.com'+j.image_url" alt="">
-                    <p>{{j.title}}</p>
+                <div class="item" v-for="j in list.slice(8)" :key="j.id">
+                    <router-link :to="{name:'sweetmeats',params:{title:j.title}}">
+                        <img :src="'https://fuss10.elemecdn.com'+j.image_url" alt="">
+                        <p>{{j.title}}</p>
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -31,7 +35,7 @@ export default {
          fetch('http://elm.cangdu.org/v2/index_entry?geohash=31.22299,121.36025&group_type=1&flags[]=F')
             .then( response => response.json())
             .then( res => {
-                // console.log(res)
+                console.log(res)
                 this.list=res
             })  
     },
