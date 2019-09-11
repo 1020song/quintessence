@@ -2,16 +2,16 @@
     <div class="swiper-container in-banner">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
-                <div class="item" v-for="j in list.slice(0,8)" :key="j.id">
-                    <router-link :to="{name:'sweetmeats',params:{title:j.title}}">
+                <div class="item" v-for="j in list.slice(0,8)" :key="j.id" @click="hh(j)">
+                    <router-link :to="{name:'sweetmeats'}">
                         <img :src="'https://fuss10.elemecdn.com'+j.image_url" alt="">
                         <p>{{j.title}}</p>
                     </router-link>
                 </div>
             </div>
             <div class="swiper-slide">
-                <div class="item" v-for="j in list.slice(8)" :key="j.id">
-                    <router-link :to="{name:'sweetmeats',params:{title:j.title}}">
+                <div class="item" v-for="j in list.slice(8)" :key="j.id" @click="hh(j)">
+                    <router-link :to="{name:'sweetmeats'}">
                         <img :src="'https://fuss10.elemecdn.com'+j.image_url" alt="">
                         <p>{{j.title}}</p>
                     </router-link>
@@ -47,8 +47,10 @@ export default {
             paginationClickable: true
         })
     },
-    mounted(){
-        
+    methods:{
+        hh(a){
+            this.$store.commit('setselectshop',a.title)
+        }
     }
 }
 </script>

@@ -78,6 +78,12 @@ export default {
         if (r != true) {
         } else {
           alert(data.data.message);
+          this.$store.commit('setUserName','')
+          this.$store.commit('setUserId','')
+          this.$store.commit('setUsercity','')
+          this.$store.commit('setPoint',0)
+          this.$store.commit('setBalance',0)
+          this.$store.commit('setGift_amount',0)
           history.go(-1);
           localStorage.removeItem('user')
         }

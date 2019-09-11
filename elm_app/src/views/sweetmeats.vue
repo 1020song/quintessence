@@ -10,7 +10,7 @@
             <ul class="lists" @click="isOp">
                 <li>
                     <div>
-                        <span @click="clk">{{$store.state.order.selectshop}}</span> 
+                        <span @click="clk1">{{$store.state.order.selectshop}}</span> 
                         <svg data-v-6cc1fce6="" width="10" height="10" xmlns="http://www.w3.org/2000/svg" version="1.1" class="sort_icon">
                         <polygon data-v-6cc1fce6="" points="0,3 10,3 5,8"></polygon>
                         </svg>
@@ -19,7 +19,7 @@
                 </li>
                 <li>
                     <div>
-                        <span @click="clk">排序</span>
+                        <span @click="clk2">排序</span>
                         <svg data-v-6cc1fce6="" width="10" height="10" xmlns="http://www.w3.org/2000/svg" version="1.1" class="sort_icon">
                         <polygon data-v-6cc1fce6="" points="0,3 10,3 5,8"></polygon>
                         </svg>
@@ -28,7 +28,7 @@
                 </li>
                 <li>
                     <div>
-                        <span @click="clk">筛选</span>
+                        <span @click="clk3">筛选</span>
                         <svg data-v-6cc1fce6="" width="10" height="10" xmlns="http://www.w3.org/2000/svg" version="1.1" class="sort_icon">
                         <polygon data-v-6cc1fce6="" points="0,3 10,3 5,8"></polygon>
                         </svg>
@@ -36,8 +36,8 @@
                     
                 </li>
             </ul>
-            <div class="oitem" v-show="isOpen" style="position:absolute;z-index:9;">
-                <div style="display: block;" class="fenlei" v-show="classify">
+            <div class="oitem" style="position:absolute;z-index:9;">
+                <div style="display: block;" class="fenlei" v-if="point==1">
                     <ul style="background:#f5f5f5">
                         <!-- <i>异国料理</i><span class="yiguo">2262</span> -->
                         <li v-for="(item,index) in olist" @click="tab(index)" :key="index" :style="{'background':index==idx?'#fff':'#f5f5f5'}">     
@@ -57,7 +57,7 @@
                     </p>
                 </div>
                 <!-- 排序 -->
-                <div class="paixu" v-show="px">
+                <div class="paixu" v-if="point==2" style="display:block">
                     <ul>
                         <li v-for="(item,index) in paixu" @click="paixu1(index)" :key="index">
                             <i :class="'iconfont '+item.icon"></i>
@@ -65,7 +65,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="shaixuan" v-show="yes_no">
+                <div class="shaixuan" v-if="point==3" style="display:block">
 
                     <h2 v-for="(i,index) in peisong" :key="index" class="peisong">
                         <p>配送方式</p>
@@ -212,17 +212,11 @@ export default {
             classify:true,
             idx:0,
             order_by:4,//排序
+            point:-1,
             // isbtnlogin: false
         }
     },
     created () {
-        // if (localStorage.user) {
-        //     this.isbtnlogin = true
-        //     } else {
-        //     this.isbtnlogin = false
-        //     }
-            this.title=this.$route.params.title
-            this.$store.commit('setselectshop',this.title)
             this.geohash = localStorage.geohash,
             // console.log(this.geohash)
             fetch('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.geohash.split(',')[0] + '&longitude=' + this.geohash.split(',')[1]).then(response => response.json()).then(res => {
@@ -250,7 +244,6 @@ export default {
     },
     methods:{
         shop(i){
-            // console.log(i)
             localStorage.id = i
             location.href = 'http://localhost:8080/shop'
 
@@ -258,23 +251,25 @@ export default {
         isOp(){
             this.isOpen = !this.isOpen;
         },
-        
-        clk(){
-            var oList=document.querySelector(".lists");
-            var oSpan=document.querySelectorAll(".lists span");
-            var oItem=document.querySelector(".oitem");
-            var divs=document.querySelectorAll(".oitem div");
-            var aList = document.querySelectorAll(".oitem li");
-            for(var i=0;i<oSpan.length;i++){
-                oSpan[i].index=i;
-                oSpan[i].onclick=function(){
-                    for(var i=0;i<oSpan.length;i++){
-                        divs[i].style.display='none';
-                       oSpan[i].className = '';
-                    }
-                    divs[this.index].style.display='block';
-                    this.className = 'choose';
-                }
+        clk1(){
+			if(this.point != 1) {
+				this.point = 1
+			} else {
+				this.point = -1
+            }
+        },
+        clk2(){
+            if(this.point != 2) {
+				this.point = 2
+			} else {
+				this.point = -1
+            }
+        },
+        clk3(){
+            if(this.point != 3) {
+				this.point = 3
+			} else {
+				this.point = -1
             }
         },
         tab(index){
@@ -293,6 +288,7 @@ export default {
         },
         paixu1(index){
             this.px = !this.px
+            this.point = -1
             if(index==0){
                 this.order_by=4
             }else if(index==1){
@@ -316,6 +312,7 @@ export default {
             this.yes_no = !this.yes_no
         },
         classify_n(index,i){
+            this.point = -1
             this.classify = !this.classify;
             // console.log(i.id)
              fetch('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.geohash.split(',')[0] + '&longitude=' + this.geohash.split(',')[1]+'&offset=0&limit=20&extras[]=activities&keyword=&restaurant_category_id=&restaurant_category_ids[]='+i.id+'&order_by=null&delivery_mode[]=null').then(response => response.json()).then(res => {
