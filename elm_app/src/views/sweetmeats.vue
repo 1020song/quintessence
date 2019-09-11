@@ -2,7 +2,7 @@
 	<div>
 		<elmHead>
             <template v-slot:left><router-link :to='{path:"/about/Takeaway", query: {geohash: geohash}}'>&lt;</router-link></template>
-            <template v-slot:center>{{title}}</template>
+            <template v-slot:center>{{$store.state.order.selectshop}}</template>
             <template v-slot:right></template>
 		</elmHead>
 
@@ -10,7 +10,7 @@
             <ul class="lists" @click="isOp">
                 <li>
                     <div>
-                        <span @click="clk">{{title}}</span> 
+                        <span @click="clk">{{$store.state.order.selectshop}}</span> 
                         <svg data-v-6cc1fce6="" width="10" height="10" xmlns="http://www.w3.org/2000/svg" version="1.1" class="sort_icon">
                         <polygon data-v-6cc1fce6="" points="0,3 10,3 5,8"></polygon>
                         </svg>
@@ -222,6 +222,7 @@ export default {
         //     this.isbtnlogin = false
         //     }
             this.title=this.$route.params.title
+            this.$store.commit('setselectshop',this.title)
             this.geohash = localStorage.geohash,
             // console.log(this.geohash)
             fetch('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.geohash.split(',')[0] + '&longitude=' + this.geohash.split(',')[1]).then(response => response.json()).then(res => {

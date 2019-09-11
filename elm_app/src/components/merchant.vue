@@ -100,6 +100,7 @@ export default {
     }
     .givebox{
         float: right;
+        margin-top: 0.1rem;
     }
     .time{
         width: 2.1rem;
@@ -180,6 +181,7 @@ export default {
     .sell{
         font-size: .1rem;
         color: #666;
+        margin-top: 0.1rem;
     }
     .num1{
         font-size: .1rem;
