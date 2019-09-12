@@ -65,20 +65,25 @@
                         </li>
                     </ul>
                 </div>
+                <!-- 配送方式 -->
                 <div class="shaixuan" v-if="point==3" style="display:block">
 
                     <h2 v-for="(i,index) in peisong" :key="index" class="peisong">
                         <p>配送方式</p>
-                        <span v-if="i.text"><i class="iconfont" style="color:blue;font-size:.2rem;margin:0 .1rem;">&#xe603;</i>{{i.text}}</span>
+                        <span v-if="i.text" @click="dianji($event,i)">
+                            <i class="iconfont" style="color:blue;font-size:.2rem;margin:0 .1rem;">&#xe603;</i>
+                            <i class="right" style="display:none;font-size:0.3rem">√</i>
+                            {{i.text}}
+                        </span>
                     </h2>
                     <h2 class="shuxing">
                         <p>商家属性（可以多选）</p>
-                        <span v-for="(i,$index) in shuxing" :key="$index" @click="showToggle($index)" id="shangjia">
-                            <span id="right" v-show="isShow">√</span>
+                        <span v-for="(i,$index) in shuxing" :key="$index" @click="showToggle($event,i,$index)" class="shangjia">
                             <i :style="{'color':'#'+i.icon_color+'','border':'1px solid #'+i.icon_color+''}">
                                 {{i.icon_name}}
                             </i>
                             {{i.name}}
+                            <i class="right" style="display:none;font-size:0.3rem">√</i>
                         </span>
                     </h2>
                     <h2 class="qdqx">
@@ -86,7 +91,7 @@
                             清空
                         </span>
                         <span @click="yes(index)">
-                            确定<i></i>
+                            确定<i style="font-style: normal;">({{pei}})</i>
                         </span>
                     </h2>
                 </div> 
@@ -213,6 +218,8 @@ export default {
             idx:0,
             order_by:4,//排序
             point:-1,
+            pei:0,
+            peiarr:[],
             // isbtnlogin: false
         }
     },
@@ -282,9 +289,46 @@ export default {
             
 
         },
-        showToggle(index){
-            this.index = index;
-            this.isShow = !this.isShow;
+        showToggle(evt,i,index){
+            if (evt.target.children[1].style.display === 'none') {
+                evt.target.children[1].style.display ='block'
+                evt.target.children[0].style.display='none'
+                this.pei++
+                this.peiarr.push(i.id)
+            } else {
+                evt.target.children[1].style.display ='none'
+                evt.target.children[0].style.display='inline'
+                this.pei--
+                if(this.pei==0){
+                    this.pei=0
+                }
+                console.log(index)
+                for(var r=0;r<this.peiarr.length;r++){
+                    if(this.peiarr.indexOf(index)>-1){
+                        console.log(1)
+                        this.peiarr.splice(this.peiarr.indexOf(index), 1)
+                    }
+                }
+                console.log(this.peiarr)
+            }
+
+        },
+        dianji(evt,i){
+            // console.log(i.id)
+            if (evt.target.children[1].style.display === 'none') {
+                evt.target.children[1].style.display ='inline'
+                evt.target.children[0].style.display='none'
+                this.peiarr.push(i.id)
+                this.pei++
+            } else {
+                evt.target.children[1].style.display ='none'
+                evt.target.children[0].style.display='inline'
+                this.pei--
+                if(this.pei==0){
+                    this.pei=0
+                }
+                
+            }
         },
         paixu1(index){
             this.px = !this.px
@@ -310,6 +354,7 @@ export default {
         },
         yes(index){
             this.yes_no = !this.yes_no
+            console.log(this.peiarr)
         },
         classify_n(index,i){
             this.point = -1
@@ -335,16 +380,23 @@ export default {
     .choose{
         color:#3190e8;
     }
-    .shuxing span{
-        position: relative;
-    }
-    .shuxing span #right{
+    .shuxing span i{
         position: absolute;
-        display: inline-block;
-        left: -.1rem;top: -.1rem;
-        width: 1em;
-        height: 0.5rem;
-        font-size: .5rem;
+       left: 0;
+       top: 0;
+        width: 0.4rem;
+        height: 0.4rem;
+        text-align: center;
+        line-height: 0.4rem;
+        margin-top: 0.05rem;
+        font-style: normal;
+    }
+    .shuxing span .right,.peisong .right{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 0.4rem;
+        height: 0.4rem;
         color: blue;
         background-color: #fff;
         border: none;
@@ -383,6 +435,7 @@ export default {
         margin-left: .1rem;
         border-radius: .05rem;
         padding: .03rem;
+        font-style: normal;
 
     }
 
@@ -390,12 +443,14 @@ export default {
         font-size: .2rem;
     }
     .shuxing span{
+        position: relative;
+        padding-left: 0.65rem;
         display: inline-block;
         border-radius: .1rem;
         width: 1.8rem;
         height: .6rem;
         border:1px solid #eee;
-        line-height: .5rem;
+        line-height: .6rem;
         font-size: .2rem;
         margin: .1rem;
     }
@@ -414,6 +469,18 @@ export default {
     .peisong p{
         font-size: .2rem;
     }
+    .peisong span i{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0.4rem;
+            height: 0.4rem;
+            color: blue;
+            background-color: #fff;
+            border: none;
+            font-style: normal;
+            text-align: center
+    }
     .peisong span{
         display: block;
         border-radius: .1rem;
@@ -422,6 +489,8 @@ export default {
         border:1px solid #eee;
         line-height: .5rem;
         font-size: .2rem;
+        position: relative;
+        padding-left: 0.55rem;
     }
     .oitem .paixu ul{
         width: 6.4rem;
