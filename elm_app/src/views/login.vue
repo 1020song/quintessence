@@ -32,6 +32,7 @@
 </template>
 
 <script>
+var md5 = require('md5')
 import elmHead from '../components/head'
 export default {
   name: "login",
@@ -49,6 +50,9 @@ export default {
   },
   created() {
     this.random();
+    
+    console.log(md5('message'));
+    
   },
   methods: {
     login() {
@@ -57,7 +61,7 @@ export default {
           "https://elm.cangdu.org/v2/login",
           {
             username: this.user,
-            password: this.password,
+            password: md5(this.password),
             captcha_code: this.Verify,
           },
         )

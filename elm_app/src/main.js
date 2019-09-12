@@ -16,15 +16,18 @@ import elementUi from 'element-ui'
 import '../node_modules/element-ui/lib/index'
 import '../node_modules/element-ui/lib/theme-chalk/index.css'
 import vueResource from 'vue-resource'
+import md5 from '../node_modules/md5'
 // Vue.use(VueAxios, axios)
 Vue.use(vueResource)
 Vue.use(elementUi)
+Vue.use(md5)
 Vue.config.productionTip = false
 axios.defaults.withCredentials = true
 Vue.prototype.$axios = axios
 new Vue({
   router,
   store,
+  md5,
   // axios,
   render: h => h(App)
 }).$mount('#app')

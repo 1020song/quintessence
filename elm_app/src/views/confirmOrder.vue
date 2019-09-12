@@ -5,20 +5,35 @@
         <router-link :to="{name:'search'}">&lt;</router-link>
       </template>
       <template v-slot:center>确认订单</template>
-      <template v-slot:right
-                v-if="!isbtnlogin">
-        <router-link :to="{name:'login'}"
-                     class="login">登录/注册</router-link>
+      <template v-slot:right v-if="!isbtnlogin">
+        <router-link :to="{name:'login'}" class="login">登录/注册</router-link>
       </template>
-      <template v-slot:right
-                v-else-if="isbtnlogin">
-        <router-link :to="{name:'users'}"
-                     class="login"><i class="iconfont">&#xe602;</i></router-link>
+      <template v-slot:right v-else-if="isbtnlogin">
+        <router-link :to="{name:'users'}" class="login">
+          <i class="iconfont">&#xe602;</i>
+        </router-link>
       </template>
     </elmHead>
-    <div class="add_address">
+    <div class="add_address" v-show="!inshow">
       <router-link :to="{path:'/about/confirmOrder/chooseaddress'}">
-        <p>请添加一个收货地址 <span class="fr">&gt;</span></p>
+        <p>
+          请添加一个收货地址
+          <span class="fr">&gt;</span>
+        </p>
+      </router-link>
+    </div>
+    <div style="padding:0.3rem;background-color:#fff;" v-show="inshow">
+      <router-link :to="{path:'/about/confirmOrder/chooseaddress'}">
+        <div>
+          <span style="font-size:0.35rem;font-weight:800;margin:0rem 0.15rem;">{{data.name}}</span>
+          <span style="font-size:0.3rem;margin:0rem 0.07rem;">{{data.sex==1?'先生':'女士'}}</span>
+          <span style="font-size:0.3rem;">{{data.phone}}</span>
+        </div>
+        <div style="width:100%;height:0.5rem;">
+          <span class="tag">{{data.tag}}</span>
+          <span style="font-size:0.3rem;float: left;">{{data.address_detail}}</span>
+          <div style="float:right;position: relative;top:-0.3rem;color:#ccc;font-size:0.5rem;">></div>
+        </div>
       </router-link>
     </div>
     <div class="deliveryTime">
@@ -29,8 +44,7 @@
       </div>
     </div>
     <div class="PayWay">
-      <div class="PayWay_top clearfix"
-           @click="PayWay_top($event)">
+      <div class="PayWay_top clearfix" @click="PayWay_top($event)">
         <span class="fl">支付方式</span>
         <span class="fr ccc">在线支付&nbsp;&nbsp; &gt;</span>
       </div>
@@ -41,7 +55,7 @@
     </div>
     <div class="detail">
       <div class="detail_one">
-        <img src="">
+        <img src>
         <span>效果演示</span>
       </div>
       <div class="detail_two clearfix">
@@ -50,8 +64,14 @@
         <span class="detail_two_r fr red cuo">×</span>
       </div>
       <div class="detail_five">
-        <p>订单<span>￥7687</span></p>
-        <p class="fr">待支付<span>￥7687</span></p>
+        <p>
+          订单
+          <span>￥7687</span>
+        </p>
+        <p class="fr">
+          待支付
+          <span>￥7687</span>
+        </p>
       </div>
     </div>
     <div class="beizhu">
@@ -68,96 +88,106 @@
           <span class="fr">不需要开发票 &gt;</span>
         </p>
       </router-link>
-
     </div>
-    <div class="footer"
-         id="foot">
+    <div class="footer" id="foot">
       <div class="footer_l fl">
-        待支付￥<span>7687</span>
+        待支付￥
+        <span>7687</span>
       </div>
-      <div class="footer_r fr"
-           @click="confimInformation()">确认下单</div>
+      <div class="footer_r fr" @click="confimInformation()">确认下单</div>
     </div>
     <div v-show="show">
-      <div class="cover"
-           @click="notShow"></div>
+      <div class="cover" @click="notShow"></div>
       <div class="payToTop">
         <div class="pay">
           <p>支付方式</p>
           <ul>
             <li>
-              <span> 货到付款(商家不支持货到付款) </span>
-              <input type="checkbox"
-                     disabled
-                     class="fr">
+              <span>货到付款(商家不支持货到付款)</span>
+              <input type="checkbox" disabled class="fr">
             </li>
             <li>
               <span>在线支付</span>
-              <input type="checkbox"
-                     class="fr">
+              <input type="checkbox" class="fr">
             </li>
           </ul>
         </div>
       </div>
     </div>
-    <div class="alet_container"
-         v-show="isconfirm">
+    <div class="alet_container" v-show="isconfirm">
       <section class="tip_text_container">
         <div class="tip_icon">
           <span></span>
           <span></span>
         </div>
         <p class="tip_text">请添加一个收货地址</p>
-        <p class="con"
-           @click="confimInformation()">确认</p>
+        <p class="con" @click="confimInformation()">确认</p>
       </section>
     </div>
     <router-view></router-view>
   </div>
 </template>
 <script>
-import elmHead from '../components/head'
+import elmHead from "../components/head";
 export default {
   components: {
     elmHead
   },
-  data () {
+  data() {
     return {
       isbtnlogin: false,
       // ff: '',
-      covers: '', // cover
-      payWay: '', // 支付方式
+      covers: "", // cover
+      payWay: "", // 支付方式
       show: false,
-      isconfirm: false
+      isconfirm: false,
+      inshow: false,
+      data: ""
+    };
+  },
+  created() {
+    this.inshow = false;
+    if (localStorage.user) {
+      this.isbtnlogin = true;
+    } else {
+      this.isbtnlogin = false;
+    }
+    info:{
+      this.$axios.get('https://elm.cangdu.org/v1/users/'+localStorage.uid+'/addresses').then(data=>{
+        console.log(data);
+        
+      })
     }
   },
-  created () {
-    if (localStorage.user) {
-      this.isbtnlogin = true
-    } else {
-      this.isbtnlogin = false
+  beforeCreate() {
+    this.inshow = true;
+  },
+  updated() {
+    if(this.$route.params.name){
+      this.data = this.$route.params.name;
+      this.inshow = true;
     }
   },
   methods: {
-    PayWay_top (e) {
-      this.show = !this.show
+    PayWay_top(e) {
+      this.show = !this.show;
 
       // console.log(this.PayWay_top)  不会报错，会打印出一个function
       // ƒ PayWay_top() { console.log(this.PayWay_top); }
     },
-    notShow () {
-      this.show = !this.show
+    notShow() {
+      this.show = !this.show;
     },
-    confimInformation () {
-      this.isconfirm = !this.isconfirm
+    confimInformation() {
+      this.isconfirm = !this.isconfirm;
     }
   },
-  mounted () {
+  mounted() {
     // this.f = document.querySelector('#foot')
     // this.f.style.zIndex = '2000'
     // this.f.style.display = 'block'
   }
-}
+};
 </script>
 <style scoped>
 .confirmOrder {
@@ -547,5 +577,15 @@ header {
   color: #fff;
   font-size: 0.3rem;
   background-color: #56d176;
+}
+.tag {
+  width: 0.5rem;
+  height: 0.3rem;
+  float: left;
+  text-align: center;
+  background-color: rgb(76, 217, 100);
+  font-size: 0.2rem;
+  color: #fff;
+  margin: 0.08rem 0.2rem;
 }
 </style>
