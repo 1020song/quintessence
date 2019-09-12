@@ -108,6 +108,7 @@ export default {
         margin-left: -0.1rem;
     }
     .timebox{
+        width: 2.4rem;
         float: right;
     }
     .num span{

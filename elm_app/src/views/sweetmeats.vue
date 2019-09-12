@@ -220,6 +220,7 @@ export default {
             point:-1,
             pei:0,
             peiarr:[],
+            elivery_mode:null,
             // isbtnlogin: false
         }
     },
@@ -302,32 +303,29 @@ export default {
                 if(this.pei==0){
                     this.pei=0
                 }
-                console.log(index)
                 for(var r=0;r<this.peiarr.length;r++){
-                    if(this.peiarr.indexOf(index)>-1){
-                        console.log(1)
-                        this.peiarr.splice(this.peiarr.indexOf(index), 1)
+                    if(this.peiarr.indexOf(i.id)>-1){
+                        this.peiarr.splice(this.peiarr.indexOf(i.id), 1)
                     }
                 }
-                console.log(this.peiarr)
             }
 
         },
         dianji(evt,i){
-            // console.log(i.id)
+            console.log(i.id)
             if (evt.target.children[1].style.display === 'none') {
                 evt.target.children[1].style.display ='inline'
                 evt.target.children[0].style.display='none'
-                this.peiarr.push(i.id)
                 this.pei++
+                this.elivery_mode=i.id
             } else {
                 evt.target.children[1].style.display ='none'
                 evt.target.children[0].style.display='inline'
                 this.pei--
+                this.elivery_mode=null
                 if(this.pei==0){
                     this.pei=0
                 }
-                
             }
         },
         paixu1(index){
@@ -354,7 +352,20 @@ export default {
         },
         yes(index){
             this.yes_no = !this.yes_no
-            console.log(this.peiarr)
+            var a=''
+            this.peiarr.forEach(item=>{
+                a+="&support_ids[]="+item
+            })
+            a=a.slice(1)   
+            fetch('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.geohash.split(',')[0] + '&longitude=' + this.geohash.split(',')[1]+'&offset=0&limit=20&extras[]=activities&keyword=&restaurant_category_id=&restaurant_category_ids[]=&order_by=null&delivery_mode[]='+this.elivery_mode+'&'+a).then(response => response.json()).then(res => {
+                console.log(res)
+                 this.list = res
+            })
+            this.point = -1
+            this.pei=0
+            this.peiarr=[]
+            this.elivery_mode=null
+
         },
         classify_n(index,i){
             this.point = -1

@@ -30,7 +30,7 @@
           <h3>{{list.name}}</h3>
           <div>
             <h3>优惠信息</h3>
-            <p v-for="i in arr">
+            <p v-for="(i,index) in arr" :key="index">
               <span class="name">{{i.icon_name}}</span>
               <span>{{i.description}}</span>
               <span style="margin-left: .1rem;">(APP专享)</span>
@@ -50,13 +50,13 @@
         <div class="food_container" v-show="num==0" v-if="!type">
 <!--          左导航-->
           <ul class="menu_left">
-            <li v-for="(i,index) in show_list" :class="{bor_active:num1==index}" style="padding-left: .1rem;position: relative"  @click="num1=index">
+            <li v-for="(i,index) in show_list" :class="{bor_active:num1==index}" style="padding-left: .1rem;position: relative"  @click="num1=index" :key="index">
               <a :href="'#'+index">{{i.name}}</a>
               <span v-show="i.num" class="l_num">{{i.num}}</span>
             </li>
           </ul>
           <ul class="menu_right">
-            <li v-for="(i,index) in show_list" :id="index">
+            <li v-for="(i,index) in show_list" :id="index" :key="index">
               <p class="tit" style="position: relative">
                 <span class="rexiao">{{i.name}}</span>
                 <i style="margin-left: .2rem;">{{i.description}}</i>
@@ -66,7 +66,7 @@
                 <i style="margin-left: .2rem;">{{i.description}}</i>
                 </span>
               </p>
-              <div v-for="(j,idx) in i.foods" class="menu_detail_list">
+              <div v-for="(j,idx) in i.foods" class="menu_detail_list" :key="idx">
                 <div class="menu_detail_link">
                   <p class="menu_food_img">
                     <img :src="'https://elm.cangdu.org/img/'+j.image_path" alt="" style="width: 1rem;height: 1rem;">
@@ -79,8 +79,8 @@
                   </div>
                 </div>
                 <div v-if="obj1[idx]" style="height: 0;">
-                  <div v-for="k in obj1[idx]">
-                      <p style="height: .1rem;" v-for="l in k">
+                  <div v-for="(k,index) in obj1[idx]" :key="index">
+                      <p style="height: .1rem;" v-for="(l,index) in k" :key="index">
                         <span :class="{left_top:l=='新'}"><span class="asle">{{l=='新'?'新品':''}}</span></span>
                         <span :class="{zhpai:l=='招牌'}">{{l=='招牌'?'招牌':''}}</span>
                       </p>
@@ -103,7 +103,7 @@
           <div class="norm" v-show="normtype">
             <h3>{{norm_data.name}}<span @click="back">×</span></h3>
             <p>规格</p>
-            <div v-for="(i,idnex) in norm_data.specfoods">
+            <div v-for="(i,idnex) in norm_data.specfoods" :key="idnex">
               <span @click="index(idnex)">{{i.specs_name}}</span>
             </div>
             <p v-if="norm_data">
