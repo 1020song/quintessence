@@ -8,6 +8,8 @@ import add from './views/add.vue'
 import addsss from './views/addsss.vue'
 import addss from './views/addss.vue'
 import adds from './views/adds.vue'
+import shop from './views/shop.vue'  //商铺列表
+import shopDetail from './views/shopDetail.vue' //商铺详情
 
 import Index from './views/Index.vue'
 import About from './views/About.vue'
@@ -20,8 +22,6 @@ import user from './components/user'
 // 服务中心
 import foodDetail from './views/foodDetail.vue'
 import Users from './views/user.vue'
-import Balance from './views/balance.vue'
-import Service from './views/service_cont.vue'
 import serviceD from './views/service_details.vue'
 import service1 from './views/service1.vue'
 import sweetmeats from './views/sweetmeats.vue'
@@ -75,6 +75,17 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
+    //商铺列表
+    {
+      path:'/shop',
+      component:shop,
+    },
+    //商家详情
+    {
+      path:'/shopDetail',
+      name:'shopDetail',
+      component:shopDetail
+    },
     // 积分
     {
       path: '/integral',

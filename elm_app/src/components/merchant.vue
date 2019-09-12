@@ -1,9 +1,9 @@
 <template>
-    <div class="list">
+    <div class="list" @click="mulit">
         <div class="img fl">
             <slot name='left'>
                 <div>
-                   <img src="" alt=""> 
+                   <img src="" alt="">
                 </div>
             </slot>
         </div>
@@ -21,19 +21,22 @@
                     <span class="star">
                         <slot name="star">11111</slot>
                     </span>
+                    <span class="num1">
+                        <slot name="num1">5.0</slot>
+                    </span>
                     <span class="sell">
                         <slot name="sell">月售111单</slot>
                     </span>
                 </div>
                 <div class="bottom">
                     <span class="send">
-                        <slot name="send">￥20起送</slot> / 
+                        <slot name="send">￥20起送</slot> /
                     </span>
                     <span class="fee">
                         <slot name="fee">配送费越￥2</slot>
                     </span>
                 </div>
-                
+
             </slot>
         </div>
         <div class="num fr">
@@ -45,7 +48,7 @@
                         </span>
                     </div>
                 </div>
-                
+
                 <div class="give">
                     <div class="givebox">
                         <span class="feng">
@@ -59,7 +62,7 @@
                 <div class="time">
                     <div class="timebox">
                         <span class="km">
-                            <slot name="km">10公里</slot> / 
+                            <slot name="km">10公里</slot> /
                         </span>
                         <span class="minute">
                             <slot name="minute">20分钟</slot>
@@ -74,7 +77,11 @@
 
 <script>
 export default {
-    
+    methods:{
+        mulit(){
+          this.$emit('int')
+        }
+    }
 }
 </script>
 
@@ -93,6 +100,7 @@ export default {
     }
     .givebox{
         float: right;
+        margin-top: 0.1rem;
     }
     .time{
         width: 2.1rem;
@@ -100,13 +108,13 @@ export default {
         margin-left: -0.1rem;
     }
     .timebox{
+        width: 2.4rem;
         float: right;
     }
     .num span{
         float: left;
     }
     .minute{
-        width: 0.9rem;
         color: #3190e8;
         font-size: .1rem;
         overflow: hidden;
@@ -139,6 +147,7 @@ export default {
     .plan{
         font-size: .1rem;
         color: rgb(122, 117, 117);
+        display: inline-block;
         float: left;
         border: 1px solid #ccc;
     }
@@ -179,7 +188,6 @@ export default {
         font-size: .1rem;
         color: #ff6000;
         margin-right: .05rem;
-        margin-top: 0.1rem;
     }
     .star{
         font-size: .1rem;

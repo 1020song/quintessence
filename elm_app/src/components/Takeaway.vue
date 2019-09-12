@@ -9,12 +9,12 @@
       </template>
       <template v-slot:right
                 v-if="!isbtnlogin">
-        <router-link :to="{name:'login'}"
+        <router-link to="/login"
                      class="login">登录/注册</router-link>
       </template>
       <template v-slot:right
                 v-else-if="isbtnlogin">
-        <router-link :to="{name:'users'}"
+        <router-link to="/about/user"
                      class="login"><i class="iconfont">&#xe602;</i></router-link>
       </template>
     </elmHead>
@@ -26,8 +26,8 @@
       <span>附近商家</span>
     </div>
 
-    <merchant v-for="(i,index) in list" :key="index">
-
+    <merchant v-for="(i,index) in list" @int="shop(i.id)"
+              :key="index">
       <template v-slot:left>
         <img :src="'https://elm.cangdu.org/img/'+i.image_path"
              alt="">
@@ -117,14 +117,20 @@ export default {
     elmHead,
     elmfoot
   },
+  methods:{
+     shop(i){
+         console.log(i)
+        localStorage.id = i
+        location.href = 'http://localhost:8080/shop'
+
+    }
+  },
   data () {
     return {
       list: '',
       arr: '',
       ads_name: '',
-      isbtnlogin: false,
-      value:3.7
-
+      isbtnlogin: false
       //   jieshouList: this.$route.query.geohash
     }
   },
@@ -147,13 +153,13 @@ export default {
 </script>
 <style>
 .el-rate__icon{
-    font-size: 0.14rem !important;
-    margin-right: 0 !important;
+  margin-right: 0 !important;
+  font-size: 0.12rem !important;
 }
-.el-rate__decimal{
-  font-size: 0.14rem !important;
+.el-icon-star-on{
+  font-size: 0.12rem !important;
 }
-.el-rate__text{
+.el-rate__text {
   font-size: 0.14rem !important;
 }
 </style>
