@@ -39,8 +39,15 @@ export default {
       type:false
     };
   },
-  beforeMount() {
-    this.info();
+  // beforeMount() {
+  //   this.info();
+  // },
+  created(){
+    this.info()
+  },
+   beforeRouteUpdate(to,from, next) {
+      this.info()
+      next()
   },
   methods: {
     toNewAddress() {
@@ -51,7 +58,11 @@ export default {
     btn(a){
       this.type=true
       this.$router.push({name: 'confirmOrder',params:{name:a}})
-      
+      this.$store.commit('setorderName',a.name)
+      this.$store.commit('setorderSex',a.sex)
+      this.$store.commit('setorderPhone',a.phone)
+      this.$store.commit('setorderAddress_detail',a.address_detail)
+      this.$store.commit('setorderTag',a.tag)
     },
     info(){
       this.$axios
@@ -69,6 +80,9 @@ export default {
 <style scoped>
 .add {
   margin-top: 1rem;
+  background: #fff;
+  height: 9rem;
+  overflow-y: scroll;
 }
 .add li {
   padding: 0.35rem;
@@ -109,7 +123,10 @@ header {
   width: 100%;
   position: fixed;
   left: 0;
-  bottom: 1rem;
+  bottom: 0rem;
+  height: 1.38rem;
+  line-height: 1.38rem;
+  background: #fff;
 }
 
 .newAddress span {

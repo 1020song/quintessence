@@ -25,13 +25,13 @@
     <div style="padding:0.3rem;background-color:#fff;" v-show="inshow">
       <router-link :to="{path:'/about/confirmOrder/chooseaddress'}">
         <div>
-          <span style="font-size:0.35rem;font-weight:800;margin:0rem 0.15rem;">{{data.name}}</span>
-          <span style="font-size:0.3rem;margin:0rem 0.07rem;">{{data.sex==1?'先生':'女士'}}</span>
-          <span style="font-size:0.3rem;">{{data.phone}}</span>
+          <span style="font-size:0.35rem;font-weight:800;margin:0rem 0.15rem;">{{$store.state.order.orderName}}</span>
+          <span style="font-size:0.3rem;margin:0rem 0.07rem;">{{data.sex==sex?'先生':'女士'}}</span>
+          <span style="font-size:0.3rem;">{{$store.state.order.orderPhone}}</span>
         </div>
         <div style="width:100%;height:0.5rem;">
-          <span class="tag">{{data.tag}}</span>
-          <span style="font-size:0.3rem;float: left;">{{data.address_detail}}</span>
+          <span class="tag">{{$store.state.order.orderTag}}</span>
+          <span style="font-size:0.3rem;float: left;">{{$store.state.order.orderAddress_detail}}</span>
           <div style="float:right;position: relative;top:-0.3rem;color:#ccc;font-size:0.5rem;">></div>
         </div>
       </router-link>
@@ -78,7 +78,10 @@
       <router-link to="/about/confirmOrder/kouwei">
         <p class="beizhu1">
           <span>定单备注</span>
-          <span class="fr">口味、偏好等 &gt;</span>
+          <span class="fr">
+              <span v-for="(i,index) in list" :key="index" v-show="txttype">{{i}} </span>
+              <span v-show="!txttype">口味、偏好等</span> &gt;
+          </span>
         </p>
       </router-link>
 
@@ -89,13 +92,13 @@
         </p>
       </router-link>
     </div>
-    <div class="footer" id="foot">
+    <!-- <div class="footer" id="foot">
       <div class="footer_l fl">
         待支付￥
         <span>7687</span>
       </div>
       <div class="footer_r fr" @click="confimInformation()">确认下单</div>
-    </div>
+    </div> -->
     <div v-show="show">
       <div class="cover" @click="notShow"></div>
       <div class="payToTop">
@@ -108,7 +111,7 @@
             </li>
             <li>
               <span>在线支付</span>
-              <input type="checkbox" class="fr">
+              <input type="checkbox" checked='true' class="fr">
             </li>
           </ul>
         </div>
@@ -142,30 +145,42 @@ export default {
       show: false,
       isconfirm: false,
       inshow: false,
-      data: ""
+      data: "",
+      sex: 0,
+      list:'',
+      txttype:false
     };
   },
   created() {
-    this.inshow = false;
+    this.sex=this.$store.state.order.orderSex
+    console.log(this.$store.state.order)
     if (localStorage.user) {
       this.isbtnlogin = true;
     } else {
       this.isbtnlogin = false;
     }
+    if(this.$store.state.order.orderName){
+      this.inshow = true;
+    }else{
+      this.inshow = false;
+    }
     info:{
       this.$axios.get('https://elm.cangdu.org/v1/users/'+localStorage.uid+'/addresses').then(data=>{
-        console.log(data);
+        // console.log(data);
         
       })
     }
-  },
-  beforeCreate() {
-    this.inshow = true;
   },
   updated() {
     if(this.$route.params.name){
       this.data = this.$route.params.name;
       this.inshow = true;
+    }
+    if(this.$route.params.list){
+      this.list=this.$route.params.list
+      this.txttype=true
+    }else{
+      
     }
   },
   methods: {
@@ -442,7 +457,6 @@ header {
 .beizhu2 span:last-of-type {
   color: #aaa;
 }
-
 .cover {
   width: 100%;
   height: 100%;

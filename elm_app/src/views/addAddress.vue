@@ -110,7 +110,7 @@ export default {
         )
         .then(data => {
           if(data.data.status=='1'){
-            this.$router.push({name:'chooseaddress'})
+            this.$router.push({path:'/about/confirmOrder/chooseaddress'})
           }
         });
     }
