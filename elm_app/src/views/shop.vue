@@ -169,23 +169,23 @@
           <div class="b_pingjia_r">
             <p class="b_pingjia_r_p1">
               <span>服务态度</span>
-              <!-- <el-rate style="display:inline-block;"
-                       v-model="foodscore.service_score"
+              <el-rate style="display:inline-block;"
+                       v-model="fen"
                        disabled
                        show-score
-                       text-color="#ff9900"
+                       text-color="#ff9a0d"
                        score-template="{value}">
-              </el-rate> -->
+              </el-rate>
             </p>
             <p class="b_pingjia_r_p2">
               <span>菜品评价</span>
-              <!-- <el-rate style="display:inline-block;"
-                       v-model="foodscore.overall_score"
+              <el-rate style="display:inline-block;"
+                       v-model="fen1"
                        disabled
                        show-score
-                       text-color="#ff9900"
+                       text-color="#ff9a0d"
                        score-template="{value}">
-              </el-rate> -->
+              </el-rate>
             </p>
             <p class="b_pingjia_r_p3">
               <span>送达时间</span>&nbsp;
@@ -197,8 +197,8 @@
           <p class="b_all_list"
              v-for="(item,index) in commenttype"
              :key="index"
-             @click="change($event)">
-            <span>{{item.name}}({{item.count}})</span>
+             @click="tagidx=index">
+            <span :style='{"background":tagidx==index?"#3190e8":"","color":tagidx==index?"#fff":""}'>{{item.name}}({{item.count}})</span>
           </p>
         </div>
         <div class="user_list">
@@ -206,14 +206,18 @@
                v-for="(item,index) in allcomment"
                :key="index">
             <div class="user_list_in_l">
-              <img :src="item.avatar">
+              <img
+                  v-show="item.avatar.length>0"
+                  :src="'https://fuss10.elemecdn.com/'+ item.avatar.charAt(0)+'/'+item.avatar.charAt(1)+item.avatar.charAt(2)+'/'+item.avatar.substring(3)+'.jpeg'" style="width:0.6rem;height:0.6rem;border-radius: 50%;"
+                />
+              <img v-show="item.avatar.length<=0" src="//elm.cangdu.org/img/default.jpg" style="width:0.6rem;height:0.6rem;border-radius: 50%;"/>
             </div>
             <div class="user_list_in_r">
               <p style="overflow:hidden;">
                 <i style="float:left;font-style:normal;font-size:0.24rem;">{{item.username}}</i>
                 <span style="float:right;">{{item.rated_at}}</span>
               </p>
-              <p>
+              <p style="font-size:0.2rem">
                 <el-rate style="display:inline-block;"
                          v-model="item.rating_star"
                          disabled
@@ -222,6 +226,11 @@
                 </el-rate>
                 {{item.time_spent_desc}}
               </p>
+              <div style="width:100%;overflow:hidden">
+                <div style="float:left" v-for="(j,index) in item.item_ratings" :key="index">
+                  <img v-if="j.image_hash!=''" :src="'https://fuss10.elemecdn.com/'+ j.image_hash.charAt(0)+'/'+j.image_hash.charAt(1)+j.image_hash.charAt(2)+'/'+j.image_hash.substring(3)+'.jpeg'" style="width:1rem;height:1rem;margin-right:0.2rem;"/>
+                </div>
+              </div>
               <p style="overflow:hidden;">
                 <span v-for="(items,index) in dots"
                       :key="index"
@@ -258,6 +267,7 @@ export default {
   },
   data () {
     return {
+      tagidx:0,
       num1: 0,
       id: '',
       img_path: '',
@@ -281,19 +291,12 @@ export default {
       commenttype: '', // 评价类型
       allcomment: '', // 综合评价
       foodscore: '', // 评价分数
-      dots: ''
+      dots: '',
+      fen:0,
+      fen1:0,
     }
   },
   methods: {
-    change (e) {
-      // console.log(e.target)
-      if (e.target.style.background === '') {
-        e.target.style.background = '#ccc'
-        // #3190e8
-      } else {
-        e.target.style.background = ''
-      }
-    },
     shca () {
       this.g_num++
     },
@@ -363,7 +366,8 @@ export default {
     // 获取评价分数
     this.$axios('https://elm.cangdu.org/ugc/v2/restaurants/' + localStorage.id + '/ratings/scores').then(res => {
       this.foodscore = res.data
-      // console.log(this.foodscore)
+      this.fen= Number(this.foodscore.overall_score.toFixed(1))
+      this.fen1=Number(this.foodscore.food_score.toFixed(1))
     })
 
     // 获取评价分类
@@ -374,10 +378,13 @@ export default {
 
     // 获取评价信息
     this.$axios('https://elm.cangdu.org/ugc/v2/restaurants/' + localStorage.id + '/ratings?offset=0&limit=10').then(res => {
+      console.log(res)
       this.allcomment = res.data
-      console.log(res.data)
+      // console.log(res.data)
       this.dots = this.allcomment[0].item_ratings
-      console.log(this.dots)
+      // console.log(this.dots)
+      var a='15f6cf782b0c9cd5ca8daa7f76ab05aejpeg'
+      console.log(a.slice(32))
     })
   }
 }
@@ -397,16 +404,16 @@ export default {
 }
 .b_pingjia_l > p {
   text-align: center;
-  line-height: 0.5rem;
+  line-height: 0.4rem;
 }
 .b_pingjia_l_p1 {
-  font-size: 0.5rem;
+  font-size: 0.4rem;
   color: #ff6201;
 }
 .b_pingjia_l_p2 {
-  font-size: 0.3rem;
-  color: #a4a4a4;
-  margin-top: 0.3rem;
+  font-size: 0.24rem;
+  color: #666;
+  margin-top: 0.1rem;
 }
 .b_pingjia_l_p3 {
   font-size: 0.2rem;
@@ -418,14 +425,14 @@ export default {
   vertical-align: top;
 }
 .b_pingjia_r p {
-  line-height: 0.7rem;
+  line-height: 0.4rem;
 }
 .b_pingjia_r p span {
-  font-size: 0.3rem;
-  color: #a4a4a4;
+  font-size: 0.24rem;
+  color: #666;
 }
 .fenzhong {
-  color: #b0b0b0;
+  color: #a4a4a4 !important;
 }
 .b_all {
   width: 100%;
@@ -433,19 +440,23 @@ export default {
   margin-top: 0.2rem;
   padding: 0.2rem 0;
   overflow: hidden;
+  padding-left: 0.1rem;
 }
 .b_all_list {
   float: left;
-  margin: 0.1rem 0.1rem;
+  margin: 0.05rem;
   border-radius: 0.1rem;
 }
 .b_all_list span {
   font-size: 0.24rem;
-  border-color: #3190e8;
-  color: #fff;
+  border-color: #ebf5ff;
+  color: #6d7885;
   padding: 0.1rem 0.2rem;
   border-radius: 0.1rem;
-  background-color: #3190e8;
+  background-color: #ebf5ff;
+}
+.b_all_list:nth-of-type(3) span{
+  background-color: #f5f5f5;
 }
 .user_list {
   width: 100%;
@@ -461,26 +472,26 @@ export default {
   overflow: hidden;
 }
 .user_list_in_l {
-  width: 26%;
+  width: 15%;
   float: left;
 }
 .user_list_in_r {
-  width: 70%;
+  width: 80%;
   float: left;
 }
 .user_list_in_r p span {
-  color: #ccc;
+  color: #999;
   font-size: 0.2rem;
 }
 .dotteds {
   padding: 0 0.1rem;
-  width: 0.6rem;
+  width: 0.9rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   border: 1px solid #ccc;
   float: left;
-  margin-left: 0.1rem;
+  margin-right: 0.1rem;
 }
 </style>
 <style scoped>
