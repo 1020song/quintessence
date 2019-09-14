@@ -70,20 +70,20 @@
 
                     <h2 v-for="(i,index) in peisong" :key="index" class="peisong">
                         <p>配送方式</p>
-                        <span v-if="i.text" @click="dianji($event,i)">
-                            <i class="iconfont" style="color:blue;font-size:.2rem;margin:0 .1rem;">&#xe603;</i>
-                            <i class="right" style="display:none;font-size:0.3rem">√</i>
+                        <span v-if="i.text" @click="dianji($event,i,index)">
+                            <i class="iconfont" style="color:blue;font-size:.2rem;margin:0 .1rem;" v-if="!peiarr[index]">&#xe603;</i>
+                            <i class="right" style="font-size:0.3rem" v-if="peiarr[index]">√</i>
                             {{i.text}}
                         </span>
                     </h2>
                     <h2 class="shuxing">
                         <p>商家属性（可以多选）</p>
                         <span v-for="(i,$index) in shuxing" :key="$index" @click="showToggle($event,i,$index)" class="shangjia">
-                            <i :style="{'color':'#'+i.icon_color+'','border':'1px solid #'+i.icon_color+''}">
+                            <i :style="{'color':'#'+i.icon_color+'','border':'1px solid #'+i.icon_color+''}" v-if="!peiarr[$index+1]">
                                 {{i.icon_name}}
                             </i>
                             {{i.name}}
-                            <i class="right" style="display:none;font-size:0.3rem">√</i>
+                            <i class="right" style="font-size:0.3rem" v-if="peiarr[$index+1]">√</i>
                         </span>
                     </h2>
                     <h2 class="qdqx">
@@ -91,7 +91,7 @@
                             清空
                         </span>
                         <span @click="yes(index)">
-                            确定<i style="font-style: normal;">({{pei}})</i>
+                            确定
                         </span>
                     </h2>
                 </div> 
@@ -218,9 +218,8 @@ export default {
             idx:0,
             order_by:4,//排序
             point:-1,
-            pei:0,
-            peiarr:[],
             elivery_mode:null,
+            peiarr:[0,0,0,0,0,0,0],
             // isbtnlogin: false
         }
     },
@@ -291,41 +290,17 @@ export default {
 
         },
         showToggle(evt,i,index){
-            if (evt.target.children[1].style.display === 'none') {
-                evt.target.children[1].style.display ='block'
-                evt.target.children[0].style.display='none'
-                this.pei++
-                this.peiarr.push(i.id)
-            } else {
-                evt.target.children[1].style.display ='none'
-                evt.target.children[0].style.display='inline'
-                this.pei--
-                if(this.pei==0){
-                    this.pei=0
-                }
-                for(var r=0;r<this.peiarr.length;r++){
-                    if(this.peiarr.indexOf(i.id)>-1){
-                        this.peiarr.splice(this.peiarr.indexOf(i.id), 1)
-                    }
-                }
+            if(!this.peiarr[index+1]){
+                this.$set(this.peiarr,index+1,i.id)
+            }else{
+                this.$set(this.peiarr,index+1,0)
             }
-
         },
-        dianji(evt,i){
-            console.log(i.id)
-            if (evt.target.children[1].style.display === 'none') {
-                evt.target.children[1].style.display ='inline'
-                evt.target.children[0].style.display='none'
-                this.pei++
-                this.elivery_mode=i.id
-            } else {
-                evt.target.children[1].style.display ='none'
-                evt.target.children[0].style.display='inline'
-                this.pei--
-                this.elivery_mode=null
-                if(this.pei==0){
-                    this.pei=0
-                }
+        dianji(evt,i,index){
+            if(!this.peiarr[index]){
+                this.$set(this.peiarr,index,i.id)
+            }else{
+                this.$set(this.peiarr,index,0)
             }
         },
         paixu1(index){
@@ -354,17 +329,22 @@ export default {
             this.yes_no = !this.yes_no
             var a=''
             this.peiarr.forEach(item=>{
-                a+="&support_ids[]="+item
+                if(item!=0){
+                    a+="&support_ids[]="+item
+                }
+                if(item==1){
+                    this.elivery_mode=item
+                }else{
+                    this.elivery_mode=null
+                    return
+                }
             })
-            a=a.slice(1)   
+            a=a.slice(17)
             fetch('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.geohash.split(',')[0] + '&longitude=' + this.geohash.split(',')[1]+'&offset=0&limit=20&extras[]=activities&keyword=&restaurant_category_id=&restaurant_category_ids[]=&order_by=null&delivery_mode[]='+this.elivery_mode+'&'+a).then(response => response.json()).then(res => {
                 console.log(res)
                  this.list = res
             })
             this.point = -1
-            this.pei=0
-            this.peiarr=[]
-            this.elivery_mode=null
 
         },
         classify_n(index,i){

@@ -159,7 +159,7 @@
         </div>
       </div>
       <!--        评价-->
-      <div v-show="num==1">
+      <div v-show="num==1" style="overflow-y: scroll;height:8.5rem;">
         <div class="b_pingjia">
           <div class="b_pingjia_l">
             <p class="b_pingjia_l_p1">{{parseFloat(foodscore.food_score).toFixed(2)}}</p>
