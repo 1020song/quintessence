@@ -1,5 +1,10 @@
 <template>
   <div class="list">
+    <div>
+      <transition name="fade">
+        <loading v-if="isLoading"></loading>
+      </transition>
+    </div>
     <div class="shop_container">
       <div class="head"
            v-show="!type">
@@ -159,7 +164,7 @@
         </div>
       </div>
       <!--        评价-->
-      <div v-show="num==1" style="overflow-y: scroll;height:8.5rem;">
+      <div v-show="num==1" style="overflow-y: scroll;height:8.5rem;" class="pingbox">
         <div class="b_pingjia">
           <div class="b_pingjia_l">
             <p class="b_pingjia_l_p1">{{parseFloat(foodscore.food_score).toFixed(2)}}</p>
@@ -259,11 +264,13 @@
 <script>
 import shopbtn from '../components/shopbtn'
 import shopcart from '../views/shopcart'
+import Loading from '../components/loading'
 export default {
   name: 's_shop',
   components: {
     shopbtn,
-    shopcart
+    shopcart,
+    Loading
   },
   data () {
     return {
@@ -287,6 +294,7 @@ export default {
       norm_data: '',
       normtype: false,
       num2: 0,
+      isLoading: true,
 
       commenttype: '', // 评价类型
       allcomment: '', // 综合评价
@@ -346,6 +354,7 @@ export default {
       })
     this.$axios('https://elm.cangdu.org/shopping/v2/menu?restaurant_id=' + this.id + '').then(res => {
       // console.log(res)
+      this.isLoading = false
       this.show_list = res.data
       this.show_list.forEach(item => {
         item.num = 0

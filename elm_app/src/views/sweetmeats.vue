@@ -1,5 +1,8 @@
 <template>
 	<div>
+        <transition name="fade">
+            <loading v-if="isLoading"></loading>
+        </transition>
 		<elmHead>
             <template v-slot:left><router-link :to='{path:"/about/Takeaway", query: {geohash: geohash}}'>&lt;</router-link></template>
             <template v-slot:center>{{$store.state.order.selectshop}}</template>
@@ -180,17 +183,16 @@
 <script>
 import merchant from '../components/merchant'
 import elmHead from '../components/head'
-
-    
-
-
+import Loading from '../components/loading'
 export default {
 	components:{
         elmHead:elmHead,
-        merchant:merchant
+        merchant:merchant,
+        Loading,
     },
     data () {
         return {
+            isLoading: true,
             title:'',
             geohash:'',
             olist:[],
@@ -229,6 +231,7 @@ export default {
             fetch('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.geohash.split(',')[0] + '&longitude=' + this.geohash.split(',')[1]).then(response => response.json()).then(res => {
             this.list = res
             this.arr = res[0].supports
+            this.isLoading=false
             })
             fetch('https://elm.cangdu.org/v2/pois/' + this.geohash).then(response => response.json()).then(res => {
             // this.ads_name = res.name
@@ -262,21 +265,21 @@ export default {
 			if(this.point != 1) {
 				this.point = 1
 			} else {
-				this.point = -1
+                this.point = -1
             }
         },
         clk2(){
             if(this.point != 2) {
 				this.point = 2
 			} else {
-				this.point = -1
+                this.point = -1
             }
         },
         clk3(){
             if(this.point != 3) {
 				this.point = 3
 			} else {
-				this.point = -1
+                this.point = -1
             }
         },
         tab(index){
@@ -286,8 +289,6 @@ export default {
             }
             this.olist[index].show=true;
             this.kuaican = this.olist[index].sub_categories
-            
-
         },
         showToggle(evt,i,index){
             if(!this.peiarr[index+1]){
@@ -306,6 +307,7 @@ export default {
         paixu1(index){
             this.px = !this.px
             this.point = -1
+            this.isLoading=true
             if(index==0){
                 this.order_by=4
             }else if(index==1){
@@ -323,9 +325,11 @@ export default {
             fetch('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.geohash.split(',')[0] + '&longitude=' + this.geohash.split(',')[1]+'&offset=0&limit=20&extras[]=activities&keyword=&restaurant_category_id=&restaurant_category_ids[]=null&order_by='+this.order_by+'&delivery_mode[]=null').then(response => response.json()).then(res => {
                 console.log(res)
                  this.list = res
+                 this.isLoading=false
             })
         },
         yes(index){
+            this.isLoading=true
             this.yes_no = !this.yes_no
             var a=''
             this.peiarr.forEach(item=>{
@@ -343,17 +347,19 @@ export default {
             fetch('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.geohash.split(',')[0] + '&longitude=' + this.geohash.split(',')[1]+'&offset=0&limit=20&extras[]=activities&keyword=&restaurant_category_id=&restaurant_category_ids[]=&order_by=null&delivery_mode[]='+this.elivery_mode+'&'+a).then(response => response.json()).then(res => {
                 console.log(res)
                  this.list = res
+                 this.isLoading=false
             })
             this.point = -1
-
         },
         classify_n(index,i){
             this.point = -1
             this.classify = !this.classify;
+            this.isLoading=true
             // console.log(i.id)
              fetch('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.geohash.split(',')[0] + '&longitude=' + this.geohash.split(',')[1]+'&offset=0&limit=20&extras[]=activities&keyword=&restaurant_category_id=&restaurant_category_ids[]='+i.id+'&order_by=null&delivery_mode[]=null').then(response => response.json()).then(res => {
                 // console.log(res)
                  this.list = res
+                 this.isLoading=false
             })
         }
     }
