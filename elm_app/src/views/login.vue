@@ -1,11 +1,5 @@
 <template>
   <div class="login">
-    <!-- <div class="header">
-      <div class="r">
-        <router-link to class="color"><</router-link>
-      </div>
-      <div class="pass">密码登录</div>
-    </div> -->
     <elmHead>
       <template v-slot:left><span class="lt" @click="$router.back(-1)">&lt;</span></template>
       <template v-slot:center>密码登录</template>
@@ -28,16 +22,21 @@
       <button @click="login">登录</button>
     </div>
     <div class="chong"><router-link to="/change" class="chong">重置密码?</router-link></div>
+
+    <!-- 弹框 -->
+    <dialog-bar v-model="sendVal" type="danger" :content="txt" v-on:cancel="clickCancel()" @danger="clickDanger()" @confirm="clickConfirm()" confirmText='确认'></dialog-bar>
   </div>
 </template>
 
 <script>
 var md5 = require('md5')
 import elmHead from '../components/head'
+import dialogBar from '../components/alert'
 export default {
   name: "login",
   components:{
-    elmHead
+    elmHead,
+    'dialog-bar': dialogBar,
   },
   data() {
     return {
@@ -45,17 +44,28 @@ export default {
       password: "",
       Verify: "",
       randoms: "",
-      yanUrl: ""
+      yanUrl: "",
+      sendVal: false,
+      txt:'',
     };
   },
   created() {
     this.random();
-    
     console.log(md5('message'));
-    
+    // 判断
+    // if(!this.user){
+    //   this.txt='请输入账号'
+    // }else if(!this.password){
+    //   this.txt='请输入密码'
+    // }else if(!this.Verify){
+    //   this.txt='请输入验证码'
+    // }
   },
   methods: {
     login() {
+      this.sendVal = true;
+    },
+    clickConfirm(){
       this.$axios
         .post(
           "https://elm.cangdu.org/v2/login",
@@ -66,14 +76,14 @@ export default {
           },
         )
         .then(data => {
-          if(!this.user){
-            alert('请输入账号')
-          }else if(!this.password){
-            alert('请输入密码')
-          }else if(!this.Verify){
-            alert('请输入验证码')
+          if(this.user==''){
+            this.txt='请输入账号'
+          }else if(this.password==''){
+            this.txt='请输入密码'
+          }else if(this.Verify==''){
+            this.txt='请输入验证码'
           }else if(this.user = data.data.username){
-            alert('登录成功')
+           this.txt='登录成功'
             this.$store.commit('setUserName',data.data.username)
             this.$store.commit('setUserId',data.data.user_id)
             this.$store.commit('setUsercity',data.data.city)
@@ -84,12 +94,13 @@ export default {
             localStorage.user = this.user
             localStorage.uid = data.data.user_id
           }else{
-            alert(data.data.message)
+            this.txt=data.data.message
             this.random()
             this.password=''
             this.Verify = ''
           }
         });
+        console.log(1)
     },
     random() {
       this.$axios.post("http://elm.cangdu.org/v1/captchas",{}).then(data => {
