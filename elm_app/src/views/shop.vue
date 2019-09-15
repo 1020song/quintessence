@@ -9,7 +9,7 @@
       <div class="head"
            v-show="!type">
         <div>
-          <!--              头部-->
+          <!--头部-->
           <router-link :to="{path:'/about/Takeaway',query:{geohash: addrs.split(',')[0]+','+ addrs.split(',')[1]}}"
                        class="back_Takeaway">&lt;</router-link>
           <div class="head_tit">
@@ -164,7 +164,7 @@
         </div>
       </div>
       <!--        评价-->
-      <div v-show="num==1" style="overflow-y: scroll;height:8.5rem;" class="pingbox">
+      <div v-show="num==1" style="overflow-y: scroll;height:8.5rem;" id="pingbox">
         <div class="b_pingjia">
           <div class="b_pingjia_l">
             <p class="b_pingjia_l_p1">{{parseFloat(foodscore.food_score).toFixed(2)}}</p>
@@ -298,11 +298,15 @@ export default {
 
       commenttype: '', // 评价类型
       allcomment: '', // 综合评价
+      newAllcomment:[],
       foodscore: '', // 评价分数
       dots: '',
       fen:0,
       fen1:0,
     }
+  },
+  updated(){
+    
   },
   methods: {
     shca () {
@@ -391,9 +395,27 @@ export default {
       this.allcomment = res.data
       // console.log(res.data)
       this.dots = this.allcomment[0].item_ratings
-      // console.log(this.dots)
-      var a='15f6cf782b0c9cd5ca8daa7f76ab05aejpeg'
-      console.log(a.slice(32))
+
+      var types=true
+      //延迟加载
+      $('#pingbox').scroll((event)=>{
+				var top = $('#pingbox').scrollTop() 
+				var wh = $('#pingbox').height()
+        var dh = pingbox.scrollHeight
+				if(top+wh+2>=dh){
+					if(types){
+            types=false
+            this.isLoading=true
+            fetch('https://elm.cangdu.org/ugc/v2/restaurants/' + localStorage.id + '/ratings?offset=0&limit=10').then(response=>response.json()).then(res=>{
+              res.forEach((item)=>{
+                this.allcomment.push(item)
+              })
+              types=true
+              this.isLoading=false
+            })
+					}
+				}
+			})
     })
   }
 }

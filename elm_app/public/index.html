@@ -5,6 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>elm_app</title>
+    <meta name="viewport"
+      content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <script>
+      window.onload = function () {
+      document.documentElement.style.fontSize = document.documentElement.clientWidth /640 * 100 + 'px';
+      window.onresize = function () {
+      document.documentElement.style.fontSize = document.documentElement.clientWidth /640 * 100 + 'px';
+      };
+      };
+      </script>
+    <script src="./jQuery.js"></script>
   </head>
   <body>
     <noscript>
@@ -13,16 +24,4 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
-
-  <script>
-    window.onload = function () {
-    document.documentElement.style.fontSize = document.documentElement.clientWidth /640 * 100 + 'px';
-    window.onresize = function () {
-    document.documentElement.style.fontSize = document.documentElement.clientWidth /640 * 100 + 'px';
-    };
-    };
-    </script>
-    
-    <meta name="viewport"
-    content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
 </html>
