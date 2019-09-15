@@ -24,7 +24,7 @@
     <div class="chong"><router-link to="/change" class="chong">重置密码?</router-link></div>
 
     <!-- 弹框 -->
-    <dialog-bar v-model="sendVal" type="danger" :content="txt" v-on:cancel="clickCancel()" @danger="clickDanger()" @confirm="clickConfirm()" confirmText='确认'></dialog-bar>
+     <dialog-bar v-model="sendVal" type="confirm" :content="txt" v-on:cancel="clickCancel()" @danger="clickDanger()" @confirm="clickConfirm()" confirmText='确认'></dialog-bar>
   </div>
 </template>
 
@@ -52,20 +52,10 @@ export default {
   created() {
     this.random();
     console.log(md5('message'));
-    // 判断
-    // if(!this.user){
-    //   this.txt='请输入账号'
-    // }else if(!this.password){
-    //   this.txt='请输入密码'
-    // }else if(!this.Verify){
-    //   this.txt='请输入验证码'
-    // }
   },
   methods: {
     login() {
       this.sendVal = true;
-    },
-    clickConfirm(){
       this.$axios
         .post(
           "https://elm.cangdu.org/v2/login",
@@ -76,23 +66,25 @@ export default {
           },
         )
         .then(data => {
-          if(this.user==''){
-            this.txt='请输入账号'
-          }else if(this.password==''){
-            this.txt='请输入密码'
-          }else if(this.Verify==''){
-            this.txt='请输入验证码'
-          }else if(this.user = data.data.username){
-           this.txt='登录成功'
+          if(this.user == data.data.username){
+            this.txt='登录成功'
             this.$store.commit('setUserName',data.data.username)
             this.$store.commit('setUserId',data.data.user_id)
             this.$store.commit('setUsercity',data.data.city)
             this.$store.commit('setPoint',data.data.point)
             this.$store.commit('setBalance',data.data.balance)
             this.$store.commit('setGift_amount',data.data.gift_amount)
-            this.$router.back(-1)
+            setTimeout(()=>{
+              this.$router.back(-1)
+            },1000)
             localStorage.user = this.user
             localStorage.uid = data.data.user_id
+          }else if(this.user==''){
+            this.txt='请输入账号'
+          }else if(this.password==''){
+            this.txt='请输入密码'
+          }else if(this.Verify==''){
+            this.txt='请输入验证码'
           }else{
             this.txt=data.data.message
             this.random()
@@ -100,7 +92,9 @@ export default {
             this.Verify = ''
           }
         });
-        console.log(1)
+    },
+    clickConfirm(){
+      
     },
     random() {
       this.$axios.post("http://elm.cangdu.org/v1/captchas",{}).then(data => {

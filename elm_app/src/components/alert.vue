@@ -1,8 +1,8 @@
 <template>
     <div class="dialog" v-show="showMask">
         <div class="dialog-container">
-            <div class="dialog-title">{{title}}</div>
-            <div class="content" v-html="content"></div>
+            <div class="dialog-title"></div>
+            <div class="content" v-html="content">{{title}}</div>
             <div class="btns">
                 <div v-if="cancelText != ''" class="default-btn" @click="closeBtn">
                     {{cancelText}}
