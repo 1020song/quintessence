@@ -35,6 +35,7 @@ import addaddress from './views/addAddress.vue' //添加地址
 import searchaddress from './views/searchAddress.vue' //搜索地址
 import kouwei from './views/kouwei.vue'//订单备注
 import invoice from './views/invoice.vue' //订单的发票
+import orderDetail from './views/orderDetail.vue'
 // -----------------------  李军
 // 优惠
 import benefits from './views/benefits.vue'
@@ -217,6 +218,11 @@ export default new Router({
           path: 'Order',
           name: 'Order',
           component: Order
+        },
+        {
+            path: 'orderDetail',
+            name: 'orderDetail',
+            component: orderDetail,
         },
         // 确认订单
         {
