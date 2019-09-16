@@ -1,6 +1,14 @@
 <template>
   <div>
+<<<<<<< HEAD
+<<<<<<< HEAD
+   <div @click="mulit"><div class="icon"><i class="iconfont">&#xe604;</i><span><slot name="num"></slot></span></div></div>
+=======
    <div><div class="icon"><i class="iconfont">&#xe604;</i><span><slot name="num"></slot></span></div></div>
+>>>>>>> 2fc187d18a4a90cb29d4f4c7594a7c2e1beffaa7
+=======
+   <div><div class="icon"><i class="iconfont">&#xe604;</i><span><slot name="num"></slot></span></div></div>
+>>>>>>> 3c820b3f8463d4555840cfc083e45c1570db7be6
     <div class="shop_price"><div ><slot name="price"></slot><p style="color: #fff">配送费￥5</p></div></div>
     <div><slot name="pick_up"></slot></div>
   </div>
@@ -14,6 +22,17 @@
                 num:0
             }
         },
+<<<<<<< HEAD
+<<<<<<< HEAD
+        methods:{
+            mulit(){
+                this.$emit('type')
+            }
+        }
+=======
+>>>>>>> 2fc187d18a4a90cb29d4f4c7594a7c2e1beffaa7
+=======
+>>>>>>> 3c820b3f8463d4555840cfc083e45c1570db7be6
     }
 </script>
 
