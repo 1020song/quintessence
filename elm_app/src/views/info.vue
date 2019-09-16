@@ -48,18 +48,24 @@
       </div>
     </div>
     <button @click="log_out">退出登录</button>
+    <!-- 弹框 -->
+    <dialog-bar v-model="sendVal" type="danger" :content="txt" v-on:cancel="clickCancel()" cancelText='取消' @danger="clickDanger()" @confirm="clickConfirm()" confirmText='确认'></dialog-bar>
   </div>
 </template>
 <script>
 import elmHead from "../components/head";
+import dialogBar from '../components/alert'
 export default {
   components: {
-    elmHead
+    elmHead,
+    'dialog-bar': dialogBar,
   },
   data() {
     return {
       info_user2: "",
-      info_img2: ""
+      info_img2: "",
+      sendVal: false,
+      txt:'确定要退出登录',
     };
   },
   created() {
@@ -73,11 +79,14 @@ export default {
   },
   methods: {
     log_out() {
-      this.$axios.get("https://elm.cangdu.org/v2/signout").then(data => {
-        var r = confirm("是否退出登录");
-        if (r != true) {
-        } else {
-          alert(data.data.message);
+      this.sendVal = true;
+    },
+    clickCancel(){
+        console.log('点击了取消');
+    },
+    clickConfirm(){
+        this.$axios.get("https://elm.cangdu.org/v2/signout").then(data => {
+          this.txt=data.data.message
           this.$store.commit('setUserName','')
           this.$store.commit('setUserId','')
           this.$store.commit('setUsercity','')
@@ -86,7 +95,6 @@ export default {
           this.$store.commit('setGift_amount',0)
           history.go(-1);
           localStorage.removeItem('user')
-        }
       });
     }
   }

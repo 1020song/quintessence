@@ -21,47 +21,99 @@
       <input type="search"
              class="search_input"
              placeholder="请输入商家或美食名称"
-             v-model="iptValue" />
+             v-model="iptValue" @input='ipt($event)'/>
       <button class="search_button"
               @click="btnClick">提交</button>
       <!-- </form> -->
-      <ul class="commit_list">
+      <ul class="commit_list" v-if="type">
         <li v-if="iptValue==''"></li>
-        <li v-else
-            v-for="(item,index) in searchlist"
-            :key="index"
-            @click="place(item)"
-            class="list clearfix">
-          <!-- <router-link :to='{path:"/about/Takeaway", query: {geohash: searchlist[item]}}'> -->
-          <!-- <div class="list_left fl"></div> -->
-
-          <router-link to="/about/search/searchdetail">
-            <div class="list_right">
-              <p>{{item.name}}</p>
-              <p>{{item.address}}</p>
+        
+          <!-- 搜索列表 -->
+        <merchant v-for="(i,index) in searchlist" @int="shop(i.id)"
+                  :key="index" @click="place(item)">
+          <template v-slot:left>
+            <img :src="'https://elm.cangdu.org/img/'+i.image_path"
+                alt="">
+          </template>
+          <template v-slot:center>
+            <div class="top">
+              <span class="pinpai">
+                <template name="pinpai">品牌</template>
+              </span>
+              <span class="oName">
+                <template name="oName">{{i.name}}</template>
+              </span>
             </div>
-          </router-link>
-          <!-- </router-link> -->
-        </li>
+            <div class="center">
+              <span class="star">
+                <template name="star">
+                  <el-rate
+                      v-model="i.rating"
+                      disabled
+                      show-score
+                      text-color="#ff9900"
+                      score-template="{value}">
+                  </el-rate>
+                </template>
+              </span>
+              <span class="sell">
+                <template name="sell">月售{{i.rating_count}}单</template>
+              </span>
+            </div>
+            <div class="bottom">
+              <span class="send">
+                <template name="send">￥{{i.float_minimum_order_amount}}起送</template> /
+              </span>
+              <span class="fee">
+                <template name="fee">{{i.piecewise_agent_fee.tips}}</template>
+              </span>
+            </div>
+          </template>
+          <template v-slot:right>
+            <div class="plan1">
+              <div class="planbox">
+                <div class="plan"
+                    v-for="(j,ind) in arr"
+                    :key="ind">
+                  <template name="plan">{{j.icon_name}}</template>
+                </div>
+              </div>
+            </div>
+            <div class="give">
+              <div class="givebox">
+                <span class="feng">
+                  <template name="feng">蜂鸟专送</template>
+                </span>
+                <span class="zhun">
+                  <template name="zhun">准时答</template>
+                </span>
+              </div>
+            </div>
+            <div class="time">
+              <div class="timebox">
+                <span class="km">
+                  <template name="km">{{i.distance}}</template> /
+                </span>
+                <span class="minute">
+                  <template name="minute">{{i.order_lead_time}}</template>
+                </span>
+              </div>
+            </div>
+          </template>
+        </merchant>
 
+          <!--  -->
       </ul>
     </div>
-    <div class="search_history">
+    <div v-if="type==''" class="search_history">
       <h3>搜索历史</h3>
       <ul>
         <li v-if="iptValueArray==''"></li>
         <li class="histroy_list"
-            v-else
             v-for="(item,index) in iptValueArray"
             :key="index">
-          <router-link to="/about/search/searchdetail">
-            <div>
-              <p>{{item.name}}</p>
-              <p>{{item.address}}</p>
-            </div>
-          </router-link>
-          <span class="fr"
-                @click="clearItem">×</span>
+            <span @click='sou($event)'>{{item}}</span>
+            <span class="fr" @click="clearItem">×</span>
         </li>
       </ul>
       <p class="clearhistory"
@@ -74,11 +126,13 @@
 <script>
 import elmfoot from './foot'
 import elmHead from './head'
+import merchant from '../components/merchant'
 export default {
   name: 'seach',
   components: {
     elmHead,
-    elmfoot
+    elmfoot,
+    merchant
   },
   data () {
     return {
@@ -89,8 +143,10 @@ export default {
       city_id: '',
       keyword: '',
       nulls: '',
+      arr:'',
       // 搜索历史
-      iptValueArray: []
+      iptValueArray: [],
+      type:'',
     }
   },
   created () {
@@ -108,45 +164,52 @@ export default {
     }
   },
   methods: {
+    // 跳转
+    shop(i){
+         console.log(i)
+        localStorage.id = i
+        location.href = 'http://localhost:8080/shop'
+    },
+    // 搜索
     btnClick () {
       if (this.iptValue == '') {
         this.nulls = '输入为空！！！'
         this.searchlist = ''
       } else {
-        this.$http.get('https://elm.cangdu.org/v1/pois', {
+        this.$http.get('https://elm.cangdu.org/v4/restaurants', {
           params: {
-            city_id: this.cityid,
-            keyword: this.iptValue
+            geohash:'31.22967,121.4762',
+            keyword:this.iptValue
           }
         }).then((res) => {
           console.log(res.body)
           this.searchlist = res.body
         })
       }
-    },
-    place (a) {
-      // this.$http.get('https://elm.cangdu.org/v4/restaurants?geohash=31.22967,121.4762&keyword=肯德基',{
-      //   params:{}
-      // })
-      this.iptValueArray.unshift(a)
+      this.iptValueArray.unshift(this.iptValue)
       localStorage.iptValueArray = JSON.stringify(this.iptValueArray)
+      this.type=true
     },
+    ipt(e){
+      if(e.target.value == ''){
+          this.type = false;
+      }
+    },
+    // 清空历史
     clearHistory () {
       this.iptValueArray = []
-      localStorage.clear()
+      localStorage.removeItem("iptValueArray")
     },
+    // 单个删除
     clearItem (b) {
       this.iptValueArray.shift(b)
       localStorage.iptValueArray = JSON.stringify(this.iptValueArray)
-      // localStorage.removeItem('iptValueArray')
+    },
+    // 点击历史列表
+    sou(e){
+        this.iptValue = e.target.innerText;
+        this.btnClick()
     }
-    // gotoIndex (item) {
-    //   this.$router.push({
-    //     path: '/about/Takeaway'
-    //     // path: '/about/Takeaway?geohash=' + localStorage.geohash
-    //     // query: {abc:item}
-    //   })
-    // },
 
   }
 
@@ -266,7 +329,7 @@ export default {
   line-height: 0.6rem;
   font-weight: bolder;
 }
-.list {
+/* .list {
   height: 1rem;
   margin-top: 0.2rem;
 }
@@ -276,14 +339,15 @@ export default {
 .list_right {
   width: 80%;
   display: inline-block;
-}
+} */
 .histroy_list {
   height: 1rem;
   line-height: 1rem;
 }
 .histroy_list span {
   display: inline-block;
-  margin-top: -0.9rem;
+  font-size: 0.23rem;
+  color: #555;
   margin-right: 0.5rem;
 }
 </style>

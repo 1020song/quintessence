@@ -8,19 +8,14 @@
       <section class="section_list section_list1 clearfix">
         <span class="section_left fl lianxiren">联系人</span>
         <section class="section_right fr">
-          <input type="text"
-                 name="name"
-                 placeholder="你的名字"
-                 class="input_style fr">
+          <input type="text" name="name" placeholder="你的名字" class="input_style fr" v-model="username">
           <div class="choose_sex fr">
             <span class="choose_option fr">
-              <input type="radio"
-                     name="myChoose">
+              <input type="radio" name="myChoose" value="2" v-model="sex" >
               <span>女士</span>
             </span>
             <span class="choose_option fr">
-              <input type="radio"
-                     name="myChoose">
+              <input type="radio" name="myChoose"  value="1" v-model="sex">
               <span>先生</span>
             </span>
           </div>
@@ -30,49 +25,97 @@
         <span class="section_left phone fl">联系电话</span>
         <section class="section_right fr">
           <div class="phone_add">
-            <input type="text"
-                   name="phone"
-                   placeholder="你的手机号"
-                   class="input_style">
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAfCAYAAAAfrhY5AAAAAXNSR0IArs4c6QAAAHRJREFUSA1jZCAT8E59/R+m9XO2KCOMTQrNRIpiaqsdtZzaIUqUeaPBTlQwUVvRaLBTO0SJMm802IkKJmorYkSunahtOCHzRm6ck9UIAAUncnSNNiYIJTB0+ZGb4EZ9jp4W6MIfDXa6BDO6JaPBjh4idOEDAOTZCsiDM8JjAAAAAElFTkSuQmCC"
-                 height="20"
-                 width="20">
+            <input type="text" name="phone" placeholder="你的手机号" class="input_style" v-model='usernumber'>
+            
+            <img
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAfCAYAAAAfrhY5AAAAAXNSR0IArs4c6QAAAHRJREFUSA1jZCAT8E59/R+m9XO2KCOMTQrNRIpiaqsdtZzaIUqUeaPBTlQwUVvRaLBTO0SJMm802IkKJmorYkSunahtOCHzRm6ck9UIAAUncnSNNiYIJTB0+ZGb4EZ9jp4W6MIfDXa6BDO6JaPBjh4idOEDAOTZCsiDM8JjAAAAAElFTkSuQmCC"
+              height="20"
+              width="20"
+              @click="type=true"
+            >
+            
           </div>
+        </section>
+        <section class="section_right fr" v-show="type">
+          <input type="text" class="input_style" placeholder="备注电话" v-model="phone_bks">
         </section>
       </section>
       <section class="section_list section_list3">
         <span class="section_left songcanAddress fl">送餐地址</span>
         <section class="section_right fr">
-          <div class="choose_address"
-               contenteditable>
+          <div class="choose_address" contenteditable>
             <router-link to="/about/confirmOrder/chooseaddress/addaddress/searchaddress">
-              小区/写字楼/学校等
+              <input
+                type="text"
+                placeholder="小区/写字楼/学校等"
+                v-model="address"
+                class="input_style"
+              >
             </router-link>
           </div>
-          <input type="text"
-                 name="address_detail"
-                 placeholder="详细地址（如门牌号等）"
-                 class="input_style input_style1">
+          <input
+            type="text"
+            name="address_detail"
+            placeholder="详细地址（如门牌号等）"
+            class="input_style input_style1"
+            v-model="address_detail"
+          >
         </section>
       </section>
       <section class="section_list section_list4 clearfix">
         <span class="section_left">标签</span>
         <section class="section_right fr">
-          <input type="text"
-                 name="tag"
-                 placeholder="无/家/学校/公司"
-                 class="input_style">
+          <input type="text" name="tag" placeholder="无/家/学校/公司" class="input_style" v-model="tag">
         </section>
       </section>
     </section>
-    <div class="determine">确定</div>
+    <div class="determine" @click="determine">确定</div>
     <router-view></router-view>
   </div>
 </template>
 <script>
 export default {
-
-}
+  data() {
+    return {
+      username: "",
+      usernumber: "",
+      address: "",
+      address_detail: "",
+      tag: "",
+      phone_bks: "",
+      sex:'',
+      type:false
+    };
+  },
+  updated() {
+    this.address = this.$route.params.name;
+  },
+  methods: {
+    determine() {
+      this.$axios
+        .post(
+          "https://elm.cangdu.org/v1/users/" + localStorage.uid + "/addresses",
+          {
+            user_id: localStorage.uid,
+            address: this.address /*地址*/,
+            address_detail: this.address_detail /*地址详情*/,
+            geohash: localStorage.add_geohash, //经纬度
+            name: this.username, //收货人姓名
+            phone: this.usernumber, //电话号码
+            tag: this.tag, //标签
+            sex: Number(this.sex), //性别， 1:男，2:女
+            tag_type:1,
+            phone_bk:this.phone_bks
+          }
+        )
+        .then(data => {
+          if(data.data.status=='1'){
+            this.$router.push({path:'/about/confirmOrder/chooseaddress'})
+          }
+        });
+    }
+  }
+};
 </script>
 <style scoped>
 * {

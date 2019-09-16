@@ -1,5 +1,10 @@
 <template>
   <div>
+    <div>
+      <transition name="fade">
+        <loading v-if="isLoading"></loading>
+      </transition>
+    </div>
     <elmHead>
       <template v-slot:left>
         <router-link to="/about/search"><i class="iconfont">&#xe600;</i></router-link>
@@ -108,6 +113,7 @@ import merchant from './merchant'
 import elmBanner from './Banner'
 import elmfoot from './foot'
 import elmHead from './head'
+import Loading from './loading'
 export default {
   props: ['name'],
   name: 'Takeaway',
@@ -115,14 +121,14 @@ export default {
     elmBanner,
     merchant,
     elmHead,
-    elmfoot
+    elmfoot,
+    Loading
   },
   methods:{
-     shop(i){
+    shop(i){
          console.log(i)
         localStorage.id = i
         location.href = 'http://localhost:8080/shop'
-
     }
   },
   data () {
@@ -130,7 +136,8 @@ export default {
       list: '',
       arr: '',
       ads_name: '',
-      isbtnlogin: false
+      isbtnlogin: false,
+      isLoading: true
       //   jieshouList: this.$route.query.geohash
     }
   },
@@ -144,6 +151,7 @@ export default {
     fetch('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.$route.query.geohash.split(',')[0] + '&longitude=' + this.$route.query.geohash.split(',')[1]).then(response => response.json()).then(res => {
       this.list = res
       this.arr = res[0].supports
+      this.isLoading = false
     })
     fetch('https://elm.cangdu.org/v2/pois/' + this.$route.query.geohash).then(response => response.json()).then(res => {
       this.ads_name = res.name

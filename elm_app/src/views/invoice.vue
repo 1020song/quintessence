@@ -1,14 +1,14 @@
 <template>
   <div class="invoice">
-    <header>
-      <router-link to="/about/confirmOrder">
-        <span class="fl">&lt;</span>
-      </router-link>
-      <span class="order">订单备注</span>
-    </header>
+    <elmHead>
+      <template v-slot:left>
+        <router-link to="/about/confirmOrder">&lt;</router-link>
+      </template>
+      <template v-slot:center>订单备注</template>
+    </elmHead>
     <section class="choose_invoice">
       <span>不需要开发票</span>
-      <input type="checkbox">
+      <input type="checkbox" checked='true'>
 
     </section>
 
@@ -18,8 +18,11 @@
   </div>
 </template>
 <script>
+import elmHead from "../components/head";
 export default {
-
+  components: {
+    elmHead
+  },
 }
 </script>
 <style scoped>
@@ -44,6 +47,7 @@ export default {
   clear: both;
 }
 .invoice {
+  padding-top: 1rem;
   width: 100%;
   min-height: 15rem;
   background-color: #f5f5f5;
@@ -71,22 +75,27 @@ header span {
   font-size: 0.3rem;
   color: #fff;
   text-align: center;
-  margin: 0.2rem 0.7rem 0 0.7rem;
+  margin: 0.2rem 0.4rem 0 0.4rem;
   line-height: 0.8rem;
   border-radius: 0.2rem;
 }
 .choose_invoice {
   padding-left: 0.2rem;
   vertical-align: middle;
+  background: #fff;
+  line-height: 1rem;
+  margin: 0.2rem 0;
 }
 .choose_invoice span {
   vertical-align: bottom;
+  font-size: 0.24rem;
+  color: #333;
 }
 .choose_invoice input {
-  width: 0.5rem;
-  height: 0.5rem;
-  margin-top: 0.2rem;
-  margin-left: 2.8rem;
-  vertical-align: bottom;
+  width: 0.4rem;
+  height: 0.4rem;
+  margin-left: 3.8rem;
+  border-radius: 50%;
+  vertical-align: middle;
 }
 </style>
