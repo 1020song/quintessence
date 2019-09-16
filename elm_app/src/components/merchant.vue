@@ -100,6 +100,7 @@ export default {
     }
     .givebox{
         float: right;
+        margin-top: 0.1rem;
     }
     .time{
         width: 2.1rem;
@@ -107,6 +108,7 @@ export default {
         margin-left: -0.1rem;
     }
     .timebox{
+        width: 2.4rem;
         float: right;
     }
     .num span{
@@ -180,6 +182,7 @@ export default {
     .sell{
         font-size: .1rem;
         color: #666;
+        margin-top: 0.1rem;
     }
     .num1{
         font-size: .1rem;

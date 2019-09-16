@@ -1,5 +1,10 @@
 <template>
   <div>
+    <div>
+      <transition name="fade">
+        <loading v-if="isLoading"></loading>
+      </transition>
+    </div>
     <elmHead>
       <template v-slot:left>
         <router-link to="/about/search"><i class="iconfont">&#xe600;</i></router-link>
@@ -28,7 +33,6 @@
 
     <merchant v-for="(i,index) in list" @int="shop(i.id)"
               :key="index">
-
       <template v-slot:left>
         <img :src="'https://elm.cangdu.org/img/'+i.image_path"
              alt="">
@@ -44,10 +48,15 @@
         </div>
         <div class="center">
           <span class="star">
-            <template name="star">11111</template>
-          </span>
-          <span class="num1">
-            <template name="num1">{{i.rating}}</template>
+            <template name="star">
+              <el-rate
+                  v-model="i.rating"
+                  disabled
+                  show-score
+                  text-color="#ff9900"
+                  score-template="{value}">
+              </el-rate>
+            </template>
           </span>
           <span class="sell">
             <template name="sell">月售{{i.rating_count}}单</template>
@@ -104,6 +113,7 @@ import merchant from './merchant'
 import elmBanner from './Banner'
 import elmfoot from './foot'
 import elmHead from './head'
+import Loading from './loading'
 export default {
   props: ['name'],
   name: 'Takeaway',
@@ -111,7 +121,15 @@ export default {
     elmBanner,
     merchant,
     elmHead,
-    elmfoot
+    elmfoot,
+    Loading
+  },
+  methods:{
+    shop(i){
+         console.log(i)
+        localStorage.id = i
+        location.href = 'http://localhost:8080/shop'
+    }
   },
   methods:{
      shop(i){
@@ -124,7 +142,12 @@ export default {
       list: '',
       arr: '',
       ads_name: '',
+<<<<<<< HEAD
       isbtnlogin: false
+=======
+      isbtnlogin: false,
+      isLoading: true
+>>>>>>> 2fc187d18a4a90cb29d4f4c7594a7c2e1beffaa7
       //   jieshouList: this.$route.query.geohash
     }
   },
@@ -138,6 +161,7 @@ export default {
     fetch('https://elm.cangdu.org/shopping/restaurants?latitude=' + this.$route.query.geohash.split(',')[0] + '&longitude=' + this.$route.query.geohash.split(',')[1]).then(response => response.json()).then(res => {
       this.list = res
       this.arr = res[0].supports
+      this.isLoading = false
     })
     fetch('https://elm.cangdu.org/v2/pois/' + this.$route.query.geohash).then(response => response.json()).then(res => {
       this.ads_name = res.name
@@ -145,7 +169,18 @@ export default {
   }
 }
 </script>
-
+<style>
+.el-rate__icon{
+  margin-right: 0 !important;
+  font-size: 0.12rem !important;
+}
+.el-icon-star-on{
+  font-size: 0.12rem !important;
+}
+.el-rate__text {
+  font-size: 0.14rem !important;
+}
+</style>
 <style scoped>
 .fujin {
   padding: 0 0.24rem;

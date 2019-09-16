@@ -7,7 +7,7 @@
       <div class="pass">重置密码</div>
     </div> -->
     <elmHead>
-      <template v-slot:left> <router-link to="/login" class="login"> &lt;</router-link></template>
+      <template v-slot:left> <span class="login" @click="$router.back(-1)">&lt;</span></template>
       <template v-slot:center>重置密码</template>
       <template v-slot:right></template>
     </elmHead>
@@ -34,6 +34,7 @@
   </div>
 </template>
 <script>
+var md5 = require('md5')
 import elmHead from '../components/head'
 export default {
   name: "change",
@@ -58,9 +59,9 @@ export default {
       this.$axios.post('https://elm.cangdu.org/v2/changepassword',
       {
         username:this.user,
-        oldpassWord:this.oldpassword,
-        newpassword:this.newpassword,
-        confirmpassword:this.confirmpassword,
+        oldpassWord:md5(this.oldpassword),
+        newpassword:md5(this.newpassword),
+        confirmpassword:md5(this.confirmpassword),
         captcha_code:this.Verify
       }).then(data=>{
         console.log(data);

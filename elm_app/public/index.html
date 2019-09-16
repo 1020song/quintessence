@@ -4,8 +4,18 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>elm_app</title>
+    <meta name="viewport"
+      content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <script>
+      window.onload = function () {
+      document.documentElement.style.fontSize = document.documentElement.clientWidth /640 * 100 + 'px';
+      window.onresize = function () {
+      document.documentElement.style.fontSize = document.documentElement.clientWidth /640 * 100 + 'px';
+      };
+      };
+      </script>
+    <script src="./jQuery.js"></script>
   </head>
   <body>
     <noscript>
@@ -14,6 +24,7 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
+<<<<<<< HEAD
 
   <script>
     window.onload = function () {
@@ -26,4 +37,6 @@
 
     <meta name="viewport"
     content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+=======
+>>>>>>> 2fc187d18a4a90cb29d4f4c7594a7c2e1beffaa7
 </html>
