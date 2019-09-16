@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import login from './views/login.vue' /*登录 lz*/
 import change from './views/changepassword.vue' /*重置密码 lz*/
 import info from './views/info.vue' /*用户信息 lz */
+import shop from './views/shop.vue'  //商铺列表
+import shopDetail from './views/shopDetail.vue' //商铺详情
 import Index from './views/Index.vue'
 import About from './views/About.vue'
 import City from './views/City.vue'
@@ -26,6 +28,17 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
+    //商铺列表
+    {
+      path:'/shop',
+      component:shop,
+    },
+    //商家详情
+    {
+      path:'/shopDetail',
+      name:'shopDetail',
+      component:shopDetail
+    },
     {
       // 商品详情
       path: '/foodDetail',

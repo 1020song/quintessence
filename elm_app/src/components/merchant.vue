@@ -1,9 +1,9 @@
 <template>
-    <div class="list">
+    <div class="list" @click="mulit">
         <div class="img fl">
             <slot name='left'>
                 <div>
-                   <img src="" alt=""> 
+                   <img src="" alt="">
                 </div>
             </slot>
         </div>
@@ -30,13 +30,13 @@
                 </div>
                 <div class="bottom">
                     <span class="send">
-                        <slot name="send">￥20起送</slot> / 
+                        <slot name="send">￥20起送</slot> /
                     </span>
                     <span class="fee">
                         <slot name="fee">配送费越￥2</slot>
                     </span>
                 </div>
-                
+
             </slot>
         </div>
         <div class="num fr">
@@ -48,7 +48,7 @@
                         </span>
                     </div>
                 </div>
-                
+
                 <div class="give">
                     <div class="givebox">
                         <span class="feng">
@@ -62,7 +62,7 @@
                 <div class="time">
                     <div class="timebox">
                         <span class="km">
-                            <slot name="km">10公里</slot> / 
+                            <slot name="km">10公里</slot> /
                         </span>
                         <span class="minute">
                             <slot name="minute">20分钟</slot>
@@ -77,7 +77,11 @@
 
 <script>
 export default {
-    
+    methods:{
+        mulit(){
+          this.$emit('int')
+        }
+    }
 }
 </script>
 

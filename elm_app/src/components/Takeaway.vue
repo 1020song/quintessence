@@ -26,7 +26,7 @@
       <span>附近商家</span>
     </div>
 
-    <merchant v-for="(i,index) in list"
+    <merchant v-for="(i,index) in list" @int="shop(i.id)"
               :key="index">
 
       <template v-slot:left>
@@ -113,13 +113,18 @@ export default {
     elmHead,
     elmfoot
   },
+  methods:{
+     shop(i){
+        localStorage.id = i
+        location.href = 'http://localhost:8080/shop'
+    }
+  },
   data () {
     return {
       list: '',
       arr: '',
       ads_name: '',
       isbtnlogin: false
-
       //   jieshouList: this.$route.query.geohash
     }
   },
