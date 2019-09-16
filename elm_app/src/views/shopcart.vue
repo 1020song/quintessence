@@ -36,7 +36,8 @@
   background: #3d3d3f;
   border: solid .05rem #444;
   border-radius: 50%;
-  padding: .1rem;
+  padding: .15rem .1rem .1rem.1rem;
+  line-height: .7rem;
   z-index: 999;
 }
 

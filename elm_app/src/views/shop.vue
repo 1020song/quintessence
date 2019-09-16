@@ -157,12 +157,12 @@
             <div style="overflow:hidden;padding-left:0.18rem">
               <div v-for="(i,idnex) in norm_data.specfoods"
                 :key="idnex" class="n_li">
-                <span @click="index(idnex)">{{i.specs_name}}</span>
+                <span @click="index(idnex)" :class="{specs_active:num2==idnex}">{{i.specs_name}}</span>
               </div>
             </div>
             <p v-if="norm_data" class="n_pr">
-              <span> {{num2==0?norm_data.specfoods[0].price:norm_data.specfoods[1].price}}</span>
-              <span @click="shca()">加入购物车</span>
+              <span>{{num2==0?norm_data.specfoods[0].price:norm_data.specfoods[1].price}}</span>
+              <span @click="shca(norm_data.specfoods[num2])">加入购物车</span>
             </p>
           </div>
         </div>
@@ -252,7 +252,7 @@
       <shopcart v-show="num==0"
                 v-if="!type"
                 class="shop_cart"
-                :class="{shop_none:g_num}">
+                :class="{shop_none:!g_num}">
         <template v-slot:iconfont>
           <i class="iconfont" type="button" data-toggle="modal" data-target="#myModal">&#xe604;</i>
         </template>
@@ -278,16 +278,36 @@
               <h4 class="modal-title" id="myModalLabel">购物车</h4>
             </div>
             <div class="modal-body">
-              ...
+              <div v-for="i in shopCart_each" class="modal_box">
+                <div class="modal_showbox">
+                  <span style="font-size: .3rem">{{i.name}}</span><br>
+                  <span v-if="i.specs_name" style="font-size: .2rem">{{i.specs_name}}</span>
+                </div>
+                  <shopbtn style="float: right;padding: 0;margin-right: .1rem;margin-top: .2rem;">
+                    <template v-slot:jia><span>+</span></template>
+                    <template v-slot:num>{{i.num}}</template>
+                    <template v-slot:jian><span class="btn_jn">-</span></template>
+                  </shopbtn>
+                <div  class="modal_showbox" style="float: right;margin-right: .5rem;color: #f60">￥{{i.price}}</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </template>
 <style>
+  .modal-body .modal_showbox{
+    display: inline-block;
+    line-height: .3rem;
+    padding: .2rem .1rem;
+    font-size: .3rem
+  }
+  .normbox .specs_active{
+    border-color: #3199e8;
+    color: #3199e8;
+  }
 .modal-title{
   font-size: 0.3rem;
   padding:0 0.14rem !important;
@@ -351,7 +371,7 @@
     align-items: center;
     justify-content: flex-start;
 }
-.rating_header_right { 
+.rating_header_right {
     flex: 4;
 }
 .rating_header_left p:nth-of-type(3) {
@@ -413,6 +433,8 @@ export default {
       normtype: false,
       num2: 0,
       isLoading: true,
+      shopCart_each:[],
+      allArr:[],
 
       commenttype: '', // 评价类型
       allcomment: '', // 综合评价
@@ -422,6 +444,7 @@ export default {
       fen:0,
       fen1:0,
       add1:0,
+      each_num:0,
     }
   },
   computed: {
@@ -436,9 +459,8 @@ export default {
       }
   },
   methods: {
-    shca () {
-      // this.norm_data.num++
-      // this.shop_num=this.norm_data.num
+    shca (i) {
+      this.normtype = false
       this.add1=0
       this.price=0
       this.norm_data.num++
@@ -446,6 +468,13 @@ export default {
       this.shop_num = this.norm_data.num
       this.$set(this.norm_data, this.norm_data.num, this.shop_num)
       this.g_num = this.norm_data_food.num
+
+      i.num++
+      console.log(this.shopCart_each)
+      if (this.shopCart_each.indexOf(i)==-1){
+        this.shopCart_each.push(i)
+      }
+
       this.show_list.forEach(add_num=>{
         this.add1 += add_num.num
         add_num.foods.forEach(add_num1=>{
@@ -470,10 +499,14 @@ export default {
     jia (item, i) {
       this.add1=0
       this.price=0
-      console.log(i)
       if (item.num > 0) { this.prenx = true }
       item.num++
       i.num++
+     if (this.shopCart_each.indexOf(item.specfoods[0])==-1){
+       this.shopCart_each.push(item.specfoods[0])
+     }
+      item.specfoods[0].num++
+      console.log(item)
       this.shop_num = item.num
       this.$set(item, item.num, this.shop_num)
       this.g_num = i.num
@@ -490,6 +523,7 @@ export default {
       if (item.num <= 0) { this.prenx = false }
       item.num--
       i.num--
+      item.specfoods[0].num--
       this.shop_num = item.num
       this.$set(item, item.num, this.shop_num)
       if (item.num <= 0) { item.num = 0 }
@@ -522,6 +556,11 @@ export default {
         item.foods.forEach(item1 => {
           item1.num = 0
           for (var i in item1) {
+            if (i == 'specfoods'){
+              item1[i].forEach(item2=>{
+                item2.num = 0
+              })
+            }
             if (i == 'activity') {
               this.obj.push(JSON.parse(JSON.stringify(item1[i])))
             }
@@ -556,7 +595,7 @@ export default {
       var types=true
       //延迟加载
       $('#pingbox').scroll((event)=>{
-				var top = $('#pingbox').scrollTop() 
+				var top = $('#pingbox').scrollTop()
 				var wh = $('#pingbox').height()
         var dh = pingbox.scrollHeight
 				if(top+wh+2>=dh){

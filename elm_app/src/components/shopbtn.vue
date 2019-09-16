@@ -8,7 +8,7 @@
       <slot  name="num"></slot>
     </div>
     <div>
-      <slot name="jian"></slot>
+      <slot name="jian"  @click="mulit"></slot>
     </div>
   </div>
 
@@ -22,21 +22,10 @@
                 num: 0
             }
         },
-        watch: {
-            num(a,b){
-                this.$emit('num',a)
-            }
-        },
         methods:{
             mulit(){
                 this.$emit('int')
             },
-            jia(){
-                this.$emit('jia')
-            },
-            jian(){
-                this.$emit('jian')
-            }
         }
     }
 </script>
