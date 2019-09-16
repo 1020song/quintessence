@@ -150,6 +150,7 @@
         </ul>
         <!--   选规格     -->
 <<<<<<< HEAD
+<<<<<<< HEAD
         <div class="norm" v-show="normtype">
           <h3 style="text-align: center;padding: 0 .3rem">{{norm_data.name}}<span @click="back" style="float: right;font-size: .6rem">×</span></h3>
           <p style="padding: 0 .3rem">规格</p>
@@ -199,6 +200,8 @@
         <template v-slot:price><span style="color: #fff" @click="join_type=!join_type">￥{{ price1.price}}.00</span></template>
         <template v-slot:pick_up><div :class="{pick_bg:price1.num>0}"><span class="pick_up">{{price1.price?'去结算':'还差￥20起送'}}</span></div></template>
 =======
+=======
+>>>>>>> 3c820b3f8463d4555840cfc083e45c1570db7be6
         <div class="norm"
              v-show="normtype">
           <h3>{{norm_data.name}}<span @click="back">×</span></h3>
@@ -213,6 +216,7 @@
           </p>
         </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <div class="doing" v-show="type">
           <!--活动-->
           <h3>{{list.name}}</h3>
@@ -224,6 +228,8 @@
               <span style="margin-left: .1rem;">(APP专享)</span>
             </p>
 =======
+=======
+>>>>>>> 3c820b3f8463d4555840cfc083e45c1570db7be6
       </div>
       <!--        评价-->
       <div v-show="num==1" style="overflow-y: scroll;height:8.5rem;" id="pingbox">
@@ -232,7 +238,10 @@
             <p class="b_pingjia_l_p1">{{parseFloat(foodscore.food_score).toFixed(2)}}</p>
             <p class="b_pingjia_l_p2">综合评价</p>
             <p class="b_pingjia_l_p3">高于周边商家76.9%</p>
+<<<<<<< HEAD
 >>>>>>> 7c8f36e1c87960d30fa61fa720d3e2720d6ad5f6
+=======
+>>>>>>> 3c820b3f8463d4555840cfc083e45c1570db7be6
           </div>
           <div class="b_pingjia_r">
             <p class="b_pingjia_r_p1">
@@ -260,6 +269,7 @@
               <span>{{foodscore.deliver_time}}</span><span class="fenzhong">分钟</span>
             </p>
           </div>
+<<<<<<< HEAD
 <<<<<<< HEAD
           <p @click="type=false" style="position:absolute;bottom:10%;left:45%;font-size:.4rem;padding: .1rem .18rem;text-align:center;border:.01rem solid white;border-radius:50%">&#10006;</p>
         </div>
@@ -317,6 +327,8 @@
                   </shopbtn>
                   <div class="r_btn" v-if="j.specfoods[1]"  @click="btn(j)">选规格</div>
 =======
+=======
+>>>>>>> 3c820b3f8463d4555840cfc083e45c1570db7be6
         </div>
         <div class="b_all">
           <p class="b_all_list"
@@ -354,7 +366,10 @@
               <div style="width:100%;overflow:hidden">
                 <div style="float:left" v-for="(j,index) in item.item_ratings" :key="index">
                   <img v-if="j.image_hash!=''" :src="'https://fuss10.elemecdn.com/'+ j.image_hash.charAt(0)+'/'+j.image_hash.charAt(1)+j.image_hash.charAt(2)+'/'+j.image_hash.substring(3)+'.jpeg'" style="width:1rem;height:1rem;margin-right:0.2rem;"/>
+<<<<<<< HEAD
 >>>>>>> 7c8f36e1c87960d30fa61fa720d3e2720d6ad5f6
+=======
+>>>>>>> 3c820b3f8463d4555840cfc083e45c1570db7be6
                 </div>
               </div>
               <p style="overflow:hidden;">
@@ -365,6 +380,7 @@
             </div>
           </div>
         </div>
+<<<<<<< HEAD
 <<<<<<< HEAD
 
         <shopcart v-show="num==0" v-if="!type" class="shop_cart" :class="{shop_none:g_num}">
@@ -428,6 +444,8 @@
         </div>
 =======
 >>>>>>> 7c8f36e1c87960d30fa61fa720d3e2720d6ad5f6
+=======
+>>>>>>> 3c820b3f8463d4555840cfc083e45c1570db7be6
       </div>
       <shopcart v-show="num==0"
                 v-if="!type"
@@ -441,14 +459,20 @@
         <template v-slot:pick_up>
           <div :class="{pick_bg:g_num>0}"><span class="pick_up">{{price?'去结算':'还差￥20起送'}}</span></div>
         </template>
+<<<<<<< HEAD
 >>>>>>> 2fc187d18a4a90cb29d4f4c7594a7c2e1beffaa7
+=======
+>>>>>>> 3c820b3f8463d4555840cfc083e45c1570db7be6
       </shopcart>
     </div>
   </div>
 </template>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <script>
 =======
+=======
+>>>>>>> 3c820b3f8463d4555840cfc083e45c1570db7be6
 <style scoped>
 
 .tag_list_ul li{
@@ -527,6 +551,7 @@
 }
 </style>
 <script>
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> 2fc187d18a4a90cb29d4f4c7594a7c2e1beffaa7
     import shopbtn from '../components/shopbtn'
@@ -1118,6 +1143,8 @@
   }
 =======
 =======
+=======
+>>>>>>> 3c820b3f8463d4555840cfc083e45c1570db7be6
 import shopbtn from '../components/shopbtn'
 import shopcart from '../views/shopcart'
 import Loading from '../components/loading'
@@ -1201,7 +1228,10 @@ export default {
       if (i.num <= 0) { i.num = 0 }
       this.g_num = i.num
       this.price = i.num * item.specfoods[0].price
+<<<<<<< HEAD
 >>>>>>> 7c8f36e1c87960d30fa61fa720d3e2720d6ad5f6
+=======
+>>>>>>> 3c820b3f8463d4555840cfc083e45c1570db7be6
     }
   },
   created () {
@@ -1527,6 +1557,9 @@ export default {
   font-size: 0.2rem;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 3c820b3f8463d4555840cfc083e45c1570db7be6
 .doing h3{
    text-align: center;
 }
@@ -1547,9 +1580,12 @@ export default {
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,.8);
+<<<<<<< HEAD
 =======
 .doing {
 >>>>>>> 7c8f36e1c87960d30fa61fa720d3e2720d6ad5f6
+=======
+>>>>>>> 3c820b3f8463d4555840cfc083e45c1570db7be6
   z-index: 20;
 }
 .back_Takeaway {
@@ -1771,5 +1807,8 @@ export default {
   transition-duration: 0ms;
   transform: translate(0px, 0px) translateZ(0px);
 }
+<<<<<<< HEAD
 >>>>>>> 2fc187d18a4a90cb29d4f4c7594a7c2e1beffaa7
+=======
+>>>>>>> 3c820b3f8463d4555840cfc083e45c1570db7be6
 </style>

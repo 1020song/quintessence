@@ -128,13 +128,8 @@ export default {
     shop(i){
          console.log(i)
         localStorage.id = i
-        location.href = 'http://localhost:8080/shop'
-    }
-  },
-  methods:{
-     shop(i){
-        localStorage.id = i
-        location.href = 'http://localhost:8080/shop'
+        // location.href = 'http://localhost:8080/shop'
+        this.$router.push({path:'/shop'})
     }
   },
   data () {
@@ -142,12 +137,8 @@ export default {
       list: '',
       arr: '',
       ads_name: '',
-<<<<<<< HEAD
-      isbtnlogin: false
-=======
       isbtnlogin: false,
       isLoading: true
->>>>>>> 2fc187d18a4a90cb29d4f4c7594a7c2e1beffaa7
       //   jieshouList: this.$route.query.geohash
     }
   },

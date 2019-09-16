@@ -1,12 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-<<<<<<< HEAD
-import login from './views/login.vue' /*登录 lz*/
-import change from './views/changepassword.vue' /*重置密码 lz*/
-import info from './views/info.vue' /*用户信息 lz */
-import shop from './views/shop.vue'  //商铺列表
-import shopDetail from './views/shopDetail.vue' //商铺详情
-=======
+
 import login from './views/login.vue' /* 登录 lz */
 import change from './views/changepassword.vue' /* 重置密码 lz */
 import info from './views/info.vue' /* 用户信息 lz */
@@ -19,7 +13,6 @@ import shop from './views/shop.vue'  //商铺列表
 import shopDetail from './views/shopDetail.vue' //商铺详情
 import shopSafe from './views/shopSafe.vue'
 
->>>>>>> 2fc187d18a4a90cb29d4f4c7594a7c2e1beffaa7
 import Index from './views/Index.vue'
 import About from './views/About.vue'
 import City from './views/City.vue'
@@ -94,9 +87,6 @@ export default new Router({
     {
       path:'/shopDetail',
       name:'shopDetail',
-<<<<<<< HEAD
-      component:shopDetail
-=======
       component:shopDetail,
       children:[
         {
@@ -160,7 +150,6 @@ export default new Router({
           component: Coupon
         }
       ]
->>>>>>> 2fc187d18a4a90cb29d4f4c7594a7c2e1beffaa7
     },
     {
       // 商品详情
