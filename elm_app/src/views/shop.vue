@@ -162,7 +162,6 @@
             <span @click="shca">加入购物车</span>
           </p>
         </div>
-<<<<<<< HEAD
         <div class="doing" v-show="type">
           <!--活动-->
           <h3>{{list.name}}</h3>
@@ -173,7 +172,6 @@
               <span>{{i.description}}</span>
               <span style="margin-left: .1rem;">(APP专享)</span>
             </p>
-=======
       </div>
       <!--        评价-->
       <div v-show="num==1" style="overflow-y: scroll;height:8.5rem;" id="pingbox">
@@ -182,7 +180,6 @@
             <p class="b_pingjia_l_p1">{{parseFloat(foodscore.food_score).toFixed(2)}}</p>
             <p class="b_pingjia_l_p2">综合评价</p>
             <p class="b_pingjia_l_p3">高于周边商家76.9%</p>
->>>>>>> 7c8f36e1c87960d30fa61fa720d3e2720d6ad5f6
           </div>
           <div class="b_pingjia_r">
             <p class="b_pingjia_r_p1">
@@ -210,7 +207,6 @@
               <span>{{foodscore.deliver_time}}</span><span class="fenzhong">分钟</span>
             </p>
           </div>
-<<<<<<< HEAD
           <p @click="type=false" style="position:absolute;bottom:10%;left:45%;font-size:.4rem;padding: .1rem .18rem;text-align:center;border:.01rem solid white;border-radius:50%">&#10006;</p>
         </div>
         <!-- Tab切换 -->
@@ -266,7 +262,6 @@
                     <template v-slot:jian v-if="j.num"><div :class="{btn_jn:j.num>0}" @click="jian(j,i)">-</div></template>
                   </shopbtn>
                   <div class="r_btn" v-if="j.specfoods[1]"  @click="btn(j)">选规格</div>
-=======
         </div>
         <div class="b_all">
           <p class="b_all_list"
@@ -304,7 +299,6 @@
               <div style="width:100%;overflow:hidden">
                 <div style="float:left" v-for="(j,index) in item.item_ratings" :key="index">
                   <img v-if="j.image_hash!=''" :src="'https://fuss10.elemecdn.com/'+ j.image_hash.charAt(0)+'/'+j.image_hash.charAt(1)+j.image_hash.charAt(2)+'/'+j.image_hash.substring(3)+'.jpeg'" style="width:1rem;height:1rem;margin-right:0.2rem;"/>
->>>>>>> 7c8f36e1c87960d30fa61fa720d3e2720d6ad5f6
                 </div>
               </div>
               <p style="overflow:hidden;">
@@ -315,7 +309,6 @@
             </div>
           </div>
         </div>
-<<<<<<< HEAD
 
         <shopcart v-show="num==0" v-if="!type" class="shop_cart" :class="{shop_none:g_num}">
           <template  v-slot:num v-if="g_num"><div :class="{num_bg:price>0}"><span :class="{num:g_num}">{{g_num}}</span></div></template>
@@ -376,8 +369,6 @@
               </li>
             </ul>
         </div>
-=======
->>>>>>> 7c8f36e1c87960d30fa61fa720d3e2720d6ad5f6
       </div>
       <shopcart v-show="num==0"
                 v-if="!type"
@@ -473,105 +464,6 @@
 }
 </style>
 <script>
-<<<<<<< HEAD
-    import shopbtn from '../components/shopbtn'
-    import shopcart from '../views/shopcart'
-    export default {
-        name: "s_shop",
-        components:{
-            shopbtn,
-            shopcart,
-        },
-        data(){
-            return{
-                num1:0,
-                id:'',
-                img_path:'',
-                list:'',
-                addrs:'',
-                arr:[],
-                type:false,
-                titType:false,
-                num:0,
-                show_list:'',
-                obj:[],
-                obj1:[],
-                price:0,
-                shop_num:0,
-                prenx:false,
-                g_num:0,
-                norm_data:'',
-                normtype:false,
-                num2:0,
-                PJbtn:['全部(473)','满意(453)','不满意(20)','有图(2)','味道好(47)','送货快(32)','分量足(18)','包装精美(15)','干净卫生(15)','食材新鲜(15)','服务不错(11)'],
-                PJbtns:0
-            }
-        },
-        methods:{
-            shca(){
-                this.g_num++
-            },
-            back(){
-                this.normtype = false
-                this.num2 = 0
-            },
-            index(i){
-                this.num2 = i
-            },
-            btn(q){
-                this.normtype = true
-                this.norm_data = q
-            },
-            jia(item,i){
-                if (item.num>0){this.prenx =true}
-                item.num++
-                i.num++
-                this.shop_num = item.num
-                this.$set(item,item.num,this.shop_num)
-                this.g_num = i.num
-                this.price = i.num * item.specfoods[0].price
-            },
-            jian(item,i){
-                if (item.num<=0){this.prenx =false}
-                item.num--
-                i.num--
-                this.shop_num = item.num
-                this.$set(item,item.num,this.shop_num)
-                if (item.num <=0){item.num=0}
-                if (i.num <=0){i.num=0}
-                this.g_num = i.num
-                this.price = i.num * item.specfoods[0].price
-            },
-        },
-        created() {
-            this.id = localStorage.id
-            this.addrs = localStorage.geohash
-            this.$axios(`https://elm.cangdu.org/shopping/restaurant/${this.id}`)
-                .then(res=>{
-                    this.img_path = res.data.image_path
-                    this.list = res.data
-                    this.arr = res.data.activities
-                })
-            this.$axios('https://elm.cangdu.org/shopping/v2/menu?restaurant_id='+this.id+'')
-                .then(res=>{
-                    this.show_list = res.data
-                    this.show_list.forEach(item=>{
-                        item.num=0
-                            item.foods.forEach(item1=>{
-                            item1.num=0
-                            for (var i in item1){
-                                if(i=='activity'){
-                                    this.obj.push(JSON.parse(JSON.stringify(item1[i])))
-                                }
-                                if (i=='attributes'){
-                                    this.obj1.push(JSON.parse(JSON.stringify(item1[i])))
-                                }
-                            }
-                        })
-                    })
-                })
-        }
-=======
 import shopbtn from '../components/shopbtn'
 import shopcart from '../views/shopcart'
 import Loading from '../components/loading'
@@ -655,7 +547,6 @@ export default {
       if (i.num <= 0) { i.num = 0 }
       this.g_num = i.num
       this.price = i.num * item.specfoods[0].price
->>>>>>> 7c8f36e1c87960d30fa61fa720d3e2720d6ad5f6
     }
   },
   created () {
@@ -980,7 +871,6 @@ export default {
   color: #fff;
   font-size: 0.2rem;
 }
-<<<<<<< HEAD
 .doing h3{
    text-align: center;
 }
@@ -1001,9 +891,6 @@ export default {
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,.8);
-=======
-.doing {
->>>>>>> 7c8f36e1c87960d30fa61fa720d3e2720d6ad5f6
   z-index: 20;
 }
 .back_Takeaway {
