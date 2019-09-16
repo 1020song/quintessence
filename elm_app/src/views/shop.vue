@@ -162,16 +162,6 @@
             <span @click="shca">加入购物车</span>
           </p>
         </div>
-        <div class="doing" v-show="type">
-          <!--活动-->
-          <h3>{{list.name}}</h3>
-          <div>
-            <h3>优惠信息</h3>
-            <p v-for="(i,index) in arr" :key="index">
-              <span class="name">{{i.icon_name}}</span>
-              <span>{{i.description}}</span>
-              <span style="margin-left: .1rem;">(APP专享)</span>
-            </p>
       </div>
       <!--        评价-->
       <div v-show="num==1" style="overflow-y: scroll;height:8.5rem;" id="pingbox">
@@ -207,61 +197,6 @@
               <span>{{foodscore.deliver_time}}</span><span class="fenzhong">分钟</span>
             </p>
           </div>
-          <p @click="type=false" style="position:absolute;bottom:10%;left:45%;font-size:.4rem;padding: .1rem .18rem;text-align:center;border:.01rem solid white;border-radius:50%">&#10006;</p>
-        </div>
-        <!-- Tab切换 -->
-        <div class="change_show" v-show="!type">
-          <div><span @click="num=0" :class="{activity_show:num==0}">商品</span></div>
-          <div><span @click="num=1" :class="{activity_show:num==1}">评价</span></div>
-        </div>
-        <div class="food_container" v-show="num==0" v-if="!type"><!--  商品 -->
-          <ul class="menu_left"> <!--左导航-->
-            <li v-for="(i,index) in show_list" :class="{bor_active:num1==index}" style="padding-left: .1rem;position: relative"  @click="num1=index" :key="index">
-              <a :href="'#'+index">{{i.name}}</a>
-              <span v-show="i.num" class="l_num">{{i.num}}</span>
-            </li>
-          </ul>
-          <!-- 右导航 -->
-          <ul class="menu_right">
-            <li v-for="(i,index) in show_list" :id="index" :key="index">
-              <p class="tit" style="position: relative">
-                <span class="rexiao">{{i.name}}</span>
-                <i style="margin-left: .2rem;">{{i.description}}</i>
-                <i @click="titType=!titType" style="margin-left: .9rem;font-size: .3rem;display: inline-block">···</i>
-                <span v-show="titType" class="tit_name">
-                <span class="rexiao">{{i.name}}</span>
-                <i style="margin-left: .2rem;">{{i.description}}</i>
-                </span>
-              </p>
-              <div v-for="(j,idx) in i.foods" class="menu_detail_list" :key="idx">
-                <div class="menu_detail_link">
-                  <p class="menu_food_img">
-                    <img :src="'https://elm.cangdu.org/img/'+j.image_path" alt="" style="width: 1rem;height: 1rem;">
-                  </p>
-                  <div class="menu_food_description">
-                    <h4>{{j.name}}</h4>
-                    <p style="color: #999;margin-bottom:.1rem ; ">{{j.description}}</p>
-                    <p style="margin-bottom: .1rem"><span>{{j.tips.split(' ')[1]}}</span><span style="margin-left: .1rem">好评率{{j.satisfy_rate}}%</span></p>
-                    <p v-if="obj[idx]"><span class="border">{{obj[idx].image_text}}</span></p>
-                  </div>
-                </div>
-                <div v-if="obj1[idx]" style="height: 0;">
-                  <div v-for="(k,index) in obj1[idx]" :key="index">
-                      <p style="height: .1rem;" v-for="(l,index) in k" :key="index">
-                        <span :class="{left_top:l=='新'}"><span class="asle">{{l=='新'?'新品':''}}</span></span>
-                        <span :class="{zhpai:l=='招牌'}">{{l=='招牌'?'招牌':''}}</span>
-                      </p>
-                  </div>
-                </div>
-                <!-- 价格 -->
-                <div class="menu_detail_footer">
-                  <p class="food_price"><span>￥</span><span style="font-size: .35rem">{{j.specfoods[0].price}}</span><span style="padding-left: .1rem;color: #666;">{{j.specfoods.length>1?'起':''}}</span></p>
-                  <shopbtn v-if="!j.specfoods[1]">
-                    <template v-slot:jia><div @click="jia(j,i)">+</div></template>
-                    <template v-slot:num v-if="j.num">{{j.num}}</template>
-                    <template v-slot:jian v-if="j.num"><div :class="{btn_jn:j.num>0}" @click="jian(j,i)">-</div></template>
-                  </shopbtn>
-                  <div class="r_btn" v-if="j.specfoods[1]"  @click="btn(j)">选规格</div>
         </div>
         <div class="b_all">
           <p class="b_all_list"
@@ -308,66 +243,6 @@
               </p>
             </div>
           </div>
-        </div>
-
-        <shopcart v-show="num==0" v-if="!type" class="shop_cart" :class="{shop_none:g_num}">
-          <template  v-slot:num v-if="g_num"><div :class="{num_bg:price>0}"><span :class="{num:g_num}">{{g_num}}</span></div></template>
-          <template v-slot:price>￥{{price}}.00</template>
-          <template v-slot:pick_up><div :class="{pick_bg:g_num>0}"><span class="pick_up">{{price?'去结算':'还差￥20起送'}}</span></div></template>
-        </shopcart>
-        
-        <div v-show="num==1"><!-- 评价 -->
-            <div class="rating_header">
-              <div class="rating_header_left">
-                <p>4.7</p>
-                <p>综合评价</p>
-                <p>高于周边商家76.9%</p>
-              </div>
-              <div class="rating_header_right">
-                <p>
-                  <span>服务态度</span>
-                  <!-- 评价小星星 -->
-                  <!-- <div class="rating_container"></div> -->
-                  <span class="rating_num">4.7</span>
-                </p>
-                <p>
-                  <span>菜品评价</span>
-                  <!-- 评价小星星 -->
-                  <!-- <div class="rating_container"></div> -->
-                  <span class="rating_num">4.8</span>
-                </p>
-                <p>
-                  <span>送达时间</span>
-                  <!-- 评价小星星 -->
-                  <span class="delivery_time">分钟</span>
-                </p>
-              </div>
-            </div>
-            <!-- 评价按钮 -->
-            <ul class="tag_list_ul">
-              <li v-for="(i,$index) in PJbtn" :key="$index" @click="PJbtns=$index" :class="{tagActivity:$index==PJbtns}">{{i}}</li>
-            </ul>
-            <!-- 用户评价 -->
-            <ul class="rating_list_ul">
-              <li class="rating_list_li">
-                <img src="" class="user_avatar" alt="">
-                <div class="rating_list_details">
-                  <header>
-                    <div class="username_star">
-                      <p class="username"></p>
-                      <p class="star_desc"></p>
-                    </div>
-                    <div class="rated_at"></div>
-                  </header>
-                  <ul class="food_img_ul">
-                    <li><img src="" alt=""></li>
-                  </ul>
-                  <ul class="food_name_ul">
-                    <li class="ellipsis"></li>
-                  </ul>
-                </div>
-              </li>
-            </ul>
         </div>
       </div>
       <shopcart v-show="num==0"

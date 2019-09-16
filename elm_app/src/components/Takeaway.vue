@@ -128,7 +128,8 @@ export default {
     shop(i){
          console.log(i)
         localStorage.id = i
-        location.href = 'http://localhost:8080/shop'
+        // location.href = 'http://localhost:8080/shop'
+        this.$router.push({path:'/shop'})
     }
   },
   data () {
