@@ -5,6 +5,18 @@
         <template v-slot:center>商家详情</template>
         <template v-slot:right></template>
       </elmhead>
+<<<<<<< HEAD
+<<<<<<< HEAD
+      <div class="contain">
+        <div class="activ">
+          <h3>活动与属性</h3>
+          <p v-if="arr" v-for="i in arr">
+            <span class="color">{{i.icon_name}}</span><span>{{i.description}}</span><span>(APP专享)</span>
+          </p>
+          <p v-for="i in list.supports">
+=======
+=======
+>>>>>>> 3c820b3f8463d4555840cfc083e45c1570db7be6
       <div class="contain" style="padding:1rem 0;">
         <div class="activ">
           <h3 style="font-size:.3rem;color:gray;line-height:1rem;">活动与属性</h3>
@@ -12,14 +24,31 @@
             <span class="color">{{i.icon_name}}</span><span>{{i.description}}</span><span>(APP专享)</span>
           </p>
           <p v-for="i in list.supports" style="padding:0 .2rem">
+<<<<<<< HEAD
+>>>>>>> 2fc187d18a4a90cb29d4f4c7594a7c2e1beffaa7
+=======
+>>>>>>> 3c820b3f8463d4555840cfc083e45c1570db7be6
             <span class="color">{{i.icon_name}}</span><span>{{i.description}}</span><span>(APP专享)</span>
           </p>
         </div>
         <div class="Safety">
+<<<<<<< HEAD
+<<<<<<< HEAD
+          <router-link to="">食品监督安全公示<span>企业认证详情</span></router-link>
+          <div>
+            <div><i class="iconfont filu" :class="{active:!list.status}" >{{list.status?'&#xe64d;':'&#xe619;'}}</i></div>
+            <div>
+=======
+=======
+>>>>>>> 3c820b3f8463d4555840cfc083e45c1570db7be6
           <router-link :to="{name:'shopSafe',params:{list:list.status}}" style="font-size:.3rem;color:gray;line-height:1rem;">食品监督安全公示<span style="font-size:.3rem;color:gray;float:right">企业认证详情&gt;</span></router-link>
           <div style="display:flex;padding:.2rem 0;border-top:.01rem solid #ccc">
             <div><i class="iconfont filu" :class="{active:!list.status}" >{{list.status?'&#xe64d;':'&#xe619;'}}</i></div>
             <div class="color-gray"> 
+<<<<<<< HEAD
+>>>>>>> 2fc187d18a4a90cb29d4f4c7594a7c2e1beffaa7
+=======
+>>>>>>> 3c820b3f8463d4555840cfc083e45c1570db7be6
               <p>监督检查结果：<span  class="filu" :class="{active:!list.status}">{{list.status?'良好':'差'}}</span></p>
               <p>检查日期：</p>
             </div>
@@ -34,6 +63,16 @@
           <p @click="type=true">餐饮服务许可证<span style="float: right">&gt;</span></p>
         </div>
         <div class="license" v-if="type" @click="type=false">
+<<<<<<< HEAD
+<<<<<<< HEAD
+          <img :src="'https://elm.cangdu.org/img/'+list.image_path" alt="">
+        </div>
+      </div>
+    </div>
+</template>
+=======
+=======
+>>>>>>> 3c820b3f8463d4555840cfc083e45c1570db7be6
           <img :src="'https://elm.cangdu.org/img/'+list.image_path" alt="" style="position:absolute;top:30%;left:0;width:100%;height:4rem;">
         </div>
       </div>
@@ -57,6 +96,10 @@
 }
   
 </style>
+<<<<<<< HEAD
+>>>>>>> 2fc187d18a4a90cb29d4f4c7594a7c2e1beffaa7
+=======
+>>>>>>> 3c820b3f8463d4555840cfc083e45c1570db7be6
 <script>
   import elmhead from '../components/head'
     export default {
@@ -74,6 +117,13 @@
         created() {
             this.list=this.$route.params.detail
             this.arr = this.$route.params.detail.activities
+<<<<<<< HEAD
+<<<<<<< HEAD
+            console.log(this.list)
+=======
+>>>>>>> 2fc187d18a4a90cb29d4f4c7594a7c2e1beffaa7
+=======
+>>>>>>> 3c820b3f8463d4555840cfc083e45c1570db7be6
         }
     }
 </script>

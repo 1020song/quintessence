@@ -1,5 +1,5 @@
 <template>
-	<div id="contain">
+	<div id="contain" style="background:rgb(247, 247, 233)">
 		<elmHead>
 			<template v-slot:left>
 				<router-link :to="{name:'shopDetail'}">&lt;</router-link>
@@ -31,7 +31,7 @@
 		<!-- 工商登记信息 -->
 		<div class="shop_status_container">
 			<header>
-				<span>工商登记信息</span>
+				工商登记信息
 			</header>
 			<ul>
 				<li>企业名称</li>
@@ -60,6 +60,16 @@
 	</div>
 </template>
 <style scoped>
+.iconfont{
+  font-size: 1rem;
+}
+.filu{
+  color: rgb(126, 211, 33);
+  margin-right: .6rem
+}
+.active{
+  color: rgb(208, 2, 27);
+}
 	.check_date li span,ul li{
 		line-height: .5rem;
 		font-size: .4rem;
@@ -77,8 +87,13 @@
 		font-size: .3rem;
 		color: #333;
 	}
+	.shop_status_container ul li{
+		line-height: .5rem;
+		font-size: .3rem
+	}
 	.shop_status_container {
 		background-color: #fff;
+		padding:.2rem 0;
 		margin-bottom: .2rem;
 	}
 </style>

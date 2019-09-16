@@ -14,6 +14,11 @@
                 num:0
             }
         },
+        methods:{
+            mulit(){
+                this.$emit('type')
+            }
+        }
     }
 </script>
 
