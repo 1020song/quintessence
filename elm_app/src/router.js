@@ -10,6 +10,7 @@ import addss from './views/addss.vue'
 import adds from './views/adds.vue'
 import shop from './views/shop.vue'  //商铺列表
 import shopDetail from './views/shopDetail.vue' //商铺详情
+import shopSafe from './views/shopSafe.vue'
 
 import Index from './views/Index.vue'
 import About from './views/About.vue'
@@ -84,7 +85,14 @@ export default new Router({
     {
       path:'/shopDetail',
       name:'shopDetail',
-      component:shopDetail
+      component:shopDetail,
+      children:[
+        {
+          path:'shopSafe',
+          name:'shopSafe',
+          component:shopSafe
+        }
+      ]
     },
     // 积分
     {

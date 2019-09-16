@@ -2,8 +2,8 @@
     <div class="list">
       <div class="shop_container">
           <div class="head"  v-show="!type">
-            <div>
-<!--              头部-->
+          <div>
+              <!--头部-->
               <router-link :to="{path:'/about/Takeaway',query:{geohash: addrs.split(',')[0]+','+ addrs.split(',')[1]}}" class="back_Takeaway">&lt;</router-link>
               <div class="head_tit">
                 <div class="tit_img">
@@ -25,8 +25,8 @@
         <div class="bg min" :class="{max:arr.length}" v-show="!type">
           <img :src="'https://elm.cangdu.org/img/'+img_path" alt="">
         </div>
-<!--        活动-->
         <div class="doing" v-show="type">
+          <!--活动-->
           <h3>{{list.name}}</h3>
           <div>
             <h3>优惠信息</h3>
@@ -40,21 +40,21 @@
             <h3>商家公告</h3>
             <p>{{list.promotion_info}}</p>
           </div>
-          <p @click="type=false">&#10006;</p>
+          <p @click="type=false" style="position:absolute;bottom:10%;left:45%;font-size:.4rem;padding: .1rem .18rem;text-align:center;border:.01rem solid white;border-radius:50%">&#10006;</p>
         </div>
+        <!-- Tab切换 -->
         <div class="change_show" v-show="!type">
           <div><span @click="num=0" :class="{activity_show:num==0}">商品</span></div>
           <div><span @click="num=1" :class="{activity_show:num==1}">评价</span></div>
         </div>
-<!--    商品    -->
-        <div class="food_container" v-show="num==0" v-if="!type">
-<!--          左导航-->
-          <ul class="menu_left">
+        <div class="food_container" v-show="num==0" v-if="!type"><!--  商品 -->
+          <ul class="menu_left"> <!--左导航-->
             <li v-for="(i,index) in show_list" :class="{bor_active:num1==index}" style="padding-left: .1rem;position: relative"  @click="num1=index" :key="index">
               <a :href="'#'+index">{{i.name}}</a>
               <span v-show="i.num" class="l_num">{{i.num}}</span>
             </li>
           </ul>
+          <!-- 右导航 -->
           <ul class="menu_right">
             <li v-for="(i,index) in show_list" :id="index" :key="index">
               <p class="tit" style="position: relative">
@@ -86,7 +86,7 @@
                       </p>
                   </div>
                 </div>
-<!--                价格-->
+                <!-- 价格 -->
                 <div class="menu_detail_footer">
                   <p class="food_price"><span>￥</span><span style="font-size: .35rem">{{j.specfoods[0].price}}</span><span style="padding-left: .1rem;color: #666;">{{j.specfoods.length>1?'起':''}}</span></p>
                   <shopbtn v-if="!j.specfoods[1]">
@@ -112,18 +112,146 @@
             </p>
           </div>
         </div>
-<!--        评价-->
-        <div v-show="num==1">
-123
-        </div>
+
         <shopcart v-show="num==0" v-if="!type" class="shop_cart" :class="{shop_none:g_num}">
           <template  v-slot:num v-if="g_num"><div :class="{num_bg:price>0}"><span :class="{num:g_num}">{{g_num}}</span></div></template>
           <template v-slot:price>￥{{price}}.00</template>
           <template v-slot:pick_up><div :class="{pick_bg:g_num>0}"><span class="pick_up">{{price?'去结算':'还差￥20起送'}}</span></div></template>
         </shopcart>
+        
+        <div v-show="num==1"><!-- 评价 -->
+            <div class="rating_header">
+              <div class="rating_header_left">
+                <p>4.7</p>
+                <p>综合评价</p>
+                <p>高于周边商家76.9%</p>
+              </div>
+              <div class="rating_header_right">
+                <p>
+                  <span>服务态度</span>
+                  <!-- 评价小星星 -->
+                  <!-- <div class="rating_container"></div> -->
+                  <span class="rating_num">4.7</span>
+                </p>
+                <p>
+                  <span>菜品评价</span>
+                  <!-- 评价小星星 -->
+                  <!-- <div class="rating_container"></div> -->
+                  <span class="rating_num">4.8</span>
+                </p>
+                <p>
+                  <span>送达时间</span>
+                  <!-- 评价小星星 -->
+                  <span class="delivery_time">分钟</span>
+                </p>
+              </div>
+            </div>
+            <!-- 评价按钮 -->
+            <ul class="tag_list_ul">
+              <li v-for="(i,$index) in PJbtn" :key="$index" @click="PJbtns=$index" :class="{tagActivity:$index==PJbtns}">{{i}}</li>
+            </ul>
+            <!-- 用户评价 -->
+            <ul class="rating_list_ul">
+              <li class="rating_list_li">
+                <img src="" class="user_avatar" alt="">
+                <div class="rating_list_details">
+                  <header>
+                    <div class="username_star">
+                      <p class="username"></p>
+                      <p class="star_desc"></p>
+                    </div>
+                    <div class="rated_at"></div>
+                  </header>
+                  <ul class="food_img_ul">
+                    <li><img src="" alt=""></li>
+                  </ul>
+                  <ul class="food_name_ul">
+                    <li class="ellipsis"></li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+        </div>
       </div>
     </div>
 </template>
+<style scoped>
+
+.tag_list_ul li{
+    font-size: .25rem;
+    color: #6d7885;
+    padding: .02rem .1rem;
+    background-color: #ebf5ff;
+    border-radius: .1rem;
+    border: 1px;
+    line-height: .7rem;
+    margin: 0 .2rem .1rem 0;
+}
+.tag_list_ul .tagActivity{
+    background-color: #3190e8;
+    color: #fff;
+}
+.tag_list_ul{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #fff;
+    padding: .2rem;
+}
+.delivery_time{
+    font-size: .2rem;
+    color: #999;
+}
+.rating_num{
+    width: 1.5rem;
+    font-size: .2rem;
+    color: #f60;
+}
+.rating_container{
+    flex: 1;
+    overflow-y: hidden;
+    flex-direction: column;
+}
+.rating_header_right p span:first-of-type {
+    color: #666;
+    margin-right: .2rem;
+}
+.rating_header_right p span{
+  font-size: .2rem
+}
+.rating_header_right p{
+    font-size: .3rem;
+    line-height: .5rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.rating_header_right { 
+    flex: 4;
+}
+.rating_header_left p:nth-of-type(3) {
+    font-size: .2rem;
+    color: #999;
+}
+.rating_header_left p:nth-of-type(2){
+      font-size: .3rem;
+    color: #666;
+    margin-bottom: .1rem;
+}
+.rating_header_left p:first-of-type {
+    font-size: .6rem;
+    color: #f60;
+}
+.rating_header {
+    display: flex;
+    background-color: #fff;
+    padding: .1rem .11rem;
+    margin-bottom: .11rem;
+}
+.rating_header_left {
+    flex: 3;
+    text-align: center;
+}
+</style>
 <script>
     import shopbtn from '../components/shopbtn'
     import shopcart from '../views/shopcart'
@@ -154,6 +282,8 @@
                 norm_data:'',
                 normtype:false,
                 num2:0,
+                PJbtn:['全部(473)','满意(453)','不满意(20)','有图(2)','味道好(47)','送货快(32)','分量足(18)','包装精美(15)','干净卫生(15)','食材新鲜(15)','服务不错(11)'],
+                PJbtns:0
             }
         },
         methods:{
@@ -166,10 +296,8 @@
             },
             index(i){
                 this.num2 = i
-                console.log(i)
             },
             btn(q){
-                console.log(q)
                 this.normtype = true
                 this.norm_data = q
             },
@@ -180,7 +308,6 @@
                 this.shop_num = item.num
                 this.$set(item,item.num,this.shop_num)
                 this.g_num = i.num
-                console.log(this.g_num)
                 this.price = i.num * item.specfoods[0].price
             },
             jian(item,i){
@@ -206,7 +333,6 @@
                 })
             this.$axios('https://elm.cangdu.org/shopping/v2/menu?restaurant_id='+this.id+'')
                 .then(res=>{
-                    console.log(res)
                     this.show_list = res.data
                     this.show_list.forEach(item=>{
                         item.num=0
@@ -366,7 +492,26 @@
   color: #fff;
   font-size: .2rem;
 }
+.doing h3{
+   text-align: center;
+}
+.doing span{
+  font-size: .2rem
+}
+.doing *{
+  color: white;
+}
+.doing div{
+  margin-bottom: .4rem;
+  padding: 0 .4rem;
+}
 .doing{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.8);
   z-index: 20;
 }
 .back_Takeaway{
