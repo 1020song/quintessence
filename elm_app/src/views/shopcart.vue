@@ -1,6 +1,6 @@
 <template>
   <div>
-   <div><div class="icon"><i class="iconfont">&#xe604;</i><span><slot name="num"></slot></span></div></div>
+   <div><div class="icon"><slot name="iconfont"></slot><span><slot name="num"></slot></span></div></div>
     <div class="shop_price"><div ><slot name="price"></slot><p style="color: #fff">配送费￥5</p></div></div>
     <div><slot name="pick_up"></slot></div>
   </div>
@@ -32,8 +32,10 @@
   border: solid .05rem #444;
   border-radius: 50%;
   padding: .1rem;
+  z-index: 999;
 }
-.shop_cart .iconfont{
+
+ .iconfont{
   width: .7em;
   height: .7em;
   font-size: .8rem;

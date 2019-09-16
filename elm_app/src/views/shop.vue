@@ -82,6 +82,7 @@
                   class="l_num">{{i.num}}</span>
           </li>
         </ul>
+        <!-- 展示商品 -->
         <ul class="menu_right">
           <li v-for="(i,index) in show_list"
               :id="index"
@@ -143,24 +144,27 @@
                 </shopbtn>
                 <div class="r_btn"
                      v-if="j.specfoods[1]"
-                     @click="btn(j)">选规格</div>
+                     @click="btn(j,i)">选规格</div>
               </div>
             </div>
           </li>
         </ul>
         <!--   选规格     -->
-        <div class="norm"
-             v-show="normtype">
-          <h3>{{norm_data.name}}<span @click="back">×</span></h3>
-          <p>规格</p>
-          <div v-for="(i,idnex) in norm_data.specfoods"
-               :key="idnex">
-            <span @click="index(idnex)">{{i.specs_name}}</span>
+        <div class="normbox" v-show="normtype">
+          <div class="norm">
+            <h3><span class="n_name">{{norm_data.name}}</span><span @click="back" class="n_back">×</span></h3>
+            <p class="n_ti">规格</p>
+            <div style="overflow:hidden;padding-left:0.18rem">
+              <div v-for="(i,idnex) in norm_data.specfoods"
+                :key="idnex" class="n_li">
+                <span @click="index(idnex)">{{i.specs_name}}</span>
+              </div>
+            </div>
+            <p v-if="norm_data" class="n_pr">
+              <span> {{num2==0?norm_data.specfoods[0].price:norm_data.specfoods[1].price}}</span>
+              <span @click="shca()">加入购物车</span>
+            </p>
           </div>
-          <p v-if="norm_data">
-            <span> {{num2==0?norm_data.specfoods[0].price:norm_data.specfoods[1].price}}</span>
-            <span @click="shca">加入购物车</span>
-          </p>
         </div>
       </div>
       <!--        评价-->
@@ -249,18 +253,54 @@
                 v-if="!type"
                 class="shop_cart"
                 :class="{shop_none:g_num}">
+        <template v-slot:iconfont>
+          <i class="iconfont" type="button" data-toggle="modal" data-target="#myModal">&#xe604;</i>
+        </template>
         <template v-slot:num
                   v-if="g_num">
-          <div :class="{num_bg:price>0}"><span :class="{num:g_num}">{{g_num}}</span></div>
+          <div :class="{num_bg:price>0}"><span :class="{num:g_num}">{{t_count}}</span></div>
         </template>
         <template v-slot:price>￥{{price}}.00</template>
         <template v-slot:pick_up>
-          <div :class="{pick_bg:g_num>0}"><span class="pick_up">{{price?'去结算':'还差￥20起送'}}</span></div>
+          <div :class="{pick_bg:g_num>0}">
+            <router-link to='/about/confirmOrder'>
+              <span class="pick_up">{{price?'去结算':'还差￥20起送'}}</span>
+            </router-link>
+          </div>
         </template>
       </shopcart>
+      <!-- 我的购物车 -->
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">清空</span></button>
+              <h4 class="modal-title" id="myModalLabel">购物车</h4>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
+<style>
+.modal-title{
+  font-size: 0.3rem;
+  padding:0 0.14rem !important;
+}
+.modal-header .close{
+    margin-top: 2px;
+    font-size: 0.3rem;
+    margin-right: 0.14rem
+}
+.modal-header .close span{
+    font-size: 0.3rem;
+}
+</style>
 <style scoped>
 
 .tag_list_ul li{
@@ -369,6 +409,7 @@ export default {
       prenx: false,
       g_num: 0,
       norm_data: '',
+      norm_data_food: '',
       normtype: false,
       num2: 0,
       isLoading: true,
@@ -380,14 +421,37 @@ export default {
       dots: '',
       fen:0,
       fen1:0,
+      add1:0,
     }
   },
-  updated(){
-    
+  computed: {
+      t_count(){
+        var count=0
+        for(var i=0;i<this.show_list.length;i++){
+          for(var j=0;j<this.show_list[i].foods.length;j++){
+            count += this.show_list[i].foods[j].num
+          }
+        }
+        return count
+      }
   },
   methods: {
     shca () {
-      this.g_num++
+      // this.norm_data.num++
+      // this.shop_num=this.norm_data.num
+      this.add1=0
+      this.price=0
+      this.norm_data.num++
+      this.norm_data_food.num++
+      this.shop_num = this.norm_data.num
+      this.$set(this.norm_data, this.norm_data.num, this.shop_num)
+      this.g_num = this.norm_data_food.num
+      this.show_list.forEach(add_num=>{
+        this.add1 += add_num.num
+        add_num.foods.forEach(add_num1=>{
+          this.price += add_num1.num*Number(add_num1.specfoods[0].price)
+        })
+      })
     },
     back () {
       this.normtype = false
@@ -397,22 +461,32 @@ export default {
       this.num2 = i
       // console.log(i)
     },
-    btn (q) {
-      // console.log(q)
+    btn (q,i) {
+      console.log(q)
       this.normtype = true
       this.norm_data = q
+      this.norm_data_food=i
     },
     jia (item, i) {
+      this.add1=0
+      this.price=0
+      console.log(i)
       if (item.num > 0) { this.prenx = true }
       item.num++
       i.num++
       this.shop_num = item.num
       this.$set(item, item.num, this.shop_num)
       this.g_num = i.num
-      // console.log(this.g_num)
-      this.price = i.num * item.specfoods[0].price
+      this.show_list.forEach(add_num=>{
+        this.add1 += add_num.num
+        add_num.foods.forEach(add_num1=>{
+          this.price += add_num1.num*Number(add_num1.specfoods[0].price)
+        })
+      })
     },
     jian (item, i) {
+      this.add1=0
+      this.price=0
       if (item.num <= 0) { this.prenx = false }
       item.num--
       i.num--
@@ -421,7 +495,13 @@ export default {
       if (item.num <= 0) { item.num = 0 }
       if (i.num <= 0) { i.num = 0 }
       this.g_num = i.num
-      this.price = i.num * item.specfoods[0].price
+      // this.price = i.num * item.specfoods[0].price
+      this.show_list.forEach(add_num=>{
+        this.add1 += add_num.num
+        add_num.foods.forEach(add_num1=>{
+          this.price += add_num1.num*Number(add_num1.specfoods[0].price)
+        })
+      })
     }
   },
   created () {
@@ -603,16 +683,82 @@ export default {
 }
 </style>
 <style scoped>
+.normbox{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 99999;
+  background: rgba(0,0,0,.3)
+}
 .norm {
-  width: 5rem;
-  height: 5rem;
+  width: 4rem;
+  height: 4rem;
   position: absolute;
   top: 50%;
   left: 50%;
-  margin-left: -2.5rem;
-  margin-top: -2.5rem;
+  margin-left: -2rem;
+  margin-top: -2rem;
   background: #fff;
   z-index: 99;
+}
+.norm h3{
+  text-align: center;
+  position: relative;
+}
+.norm h3 .n_name{
+  font-size: .3rem;
+  color: #222;
+  font-weight: 400;
+  padding: .1rem;
+}
+.norm h3 .n_back{
+  float: right;
+  font-size: 0.4rem;
+  position: absolute;
+  right: 0.1rem;
+  top: 0;
+}
+.n_pr,.n_li,.n_ti{
+padding:0 0.18rem;
+}
+.n_li{
+  float: left;
+  padding: 0 0.12rem;
+  border: 0.01rem solid #ccc;
+  text-align: center;
+  line-height: 0.4rem;
+  margin-right: 0.3rem;
+}
+.n_li span{
+  font-size: 0.24rem
+}
+.n_ti{
+  font-size: 0.24rem;
+  color: #222;
+}
+.n_pr{
+  background: #f5f5f5;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  line-height: 0.8rem;
+}
+.n_pr span:first-of-type{
+  color: #ff6201;
+  font-weight: 400;
+  font-size: 0.24rem;
+}
+.n_pr span:last-of-type{
+  color: #fff;
+  padding: 0 0.14rem;
+  border-radius: 0.04rem;
+  line-height: 0.4rem;
+  background: #3b95e9;
+  font-size: 0.24rem;
+  float: right;
+  margin-top: 0.2rem;
 }
 .pick_bg {
   background: #4cd964;
@@ -621,12 +767,12 @@ export default {
   background: #3190e8;
 }
 .shop_cart {
-  position: absolute;
+  position: fixed;
   background-color: #3d3d3f;
   bottom: 0;
   left: 0;
   height: 1rem;
-  z-index: 24;
+  z-index: 999;
   display: -ms-flexbox;
   display: flex;
   width: 100%;
@@ -639,6 +785,7 @@ export default {
   font-size: 0.3rem;
   text-align: center;
   color: #fff;
+  z-index: 999;
   background: #535356;
   width: 2rem;
 }
