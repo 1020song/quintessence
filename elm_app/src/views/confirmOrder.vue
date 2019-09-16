@@ -2,7 +2,7 @@
   <div class="confirmOrder">
     <elmHead>
       <template v-slot:left>
-        <router-link @click="$router.back(-1)">&lt;</router-link>
+        <span @click="$router.back(-1)">&lt;</span>
       </template>
       <template v-slot:center>确认订单</template>
       <template v-slot:right v-if="!isbtnlogin">

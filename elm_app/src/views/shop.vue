@@ -258,7 +258,7 @@
         </template>
         <template v-slot:num
                   v-if="g_num">
-          <div :class="{num_bg:price>0}"><span :class="{num:g_num}">{{t_count}}</span></div>
+          <div :class="{num_bg:price>0}"><span :class="{num:g_num}">{{hhh}}</span></div>
         </template>
         <template v-slot:price>￥{{price}}.00</template>
         <template v-slot:pick_up>
@@ -278,15 +278,15 @@
               <h4 class="modal-title" id="myModalLabel">购物车</h4>
             </div>
             <div class="modal-body">
-              <div v-for="i in shopCart_each" class="modal_box">
+              <div v-for="(i,index) in shopCart_each" class="modal_box" :key="index">
                 <div class="modal_showbox">
                   <span style="font-size: .3rem">{{i.name}}</span><br>
                   <span v-if="i.specs_name" style="font-size: .2rem">{{i.specs_name}}</span>
                 </div>
                   <shopbtn style="float: right;padding: 0;margin-right: .1rem;margin-top: .2rem;">
-                    <template v-slot:jia><span>+</span></template>
-                    <template v-slot:num>{{i.num}}</template>
-                    <template v-slot:jian><span class="btn_jn">-</span></template>
+                    <template v-slot:jia><span @click="g_jia(i,index)">+</span></template>
+                    <template v-slot:num>{{shopCart_each[index].num}}</template>
+                    <template v-slot:jian><span class="btn_jn" @click="g_jian(i,index)">-</span></template>
                   </shopbtn>
                 <div  class="modal_showbox" style="float: right;margin-right: .5rem;color: #f60">￥{{i.price}}</div>
               </div>
@@ -445,28 +445,51 @@ export default {
       fen1:0,
       add1:0,
       each_num:0,
+      hhh:0,
     }
   },
-  computed: {
-      t_count(){
-        var count=0
-        for(var i=0;i<this.show_list.length;i++){
-          for(var j=0;j<this.show_list[i].foods.length;j++){
-            count += this.show_list[i].foods[j].num
-          }
-        }
-        return count
-      }
-  },
   methods: {
+    // 购物车加减
+    g_jia(i,index){
+      this.price=0
+      this.hhh=0
+      i.num++
+      console.log(this.shopCart_each)
+      this.$set(i, i.num, this.shop_num)
+      this.g_num = i.num
+      this.shopCart_each.forEach(add_num=>{
+        this.price += add_num.num*Number(add_num.price)
+        this.hhh+=add_num.num
+      })
+    },
+    g_jian(i,index){
+      this.price=0
+      this.hhh=0
+      i.num--
+      console.log(this.shopCart_each)
+      this.$set(i, i.num, this.shop_num)
+      this.g_num = i.num
+      if(i.num<=0){
+        i.num=0
+        this.shopCart_each.splice(index,1)
+      }else{
+        i.num=i.num
+      }
+      this.shopCart_each.forEach(add_num=>{
+        this.price += add_num.num*Number(add_num.price)
+        this.hhh+=add_num.num
+      })
+    },
+    // 选规格
     shca (i) {
       this.normtype = false
       this.add1=0
       this.price=0
+      this.hhh=0
       this.norm_data.num++
       this.norm_data_food.num++
-      this.shop_num = this.norm_data.num
       this.$set(this.norm_data, this.norm_data.num, this.shop_num)
+      this.shop_num = this.norm_data.num
       this.g_num = this.norm_data_food.num
 
       i.num++
@@ -474,12 +497,9 @@ export default {
       if (this.shopCart_each.indexOf(i)==-1){
         this.shopCart_each.push(i)
       }
-
-      this.show_list.forEach(add_num=>{
-        this.add1 += add_num.num
-        add_num.foods.forEach(add_num1=>{
-          this.price += add_num1.num*Number(add_num1.specfoods[0].price)
-        })
+      this.shopCart_each.forEach(add_num=>{
+        this.price += add_num.num*Number(add_num.price)
+        this.hhh+=add_num.num
       })
     },
     back () {
@@ -488,7 +508,6 @@ export default {
     },
     index (i) {
       this.num2 = i
-      // console.log(i)
     },
     btn (q,i) {
       console.log(q)
@@ -499,6 +518,7 @@ export default {
     jia (item, i) {
       this.add1=0
       this.price=0
+      this.hhh=0
       if (item.num > 0) { this.prenx = true }
       item.num++
       i.num++
@@ -507,34 +527,31 @@ export default {
      }
       item.specfoods[0].num++
       console.log(item)
-      this.shop_num = item.num
       this.$set(item, item.num, this.shop_num)
       this.g_num = i.num
-      this.show_list.forEach(add_num=>{
-        this.add1 += add_num.num
-        add_num.foods.forEach(add_num1=>{
-          this.price += add_num1.num*Number(add_num1.specfoods[0].price)
-        })
+      this.shop_num = item.num
+      this.shopCart_each.forEach((add_num)=>{
+        this.price += add_num.num*Number(add_num.price)
+        this.hhh+=add_num.num
       })
     },
     jian (item, i) {
       this.add1=0
       this.price=0
+      this.hhh=0
       if (item.num <= 0) { this.prenx = false }
       item.num--
       i.num--
       item.specfoods[0].num--
-      this.shop_num = item.num
       this.$set(item, item.num, this.shop_num)
-      if (item.num <= 0) { item.num = 0 }
-      if (i.num <= 0) { i.num = 0 }
+      item.num<=0?item.num=0:item.num
+      i.num <=0?i.num=0:i.item
       this.g_num = i.num
+      this.shop_num = item.num
       // this.price = i.num * item.specfoods[0].price
-      this.show_list.forEach(add_num=>{
-        this.add1 += add_num.num
-        add_num.foods.forEach(add_num1=>{
-          this.price += add_num1.num*Number(add_num1.specfoods[0].price)
-        })
+      this.shopCart_each.forEach(add_num=>{
+        this.price += add_num.num*Number(add_num.price)
+        this.hhh+=add_num.num
       })
     }
   },
