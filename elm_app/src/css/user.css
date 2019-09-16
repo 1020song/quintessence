@@ -5,6 +5,9 @@
 	list-style: none;
 	box-sizing: border-box;
 }
+.ziliao, .item {
+	width: 100%;
+}
 a{
 	color: black;
 	font-size: .2rem;

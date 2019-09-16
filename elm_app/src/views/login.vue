@@ -134,7 +134,7 @@ input{
 }
 .container div{
   width: 100%;
-  height: 0.8rem;
+  height: 0.9rem;
   line-height: 0.8rem;
   border-bottom: 0.01rem solid #ccc;
   font-size: 0.24rem;
